@@ -27,7 +27,7 @@ const currentStart = { web: 0, branding: 0, qr: 0, posters: 0 };
 let pagerAuto = null;
 function startPagerAuto() {
     if (pagerAuto) clearInterval(pagerAuto);
-    pagerAuto = setInterval(() => nextPage(), 8000);
+    pagerAuto = setInterval(() => nextPage(), 6000);
 }
 
 function getVisibleCount() {
@@ -124,6 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // -- Initialize Feather Icons & AOS --
     feather.replace();
     AOS.init({ once: true, offset: 100, duration: 800 });
+
+    
 
     // -- Refresh Animations on Load/Resize --
     const refreshAOS = () => { if (typeof AOS !== 'undefined') AOS.refreshHard(); };
@@ -300,12 +302,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const entry = { src: img.src, title: (item.querySelector('h3')?.textContent || '') };
             galleryMap[cat].push(entry);
 
-            // Open image in a new window when clicking the card or the image
-            img.style.cursor = 'zoom-in';
-            item.style.cursor = 'zoom-in';
-            const openImage = (e) => { e.preventDefault(); window.open(img.src, '_blank', 'noopener'); };
-            img.addEventListener('click', openImage);
-            item.addEventListener('click', openImage);
+            // Click behavior
+            if (cat === 'web') {
+                const linkEl = item.querySelector('a[href^="http"]');
+                if (linkEl) {
+                    img.style.cursor = 'pointer';
+                    item.style.cursor = 'pointer';
+                    const openLink = (e) => { e.preventDefault(); window.open(linkEl.href, '_blank', 'noopener'); };
+                    img.addEventListener('click', openLink);
+                    item.addEventListener('click', openLink);
+                }
+            } else {
+                img.style.cursor = 'zoom-in';
+                item.style.cursor = 'zoom-in';
+                const openImage = (e) => { e.preventDefault(); window.open(img.src, '_blank', 'noopener'); };
+                img.addEventListener('click', openImage);
+                item.addEventListener('click', openImage);
+            }
+
+            // Allow anchor clicks without triggering card click
             item.querySelectorAll('a').forEach(a => a.addEventListener('click', (e) => e.stopPropagation()));
         });
     }

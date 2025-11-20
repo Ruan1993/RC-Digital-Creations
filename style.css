@@ -20,6 +20,10 @@ body {
     overflow-x: hidden;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 h1, h2, h3, h4, .brand-font {
     font-family: 'Space Grotesk', sans-serif;
 }
@@ -69,4 +73,205 @@ h1, h2, h3, h4, .brand-font {
     background: linear-gradient(90deg, #3B82F6, #8B5CF6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+
+
+.particles-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particles-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20px 20px, rgba(59,130,246,0.32) 2px, transparent 2px),
+      radial-gradient(circle at 10px 10px, rgba(59,130,246,0.14) 1.5px, transparent 1.5px);
+    background-size: 48px 48px, 64px 64px;
+    animation: particles-a 26s linear infinite, shine-a 5s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+    opacity: 0.9;
+}
+
+.particles-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30px 30px, rgba(59,130,246,0.28) 2px, transparent 2px);
+    background-size: 72px 72px;
+    animation: particles-b 40s linear infinite reverse, shine-b 7s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+    opacity: 0.85;
+}
+
+@keyframes particles-a {
+    0% { transform: translate3d(0,0,0); }
+    100% { transform: translate3d(220px,-160px,0); }
+}
+
+@keyframes particles-b {
+    0% { transform: translate3d(0,0,0); }
+    100% { transform: translate3d(-260px,200px,0); }
+}
+
+@keyframes shine-a {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+@keyframes shine-b {
+    0% { opacity: 0.65; }
+    100% { opacity: 0.95; }
+}
+
+.sparkles-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    mix-blend-mode: screen;
+    will-change: transform, opacity;
+    animation: sparkles-drift 80s linear infinite, sparkle-flicker-a 6s ease-in-out infinite alternate;
+    background:
+      radial-gradient(circle 3px at 8% 12%, rgba(59,130,246,0.95) 0 2px, transparent 3px),
+      radial-gradient(circle 1.6px at 22% 38%, rgba(59,130,246,0.70) 0 1.2px, transparent 2px),
+      radial-gradient(circle 2.5px at 40% 18%, rgba(59,130,246,0.80) 0 2px, transparent 2.5px),
+      radial-gradient(circle 1.8px at 63% 9%, rgba(59,130,246,0.7) 0 1.5px, transparent 2px),
+      radial-gradient(circle 3.2px at 76% 28%, rgba(59,130,246,0.85) 0 2.6px, transparent 3.2px),
+      radial-gradient(circle 2px at 12% 72%, rgba(59,130,246,0.75) 0 1.8px, transparent 2.2px),
+      radial-gradient(circle 1.5px at 34% 66%, rgba(59,130,246,0.7) 0 1.2px, transparent 2px),
+      radial-gradient(circle 2.8px at 58% 54%, rgba(59,130,246,0.9) 0 2.2px, transparent 2.8px);
+}
+
+.sparkles-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: screen;
+    will-change: transform, opacity;
+    animation: sparkles-drift-b 90s linear infinite reverse, sparkle-flicker-b 5s ease-in-out infinite alternate;
+    background:
+      radial-gradient(circle 1.4px at 17% 24%, rgba(59,130,246,0.65) 0 1px, transparent 1.6px),
+      radial-gradient(circle 2.2px at 28% 83%, rgba(59,130,246,0.65) 0 1.8px, transparent 2.2px),
+      radial-gradient(circle 2.6px at 47% 32%, rgba(59,130,246,0.75) 0 2.1px, transparent 2.6px),
+      radial-gradient(circle 1.2px at 69% 42%, rgba(59,130,246,0.6) 0 0.9px, transparent 1.4px),
+      radial-gradient(circle 3.4px at 85% 18%, rgba(59,130,246,0.85) 0 2.7px, transparent 3.4px),
+      radial-gradient(circle 2.1px at 11% 48%, rgba(59,130,246,0.7) 0 1.6px, transparent 2.1px);
+}
+
+.sparkles-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: screen;
+    will-change: transform, opacity;
+    animation: sparkles-drift-c 70s linear infinite, sparkle-flicker-c 7s ease-in-out infinite alternate;
+    background:
+      radial-gradient(circle 4px at 33% 11%, rgba(59,130,246,0.95) 0 3px, transparent 4px),
+      radial-gradient(circle 3.6px at 72% 67%, rgba(59,130,246,0.9) 0 2.8px, transparent 3.6px),
+      radial-gradient(circle 3.2px at 18% 86%, rgba(59,130,246,0.9) 0 2.5px, transparent 3.2px),
+      radial-gradient(circle 4.4px at 88% 36%, rgba(59,130,246,0.95) 0 3.3px, transparent 4.4px);
+
+.orbs-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -2;
+}
+
+.orbs-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    filter: blur(20px);
+    background:
+      radial-gradient(circle 160px at 20% 70%, rgba(59,130,246,0.25) 0 60%, transparent 60%),
+      radial-gradient(circle 220px at 80% 30%, rgba(59,130,246,0.18) 0 55%, transparent 55%),
+      radial-gradient(circle 140px at 45% 20%, rgba(59,130,246,0.22) 0 60%, transparent 60%);
+    animation: orbs-drift-a 60s linear infinite;
+    will-change: transform;
+}
+
+.orbs-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    filter: blur(24px);
+    background:
+      radial-gradient(circle 180px at 30% 35%, rgba(59,130,246,0.22) 0 55%, transparent 55%),
+      radial-gradient(circle 120px at 65% 80%, rgba(59,130,246,0.26) 0 55%, transparent 55%);
+    animation: orbs-drift-b 70s linear infinite reverse;
+    will-change: transform;
+}
+
+
+.beam-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -3;
+}
+
+.beam-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(115deg, rgba(59,130,246,0) 0%, rgba(59,130,246,0.18) 40%, rgba(59,130,246,0) 80%),
+      radial-gradient(circle at 75% 25%, rgba(59,130,246,0.12), transparent 55%),
+      radial-gradient(circle at 25% 75%, rgba(59,130,246,0.10), transparent 50%);
+    animation: beam-shift 80s ease-in-out infinite;
+    will-change: transform, opacity;
+}
+
+}
+
+@keyframes sparkles-drift {
+    0% { transform: translate3d(0,0,0); }
+    100% { transform: translate3d(80px,-60px,0); }
+}
+
+@keyframes sparkles-drift-b {
+    0% { transform: translate3d(0,0,0); }
+    100% { transform: translate3d(-90px,70px,0); }
+}
+
+@keyframes sparkles-drift-c {
+    0% { transform: translate3d(0,0,0); }
+    100% { transform: translate3d(60px,50px,0); }
+}
+
+@keyframes sparkle-flicker-a {
+    0% { opacity: 0.55; }
+    50% { opacity: 0.95; }
+    100% { opacity: 0.7; }
+}
+
+@keyframes sparkle-flicker-b {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.9; }
+    100% { opacity: 0.6; }
+}
+
+@keyframes sparkle-flicker-c {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
 }
