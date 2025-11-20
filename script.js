@@ -97,12 +97,13 @@ function filterProjects(category, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => {
         b.classList.remove('bg-brand-blue/10', 'text-brand-blue', 'border-brand-blue');
         b.classList.add('text-gray-400', 'border-gray-700');
+        b.classList.remove('tab-active');
     });
     
     // 2. Activate Current Tab
     if (btn) {
         btn.classList.remove('text-gray-400', 'border-gray-700');
-        btn.classList.add('bg-brand-blue/10', 'text-brand-blue', 'border-brand-blue');
+        btn.classList.add('bg-brand-blue/10', 'text-brand-blue', 'border-brand-blue', 'tab-active');
     }
 
     // 3. Hide all items initially to clear the view
@@ -201,6 +202,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // -- Mobile Swipe for Selected Works --
+    const pagerEl = document.getElementById('projects-pager');
+    if (pagerEl) {
+        let startX = 0;
+        let startY = 0;
+        let movedX = 0;
+        let movedY = 0;
+        let tracking = false;
+        const threshold = 40;
+
+        pagerEl.addEventListener('touchstart', (e) => {
+            const t = e.changedTouches[0];
+            startX = t.clientX;
+            startY = t.clientY;
+            movedX = 0;
+            movedY = 0;
+            tracking = true;
+        }, { passive: true });
+
+        pagerEl.addEventListener('touchmove', (e) => {
+            if (!tracking) return;
+            const t = e.changedTouches[0];
+            movedX = t.clientX - startX;
+            movedY = t.clientY - startY;
+        }, { passive: true });
+
+        pagerEl.addEventListener('touchend', () => {
+            if (!tracking) return;
+            tracking = false;
+            const absX = Math.abs(movedX);
+            const absY = Math.abs(movedY);
+            if (absX > absY && absX > threshold) {
+                if (movedX < 0) {
+                    nextPage();
+                } else {
+                    prevPage();
+                }
+                startPagerAuto();
+            }
+        });
+    }
+
     const backToTop = document.getElementById('back-to-top');
     if (backToTop) backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
@@ -285,6 +328,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLbCategory = null;
     let currentLbIndex = 0;
 
+    function openLightbox(cat, idx) {
+        currentLbCategory = cat;
+        currentLbIndex = idx;
+        updateLightbox();
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
     function buildGalleries() {
         document.querySelectorAll('.project-item').forEach(item => {
             const img = item.querySelector('img');
@@ -300,6 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!cat) return;
 
             const entry = { src: img.src, title: (item.querySelector('h3')?.textContent || '') };
+            const idx = galleryMap[cat].length;
             galleryMap[cat].push(entry);
 
             // Click behavior
@@ -315,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 img.style.cursor = 'zoom-in';
                 item.style.cursor = 'zoom-in';
-                const openImage = (e) => { e.preventDefault(); window.open(img.src, '_blank', 'noopener'); };
+                const openImage = (e) => { e.preventDefault(); openLightbox(cat, idx); };
                 img.addEventListener('click', openImage);
                 item.addEventListener('click', openImage);
             }
