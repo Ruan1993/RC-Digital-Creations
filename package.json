@@ -4,8 +4,8 @@
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:css": "npx @tailwindcss/cli -i ./style.css -o ./dist/style.css --watch",
-    "build:css": "npx @tailwindcss/cli -i ./style.css -o ./dist/style.css --minify"
+    "dev:css": "node ./node_modules/@tailwindcss/cli/dist/index.mjs -i ./style.css -o ./dist/style.css --watch",
+    "build:css": "node ./node_modules/@tailwindcss/cli/dist/index.mjs -i ./style.css -o ./dist/style.css --minify"
   },
   "keywords": [],
   "author": "",

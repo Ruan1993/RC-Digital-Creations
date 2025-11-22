@@ -1,612 +1,1508 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>RC Digital Creations | Web Design & AI Solutions</title>
-    <meta name="description" content="RC Digital Creations offers professional web development, AI chatbot integration, and custom branding design in Stilbaai. Elevate your digital presence today.">
-    <meta name="keywords" content="Web Design Stilbaai, Ruan Coetzee, Website Developer, AI Chatbots, Logo Design, Graphic Design, RC Digital Creations">
-    <meta name="author" content="RC Digital Creations">
-    
-    <meta property="og:title" content="RC Digital Creations | Modern Digital Solutions">
-    <meta property="og:description" content="We build immersive websites, custom AI tools, and unique brand identities.">
-    <meta property="og:image" content="images/RC Digital Creations.png">
-    <meta property="og:url" content="https://rcdigitalcreations.co.za">
-    <meta property="og:type" content="business.business">
-    <link rel="canonical" href="https://rcdigitalcreations.co.za">
-    <meta name="robots" content="index, follow">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="RC Digital Creations | Web Design & AI Solutions">
-    <meta name="twitter:description" content="Modern websites, AI chatbots, and branding that drives results.">
-    <meta name="twitter:image" content="images/RC Digital Creations.png">
+    <meta
+      name="description"
+      content="RC Digital Creations offers professional web development, AI chatbot integration, and custom branding design in Stilbaai. Elevate your digital presence today."
+    />
+    <meta
+      name="keywords"
+      content="Web Design Stilbaai, Ruan Coetzee, Website Developer, AI Chatbots, Logo Design, Graphic Design, RC Digital Creations"
+    />
+    <meta name="author" content="RC Digital Creations" />
 
-    <link rel="icon" type="image/png" href="images/RC Digital Creations.png">
+    <meta
+      property="og:title"
+      content="RC Digital Creations | Modern Digital Solutions"
+    />
+    <meta
+      property="og:description"
+      content="We build immersive websites, custom AI tools, and unique brand identities."
+    />
+    <meta property="og:image" content="images/RC Digital Creations.png" />
+    <meta property="og:url" content="https://rcdigitalcreations.co.za" />
+    <meta property="og:type" content="business.business" />
+    <link rel="canonical" href="https://rcdigitalcreations.co.za" />
+    <meta name="robots" content="index, follow" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="RC Digital Creations | Web Design & AI Solutions"
+    />
+    <meta
+      name="twitter:description"
+      content="Modern websites, AI chatbots, and branding that drives results."
+    />
+    <meta name="twitter:image" content="images/RC Digital Creations.png" />
 
-    
+    <link rel="icon" type="image/png" href="images/RC Digital Creations.png" />
+
     <script src="https://unpkg.com/feather-icons"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="dist/style.css">
-</head>
-<body class="antialiased">
+    <link rel="stylesheet" href="dist/style.css" />
+  </head>
+  <body class="antialiased">
+    <canvas id="projector"
+      >Your browser does not support the Canvas element.</canvas
+    >
 
     <div class="mesh-bg"></div>
+    <div class="page-scrim"></div>
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "RC Digital Creations",
-      "url": "https://rcdigitalcreations.co.za",
-      "logo": "images/RC Digital Creations.png",
-      "sameAs": [
-        "https://www.linkedin.com/in/ruan-coetzee-43a925a1",
-        "https://www.facebook.com/rcoetzee2/"
-      ],
-      "contactPoint": [{
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "telephone": "+27-78-899-8305",
-        "email": "ruan.coetzee2@gmail.com"
-      }]
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "RC Digital Creations",
+        "url": "https://rcdigitalcreations.co.za",
+        "logo": "images/RC Digital Creations.png",
+        "sameAs": [
+          "https://www.linkedin.com/in/ruan-coetzee-43a925a1",
+          "https://www.facebook.com/rcoetzee2/"
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "telephone": "+27-78-899-8305",
+            "email": "ruan.coetzee2@gmail.com"
+          }
+        ]
+      }
     </script>
 
-    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-0 sm:px-0 lg:px-0">
-            <div class="flex justify-between items-center h-20">
-                <a href="index.html" class="flex-shrink-0 flex items-center gap-3" aria-label="RC Digital Creations Home">
-                    <img src="images/RC Digital Creations.png" alt="RC Digital Creations Logo" class="h-20 w-20 object-contain drop-shadow-[0_0_18px_rgba(59,130,246,0.6)]">
-                    <span class="font-bold tracking-tight text-white brand-font block text-base md:text-2xl">RC <span class="text-brand-blue">Digital</span> Creations</span>
-                </a>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#services" class="group relative inline-block px-2 py-1 text-gray-300 hover:text-brand-blue transition-all text-sm uppercase tracking-wider font-medium hover:shadow-[0_0_12px_rgba(59,130,246,0.6)] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-blue after:to-brand-purple group-hover:after:w-full after:transition-all after:duration-300">Services</a>
-                    <a href="#portfolio" class="group relative inline-block px-2 py-1 text-gray-300 hover:text-brand-blue transition-all text-sm uppercase tracking-wider font-medium hover:shadow-[0_0_12px_rgba(59,130,246,0.6)] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-blue after:to-brand-purple group-hover:after:w-full after:transition-all after:duration-300">Our Work</a>
-                    <a href="#about" class="group relative inline-block px-2 py-1 text-gray-300 hover:text-brand-blue transition-all text-sm uppercase tracking-wider font-medium hover:shadow-[0_0_12px_rgba(59,130,246,0.6)] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-blue after:to-brand-purple group-hover:after:w-full after:transition-all after:duration-300">About</a>
-                    <a href="#contact" class="group relative inline-block px-2 py-1 text-gray-300 hover:text-brand-blue transition-all text-sm uppercase tracking-wider font-medium hover:shadow-[0_0_12px_rgba(59,130,246,0.6)] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-blue after:to-brand-purple group-hover:after:w-full after:transition-all after:duration-300">Contact</a>
-                    <a href="#contact" class="bg-gradient-to-r from-brand-blue to-brand-purple text-white px-6 py-2.5 rounded-full font-medium hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all transform hover:-translate-y-0.5 text-sm">
-                        Start a Project
-                    </a>
-                </div>
+    <nav
+      class="fixed w-full z-50 glass transition-all duration-300"
+      id="navbar"
+    >
+      <div class="max-w-7xl mx-auto px-0 sm:px-0 lg:px-0">
+        <div class="flex justify-between items-center h-20">
+          <a
+            href="index.html"
+            class="flex items-center gap-2 md:gap-3 min-w-0"
+            aria-label="RC Digital Creations Home"
+          >
+            <img
+              src="images/RC Digital Creations.png"
+              alt="RC Digital Creations Logo"
+              class="h-12 w-12 md:h-20 md:w-20 object-contain drop-shadow-[0_0_18px_rgba(59,130,246,0.6)]"
+            />
+            <span
+              class="font-bold tracking-tight text-white brand-font block text-base sm:text-lg md:text-2xl"
+              >RC <span class="text-brand-blue">Digital</span> Creations</span
+            >
+          </a>
 
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-white hover:text-brand-blue focus:outline-none">
-                        <i data-feather="menu" class="h-8 w-8"></i>
-                    </button>
-                </div>
-            </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="#services"
+              class="group relative inline-block px-2 py-1 text-gray-300 transition-all text-sm uppercase tracking-wider font-medium hover:shadow-[0_0_12px_rgba(59,130,246,0.6)] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-blue after:to-brand-purple group-hover:after:w-full after:transition-all after:duration-300 link-pop neon-hover-blue"
+              >Services</a
+            >
+            <a
+              href="#portfolio"
+              class="group relative inline-block px-2 py-1 text-gray-300 transition-all text-sm uppercase tracking-wider font-medium hover:shadow-[0_0_12px_rgba(139,92,246,0.6)] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-purple after:to-pink-500 group-hover:after:w-full after:transition-all after:duration-300 link-pop neon-hover-purple"
+              >Our Work</a
+            >
+            <a
+              href="#about"
+              class="group relative inline-block px-2 py-1 text-gray-300 transition-all text-sm uppercase tracking-wider font-medium hover:shadow-[0_0_12px_rgba(236,72,153,0.6)] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-pink-500 after:to-brand-purple group-hover:after:w-full after:transition-all after:duration-300 link-pop neon-hover-pink"
+              >About</a
+            >
+            <a
+              href="#contact"
+              class="group relative inline-block px-2 py-1 text-gray-300 transition-all text-sm uppercase tracking-wider font-medium hover:shadow-[0_0_12px_rgba(139,92,246,0.6)] after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-purple after:to-brand-blue group-hover:after:w-full after:transition-all after:duration-300 link-pop neon-hover-purple"
+              >Contact</a
+            >
+            <a href="#contact" class="btn-neon-pill text-sm">
+              Start a Project
+            </a>
+          </div>
+
+          <div class="md:hidden flex items-center mr-2 sm:mr-3">
+            <button
+              id="mobile-menu-btn"
+              class="text-white hover:text-brand-blue focus:outline-none"
+            >
+              <i data-feather="menu" class="h-8 w-8"></i>
+            </button>
+          </div>
         </div>
-        
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-t border-gray-800 absolute w-full text-center z-50 top-20">
-            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col items-center">
-                <a href="#services" class="group relative block px-3 py-3 text-base font-medium text-gray-300 hover:text-brand-blue hover:bg-gray-800/60 rounded-md text-center after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-blue after:to-brand-purple group-hover:after:w-3/4 after:transition-all after:duration-300">Services</a>
-                <a href="#portfolio" class="group relative block px-3 py-3 text-base font-medium text-gray-300 hover:text-brand-blue hover:bg-gray-800/60 rounded-md text-center after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-blue after:to-brand-purple group-hover:after:w-3/4 after:transition-all after:duration-300">Our Work</a>
-                <a href="#about" class="group relative block px-3 py-3 text-base font-medium text-gray-300 hover:text-brand-blue hover:bg-gray-800/60 rounded-md text-center after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-blue after:to-brand-purple group-hover:after:w-3/4 after:transition-all after:duration-300">About</a>
-                <a href="#contact" class="group relative block px-3 py-3 text-base font-medium text-gray-300 hover:text-brand-blue hover:bg-gray-800/60 rounded-md text-center after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-blue after:to-brand-purple group-hover:after:w-3/4 after:transition-all after:duration-300">Contact</a>
-                <a href="#contact" class="block px-3 py-3 text-base font-medium text-brand-blue font-bold">Get a Quote</a>
-            </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-brand-dark border-t border-gray-800 absolute w-full text-center z-50 top-20"
+      >
+        <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col items-center">
+          <a
+            href="#services"
+            class="group relative block px-3 py-3 text-base font-medium text-gray-300 hover:bg-gray-800/60 rounded-md text-center after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-blue after:to-brand-purple group-hover:after:w-3/4 after:transition-all after:duration-300 link-pop neon-hover-blue"
+            >Services</a
+          >
+          <a
+            href="#portfolio"
+            class="group relative block px-3 py-3 text-base font-medium text-gray-300 hover:bg-gray-800/60 rounded-md text-center after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-purple after:to-pink-500 group-hover:after:w-3/4 after:transition-all after:duration-300 link-pop neon-hover-purple"
+            >Our Work</a
+          >
+          <a
+            href="#about"
+            class="group relative block px-3 py-3 text-base font-medium text-gray-300 hover:bg-gray-800/60 rounded-md text-center after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-pink-500 after:to-brand-purple group-hover:after:w-3/4 after:transition-all after:duration-300 link-pop neon-hover-pink"
+            >About</a
+          >
+          <a
+            href="#contact"
+            class="group relative block px-3 py-3 text-base font-medium text-gray-300 hover:bg-gray-800/60 rounded-md text-center after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-brand-purple after:to-brand-blue group-hover:after:w-3/4 after:transition-all after:duration-300 link-pop neon-hover-purple"
+            >Contact</a
+          >
+          <a
+            href="#contact"
+            class="block px-3 py-3 text-base font-medium text-brand-blue font-bold"
+            >Get a Quote</a
+          >
         </div>
+      </div>
     </nav>
 
-    <section class="relative pt-16 pb-20 lg:pt-20 lg:pb-32 overflow-hidden">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-blue opacity-20 blur-[120px] rounded-full pointer-events-none"></div>
+    <section
+      class="relative pt-28 md:pt-32 lg:pt-40 pb-20 lg:pb-32 overflow-hidden"
+    >
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-blue opacity-20 blur-[120px] rounded-full pointer-events-none"
+      ></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div data-aos="fade-up" data-aos-duration="1000">
-                <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight">
-                    We Build <span class="nav-gradient">Digital Experiences</span><br> That Grow Business.
-                </h1>
-                <p class="mt-4 text-2xl text-gray-400 max-w-3xl mx-auto mb-10 font-light">
-                    From high-performance websites to custom AI chatbots and brand identity. We combine creativity with technical precision.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#portfolio" class="px-8 py-4 rounded-full border border-gray-600 hover:border-brand-blue hover:text-brand-blue transition-all font-semibold text-white">
-                        View Our Work
-                    </a>
-                    <a href="#contact" class="px-8 py-4 rounded-full bg-white text-black font-bold hover:bg-gray-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-                        Get in Touch
-                    </a>
-                </div>
-            </div>
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center"
+      >
+        <div data-aos="fade-up" data-aos-duration="1000">
+          <h1
+            class="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-tight text-contrast"
+          >
+            <span class="text-brand-blue outline-blue-thin"
+              >Digital Experiences</span
+            >
+            <span class="outline-blue-thin"
+              >Engineered for Business Growth.</span
+            >
+          </h1>
+          <p
+            class="mt-4 text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto mb-10 font-light"
+          >
+            From high-performance websites to custom AI chatbots and brand
+            identity. We combine creativity with technical precision.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a
+              href="#portfolio"
+              class="px-6 py-3 md:px-8 md:py-4 font-semibold text-white btn-hero btn-hero-purple"
+            >
+              View Our Work
+            </a>
+            <a
+              href="#contact"
+              class="px-6 py-3 md:px-8 md:py-4 font-bold text-black btn-hero btn-hero-blue"
+            >
+              Get in Touch
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
-    <section id="services" class="py-24 bg-black/20 relative border-y border-gray-800/50 scroll-mt-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Expertise</h2>
-                <div class="w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-purple mx-auto rounded-full"></div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass p-8 rounded-2xl hover:border-brand-blue/50 transition-all group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 bg-brand-blue/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-blue/20 transition-colors">
-                        <i data-feather="layout" class="text-brand-blue w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Web Development</h3>
-                    <p class="text-gray-400 leading-relaxed">
-                        Fast, responsive, and SEO-optimized websites. Whether you need a landing page or a multi-page business site, we build for performance.
-                    </p>
-                </div>
-
-                <div class="glass p-8 rounded-2xl hover:border-brand-purple/50 transition-all group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 bg-brand-purple/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-purple/20 transition-colors">
-                        <i data-feather="message-square" class="text-brand-purple w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">AI Chatbots</h3>
-                    <p class="text-gray-400 leading-relaxed">
-                        Automate your customer support with custom AI chatbots that work 24/7. Integrated directly into your site to handle queries and bookings.
-                    </p>
-                </div>
-
-                <div class="glass p-8 rounded-2xl hover:border-pink-500/50 transition-all group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-14 h-14 bg-pink-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-pink-500/20 transition-colors">
-                        <i data-feather="pen-tool" class="text-pink-500 w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Branding & Design</h3>
-                    <p class="text-gray-400 leading-relaxed">
-                        Stand out visually. We create memorable logos, business cards, custom QR codes, and promotional posters that define your brand identity.
-                    </p>
-                </div>
-            </div>
+    <section
+      id="services"
+      class="py-20 md:py-24 bg-black/20 relative border-y border-gray-800/50 scroll-mt-24"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 neon-title">
+            Our Expertise
+          </h2>
+          <div
+            class="w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-purple mx-auto rounded-full"
+          ></div>
         </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="glass p-5 md:p-8 rounded-2xl hover:border-brand-blue/50 transition-all group"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div
+              class="w-10 h-10 md:w-14 md:h-14 bg-brand-blue/10 rounded-xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-brand-blue/20 transition-colors"
+            >
+              <i
+                data-feather="layout"
+                class="text-brand-blue w-6 h-6 md:w-7 md:h-7"
+              ></i>
+            </div>
+            <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white">
+              Web Development
+            </h3>
+            <p class="text-sm md:text-base text-gray-400 leading-relaxed">
+              Fast, responsive, and SEO-optimized websites. Whether you need a
+              landing page or a multi-page business site, we build for
+              performance.
+            </p>
+          </div>
+
+          <div
+            class="glass p-5 md:p-8 rounded-2xl hover:border-brand-purple/50 transition-all group"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="w-10 h-10 md:w-14 md:h-14 bg-brand-purple/10 rounded-xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-brand-purple/20 transition-colors"
+            >
+              <i
+                data-feather="message-square"
+                class="text-brand-purple w-6 h-6 md:w-7 md:h-7"
+              ></i>
+            </div>
+            <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white">
+              AI Chatbots
+            </h3>
+            <p class="text-sm md:text-base text-gray-400 leading-relaxed">
+              Automate your customer support with custom AI chatbots that work
+              24/7. Integrated directly into your site to handle queries and
+              bookings.
+            </p>
+          </div>
+
+          <div
+            class="glass p-5 md:p-8 rounded-2xl hover:border-pink-500/50 transition-all group"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div
+              class="w-10 h-10 md:w-14 md:h-14 bg-pink-500/10 rounded-xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-pink-500/20 transition-colors"
+            >
+              <i
+                data-feather="pen-tool"
+                class="text-pink-500 w-6 h-6 md:w-7 md:h-7"
+              ></i>
+            </div>
+            <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white">
+              Branding & Design
+            </h3>
+            <p class="text-sm md:text-base text-gray-400 leading-relaxed">
+              Stand out visually. We create memorable logos, business cards,
+              custom QR codes, and promotional posters that define your brand
+              identity.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="portfolio" class="py-24 relative scroll-mt-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Selected Works</h2>
-                <p class="text-gray-400">A collection of our recent digital projects.</p>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up" data-aos-delay="100">
-                <button id="tab-web" class="tab-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 font-medium transition-all hover:border-brand-blue hover:text-brand-blue" onclick="filterProjects('web', this)">Websites</button>
-                <button id="tab-branding" class="tab-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 font-medium transition-all hover:border-brand-blue hover:text-brand-blue" onclick="filterProjects('branding', this)">Logos & Design</button>
-                <button id="tab-qr" class="tab-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 font-medium transition-all hover:border-brand-blue hover:text-brand-blue" onclick="filterProjects('qr', this)">QR Solutions</button>
-                <button id="tab-posters" class="tab-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 font-medium transition-all hover:border-brand-blue hover:text-brand-blue" onclick="filterProjects('posters', this)">Poster & Sticker Designs</button>
-            </div>
-
-            <div id="projects-pager" class="relative px-0 md:px-0">
-                
-                <button id="projects-prev" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-gray-900/80 border border-gray-700 text-white hover:bg-brand-blue hover:border-brand-blue transition-all shadow-lg backdrop-blur-sm group" aria-label="Previous">
-                    <i data-feather="chevron-left" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
-                </button>
-                
-                <button id="projects-next" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-gray-900/80 border border-gray-700 text-white hover:bg-brand-blue hover:border-brand-blue transition-all shadow-lg backdrop-blur-sm group" aria-label="Next">
-                    <i data-feather="chevron-right" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
-                </button>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-1" id="projects-grid">
-                
-                    <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden">
-                            <img src="images/Websites/Albertinia_Pavers_Website.png" alt="Albertinia Pavers Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Albertinia Pavers</h3>
-                            <p class="text-sm text-gray-300 mb-4">Web Development • Manufacturing</p>
-                            <a href="https://albertiniapavers.co.za/" target="_blank" class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors">
-                                Visit Site <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden">
-                            <img src="images/Websites/CC_Auto_Repairs_Website.png" alt="CC Auto Repairs Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">CC Auto Repairs</h3>
-                            <p class="text-sm text-gray-300 mb-4">Web Development • Automotive</p>
-                            <a href="https://ccautorepairs.netlify.app/" target="_blank" class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors">
-                                Visit Site <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden">
-                            <img src="images/Websites/Nails_by_Wilma_Website.png" alt="Nails by Wilma Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Nails by Wilma</h3>
-                            <p class="text-sm text-gray-300 mb-4">Web Design • Beauty</p>
-                            <a href="https://nailsbywilma.netlify.app" target="_blank" class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors">
-                                Visit Site <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden">
-                            <img src="images/Websites/Ruan_Coetzee_Portfolio.png" alt="Ruan Coetzee Portfolio" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Ruan Coetzee Portfolio</h3>
-                            <p class="text-sm text-gray-300 mb-4">Web Development • Personal</p>
-                            <a href="https://ruancoetzee.co.za/" target="_blank" class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors">
-                                Visit Site <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Logo Designs/CC Auto Repairs Logo.png" alt="CC Auto Repairs Logo" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">CC Auto Repairs</h3>
-                            <p class="text-sm text-gray-300">Brand Identity • Logo Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Logo Designs/Albertinia Pavers Logo.png" alt="Albertinia Pavers Logo" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Albertinia Pavers</h3>
-                            <p class="text-sm text-gray-300">Brand Identity • Logo Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Logo Designs/Nails_by_Wilma_Logo.png" alt="Nails by Wilma Logo" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Nails by Wilma</h3>
-                            <p class="text-sm text-gray-300">Brand Identity • Logo Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Logo Designs/Still Green 6.png" alt="Still Green 6" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Still Green</h3>
-                            <p class="text-sm text-gray-300">Brand Identity • Logo Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Logo Designs/Still Green 7.png" alt="Still Green 7" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Still Green</h3>
-                            <p class="text-sm text-gray-300">Brand Identity • Logo Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Logo Designs/Still Green 8.png" alt="Still Green 8" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Still Green</h3>
-                            <p class="text-sm text-gray-300">Brand Identity • Logo Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Logo Designs/Still Greens 5.png" alt="Still Greens 5" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Still Green</h3>
-                            <p class="text-sm text-gray-300">Brand Identity • Logo Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.26 (1).jpeg" alt="WhatsApp Image 2024-04-24 (1)" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Client Logo</h3>
-                            <p class="text-sm text-gray-300">Brand Identity • Logo Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.26.jpeg" alt="WhatsApp Image 2024-04-24 10.05.26" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Client Logo</h3>
-                            <p class="text-sm text-gray-300">Brand Identity • Logo Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.27.jpeg" alt="WhatsApp Image 2024-04-24 10.05.27" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Client Logo</h3>
-                            <p class="text-sm text-gray-300">Brand Identity • Logo Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden">
-                            <img src="images/Websites/De_Brakke_Guest_House_Website.png" alt="De Brakke Guest House" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">De Brakke Guest House</h3>
-                            <p class="text-sm text-gray-300 mb-4">Web Development • Hospitality</p>
-                            <a href="https://debrakke.netlify.app/" target="_blank" class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors">
-                                Visit Site <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Poster & Sticker Designs/Still Green - Salad Mix.png" alt="Still Green - Salad Mix" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Poster & Sticker Designs</h3>
-                            <p class="text-sm text-gray-300">Product Packaging • Sticker Design</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Poster & Sticker Designs/Nails By Wilma.png" alt="Nails By Wilma" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Poster & Sticker Designs</h3>
-                            <p class="text-sm text-gray-300">Promotional Poster</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Poster & Sticker Designs/Nails_by_Wilma_Poster.png" alt="Nails by Wilma Poster" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Poster & Sticker Designs</h3>
-                            <p class="text-sm text-gray-300">Promotional Poster</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Poster & Sticker Designs/Still Green - Beetroot.png" alt="Still Green - Beetroot" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Poster & Sticker Designs</h3>
-                            <p class="text-sm text-gray-300">Product Sticker</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Poster & Sticker Designs/Still Green - Broccoli.png" alt="Still Green - Broccoli" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Poster & Sticker Designs</h3>
-                            <p class="text-sm text-gray-300">Product Sticker</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item posters flex-shrink-0 w-full lg:w-1/3 group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Poster & Sticker Designs/Still Green - Chai.png" alt="Still Green - Chai" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Poster & Sticker Designs</h3>
-                            <p class="text-sm text-gray-300">Product Sticker</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Poster & Sticker Designs/Still Green - Pea Shoots.png" alt="Still Green - Pea Shoots" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Poster & Sticker Designs</h3>
-                            <p class="text-sm text-gray-300">Product Sticker</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/Poster & Sticker Designs/Still Green - Sunflower.png" alt="Still Green - Sunflower" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Poster & Sticker Designs</h3>
-                            <p class="text-sm text-gray-300">Product Sticker</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item qr group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/QR Designs/Nails_by_Wilma_Google_Maps_QR-1024.png" alt="QR Design" class="h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Custom QR Solutions</h3>
-                            <p class="text-sm text-gray-300">Digital Integration</p>
-                        </div>
-                    </div>
-
-                    <div class="project-item qr group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
-                        <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-                            <img src="images/QR Designs/Nails_by_Wilma_Website_QR-1024.png" alt="Website QR" class="h-full object-contain transition-transform duration-700 group-hover:scale-110" loading="lazy" decoding="async">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white">Website QR</h3>
-                            <p class="text-sm text-gray-300">Digital Integration</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 neon-title">
+            Selected Works
+          </h2>
+          <p class="text-gray-400">
+            A collection of our recent digital projects.
+          </p>
         </div>
+
+        <div
+          class="flex flex-wrap justify-center gap-4 mb-12"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <button
+            id="tab-web"
+            class="tab-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 font-medium transition-all hover:border-brand-purple hover:text-brand-purple btn-pop"
+            onclick="filterProjects('web', this)"
+          >
+            Websites
+          </button>
+          <button
+            id="tab-branding"
+            class="tab-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 font-medium transition-all hover:border-brand-purple hover:text-brand-purple btn-pop"
+            onclick="filterProjects('branding', this)"
+          >
+            Logos & Design
+          </button>
+          <button
+            id="tab-qr"
+            class="tab-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 font-medium transition-all hover:border-brand-purple hover:text-brand-purple btn-pop"
+            onclick="filterProjects('qr', this)"
+          >
+            QR Solutions
+          </button>
+          <button
+            id="tab-posters"
+            class="tab-btn px-6 py-2 rounded-full border border-gray-700 text-gray-400 font-medium transition-all hover:border-brand-purple hover:text-brand-purple btn-pop"
+            onclick="filterProjects('posters', this)"
+          >
+            Poster & Sticker Designs
+          </button>
+        </div>
+
+        <div id="projects-pager" class="relative px-0 md:px-0">
+          <button
+            id="projects-prev"
+            class="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-gray-900/40 border border-gray-700/40 text-white opacity-10 hover:opacity-60 transition-all shadow-lg backdrop-blur-sm group btn-pop"
+            aria-label="Previous"
+          >
+            <i
+              data-feather="chevron-left"
+              class="w-6 h-6 group-hover:scale-110 transition-transform"
+            ></i>
+          </button>
+
+          <button
+            id="projects-next"
+            class="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-gray-900/40 border border-gray-700/40 text-white opacity-10 hover:opacity-60 transition-all shadow-lg backdrop-blur-sm group btn-pop"
+            aria-label="Next"
+          >
+            <i
+              data-feather="chevron-right"
+              class="w-6 h-6 group-hover:scale-110 transition-transform"
+            ></i>
+          </button>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-1" id="projects-grid">
+            <div
+              class="project-item web group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div class="aspect-video overflow-hidden">
+                <img
+                  src="images/Websites/Albertinia_Pavers_Website.png"
+                  alt="Albertinia Pavers Website"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Albertinia Pavers</h3>
+                <p class="text-sm text-gray-300 mb-4">
+                  Web Development • Manufacturing
+                </p>
+                <a
+                  href="https://albertiniapavers.co.za/"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                >
+                  Visit Site
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                </a>
+              </div>
+              <div class="md:hidden p-4 text-center space-y-2">
+                <p class="text-gray-300 text-sm">
+                  Paving manufacturer site with product showcase and services.
+                </p>
+                <a
+                  href="https://albertiniapavers.co.za/"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                  >Visit Website
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i
+                ></a>
+              </div>
+            </div>
+
+            <div
+              class="project-item web group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div class="aspect-video overflow-hidden">
+                <img
+                  src="images/Websites/CC_Auto_Repairs_Website.png"
+                  alt="CC Auto Repairs Website"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">CC Auto Repairs</h3>
+                <p class="text-sm text-gray-300 mb-4">
+                  Web Development • Automotive
+                </p>
+                <a
+                  href="https://ccautorepairs.netlify.app/"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                >
+                  Visit Site
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                </a>
+              </div>
+              <div class="md:hidden p-4 text-center space-y-2">
+                <p class="text-gray-300 text-sm">
+                  Automotive repair site detailing services, rates, and contact.
+                </p>
+                <a
+                  href="https://ccautorepairs.netlify.app/"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                  >Visit Website
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i
+                ></a>
+              </div>
+            </div>
+
+            <div
+              class="project-item web group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div class="aspect-video overflow-hidden">
+                <img
+                  src="images/Websites/Nails_by_Wilma_Website.png"
+                  alt="Nails by Wilma Website"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Nails by Wilma</h3>
+                <p class="text-sm text-gray-300 mb-4">Web Design • Beauty</p>
+                <a
+                  href="https://nailsbywilma.netlify.app"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                >
+                  Visit Site
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                </a>
+              </div>
+              <div class="md:hidden p-4 text-center space-y-2">
+                <p class="text-gray-300 text-sm">
+                  Beauty studio site highlighting nail services, gallery, and
+                  booking.
+                </p>
+                <a
+                  href="https://nailsbywilma.netlify.app"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                  >Visit Website
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i
+                ></a>
+              </div>
+            </div>
+
+            <div
+              class="project-item web group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div class="aspect-video overflow-hidden">
+                <img
+                  src="images/Websites/Ruan_Coetzee_Portfolio.png"
+                  alt="Ruan Coetzee Portfolio"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Ruan Coetzee Portfolio
+                </h3>
+                <p class="text-sm text-gray-300 mb-4">
+                  Web Development • Personal
+                </p>
+                <a
+                  href="https://ruancoetzee.co.za/"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                >
+                  Visit Site
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                </a>
+              </div>
+              <div class="md:hidden p-4 text-center space-y-2">
+                <p class="text-gray-300 text-sm">
+                  Personal portfolio showcasing projects, experience, and
+                  contact.
+                </p>
+                <a
+                  href="https://ruancoetzee.co.za/"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                  >Visit Website
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i
+                ></a>
+              </div>
+            </div>
+
+            <div
+              class="project-item web group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div class="aspect-video overflow-hidden">
+                <img
+                  src="images/Websites/RC_Digital_Creations.png"
+                  alt="RC Digital Creations Website"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  RC Digital Creations
+                </h3>
+                <p class="text-sm text-gray-300 mb-4">
+                  Web Development • Agency
+                </p>
+                <a
+                  href="https://rcdigitalcreations.co.za/"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                >
+                  Visit Site
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                </a>
+              </div>
+              <div class="md:hidden p-4 text-center space-y-2">
+                <p class="text-gray-300 text-sm">
+                  Agency site presenting services, selected work, and contact.
+                </p>
+                <a
+                  href="https://rcdigitalcreations.co.za/"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                  >Visit Website
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i
+                ></a>
+              </div>
+            </div>
+
+            <div
+              class="project-item branding group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Logo Designs/CC Auto Repairs Logo.png"
+                  alt="CC Auto Repairs Logo"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">CC Auto Repairs</h3>
+                <p class="text-sm text-gray-300">
+                  Brand Identity • Logo Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item branding group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Logo Designs/Albertinia Pavers Logo.png"
+                  alt="Albertinia Pavers Logo"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Albertinia Pavers</h3>
+                <p class="text-sm text-gray-300">
+                  Brand Identity • Logo Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item branding group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Logo Designs/Nails_by_Wilma_Logo.png"
+                  alt="Nails by Wilma Logo"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Nails by Wilma</h3>
+                <p class="text-sm text-gray-300">
+                  Brand Identity • Logo Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item branding group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Logo Designs/Still Green 6.png"
+                  alt="Still Green 6"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Still Green</h3>
+                <p class="text-sm text-gray-300">
+                  Brand Identity • Logo Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item branding group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Logo Designs/Still Green 7.png"
+                  alt="Still Green 7"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Still Green</h3>
+                <p class="text-sm text-gray-300">
+                  Brand Identity • Logo Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item branding group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Logo Designs/Still Green 8.png"
+                  alt="Still Green 8"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Still Green</h3>
+                <p class="text-sm text-gray-300">
+                  Brand Identity • Logo Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item branding group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Logo Designs/Still Greens 5.png"
+                  alt="Still Greens 5"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Still Green</h3>
+                <p class="text-sm text-gray-300">
+                  Brand Identity • Logo Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item branding group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.26 (1).jpeg"
+                  alt="WhatsApp Image 2024-04-24 (1)"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Client Logo</h3>
+                <p class="text-sm text-gray-300">
+                  Brand Identity • Logo Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item branding group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.26.jpeg"
+                  alt="WhatsApp Image 2024-04-24 10.05.26"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Client Logo</h3>
+                <p class="text-sm text-gray-300">
+                  Brand Identity • Logo Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item branding group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.27.jpeg"
+                  alt="WhatsApp Image 2024-04-24 10.05.27"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Client Logo</h3>
+                <p class="text-sm text-gray-300">
+                  Brand Identity • Logo Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item web group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div class="aspect-video overflow-hidden">
+                <img
+                  src="images/Websites/De_Brakke_Guest_House_Website.png"
+                  alt="De Brakke Guest House"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  De Brakke Guest House
+                </h3>
+                <p class="text-sm text-gray-300 mb-4">
+                  Web Development • Hospitality
+                </p>
+                <a
+                  href="https://debrakke.netlify.app/"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                >
+                  Visit Site
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                </a>
+              </div>
+              <div class="md:hidden p-4 text-center space-y-2">
+                <p class="text-gray-300 text-sm">
+                  Guesthouse website with rooms overview, amenities, and booking
+                  info.
+                </p>
+                <a
+                  href="https://debrakke.netlify.app/"
+                  target="_blank"
+                  class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors"
+                  >Visit Website
+                  <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i
+                ></a>
+              </div>
+            </div>
+
+            <div
+              class="project-item posters group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Poster & Sticker Designs/Still Green - Salad Mix.png"
+                  alt="Still Green - Salad Mix"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Poster & Sticker Designs
+                </h3>
+                <p class="text-sm text-gray-300">
+                  Product Packaging • Sticker Design
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="project-item posters group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Poster & Sticker Designs/Nails By Wilma.png"
+                  alt="Nails By Wilma"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Poster & Sticker Designs
+                </h3>
+                <p class="text-sm text-gray-300">Promotional Poster</p>
+              </div>
+            </div>
+
+            <div
+              class="project-item posters group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Poster & Sticker Designs/Nails_by_Wilma_Poster.png"
+                  alt="Nails by Wilma Poster"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Poster & Sticker Designs
+                </h3>
+                <p class="text-sm text-gray-300">Promotional Poster</p>
+              </div>
+            </div>
+
+            <div
+              class="project-item posters group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Poster & Sticker Designs/Still Green - Beetroot.png"
+                  alt="Still Green - Beetroot"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Poster & Sticker Designs
+                </h3>
+                <p class="text-sm text-gray-300">Product Sticker</p>
+              </div>
+            </div>
+
+            <div
+              class="project-item posters group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Poster & Sticker Designs/Still Green - Broccoli.png"
+                  alt="Still Green - Broccoli"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Poster & Sticker Designs
+                </h3>
+                <p class="text-sm text-gray-300">Product Sticker</p>
+              </div>
+            </div>
+
+            <div
+              class="project-item posters group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Poster & Sticker Designs/Still Green - Chai.png"
+                  alt="Still Green - Chai"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Poster & Sticker Designs
+                </h3>
+                <p class="text-sm text-gray-300">Product Sticker</p>
+              </div>
+            </div>
+
+            <div
+              class="project-item posters group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Poster & Sticker Designs/Still Green - Pea Shoots.png"
+                  alt="Still Green - Pea Shoots"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Poster & Sticker Designs
+                </h3>
+                <p class="text-sm text-gray-300">Product Sticker</p>
+              </div>
+            </div>
+
+            <div
+              class="project-item posters group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/Poster & Sticker Designs/Still Green - Sunflower.png"
+                  alt="Still Green - Sunflower"
+                  class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Poster & Sticker Designs
+                </h3>
+                <p class="text-sm text-gray-300">Product Sticker</p>
+              </div>
+            </div>
+
+            <div
+              class="project-item qr group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/QR Designs/Nails_by_Wilma_Google_Maps_QR-1024.png"
+                  alt="QR Design"
+                  class="h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">
+                  Custom QR Solutions
+                </h3>
+                <p class="text-sm text-gray-300">Digital Integration</p>
+              </div>
+            </div>
+
+            <div
+              class="project-item qr group relative rounded-xl overflow-hidden glass border-0"
+              data-aos="fade-up"
+            >
+              <div
+                class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8"
+              >
+                <img
+                  src="images/QR Designs/Nails_by_Wilma_Website_QR-1024.png"
+                  alt="Website QR"
+                  class="h-full object-contain transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+              >
+                <h3 class="text-xl font-bold text-white">Website QR</h3>
+                <p class="text-sm text-gray-300">Digital Integration</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="about" class="py-20 bg-gradient-to-r from-gray-900 to-black border-y border-gray-800 scroll-mt-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2" data-aos="fade-right">
-                <h2 class="text-3xl font-bold mb-6">The Mind Behind the Code</h2>
-                <p class="text-gray-300 mb-6 text-lg leading-relaxed">
-                    RC Digital Creations is led by <span class="text-brand-blue font-semibold">Ruan Coetzee</span>. 
-                    With a background in Geography & Environmental Sciences turned AI Engineer & Developer, 
-                    Ruan brings a unique systems-thinking approach to digital problems.
-                </p>
-                <p class="text-gray-400 mb-8">
-                    "I don't just write code; I build solutions that are sustainable, data-driven, and designed for the future."
-                </p>
-                <a href="https://ruancoetzee.co.za" target="_blank" class="inline-flex items-center px-6 py-3 rounded-lg border border-gray-600 hover:bg-gray-800 hover:text-brand-purple transition-all">
-                    <i data-feather="user" class="mr-2 h-5 w-5"></i>
-                    View Ruan's Personal Portfolio
-                </a>
-            </div>
-            <div class="md:w-1/2 relative" data-aos="fade-left">
-                <div class="absolute inset-0 bg-gradient-to-r from-brand-blue to-brand-purple blur-2xl opacity-20 rounded-full"></div>
-                <div class="glass p-8 rounded-2xl relative border border-gray-700">
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="text-center">
-                            <h4 class="text-4xl font-bold text-white mb-1">4+</h4>
-                            <p class="text-sm text-gray-400">Years Tech Exp</p>
-                        </div>
-                        <div class="text-center">
-                            <h4 class="text-4xl font-bold text-white mb-1">100%</h4>
-                            <p class="text-sm text-gray-400">Client Satisfaction</p>
-                        </div>
-                        <div class="text-center">
-                            <h4 class="text-4xl font-bold text-white mb-1">24h</h4>
-                            <p class="text-sm text-gray-400">Support Response</p>
-                        </div>
-                        <div class="text-center">
-                            <h4 class="text-4xl font-bold text-white mb-1">AI</h4>
-                            <p class="text-sm text-gray-400">Powered Solutions</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section
+      id="about"
+      class="py-20 bg-gradient-to-r from-gray-900 to-black border-y border-gray-800 scroll-mt-24"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12"
+      >
+        <div class="md:w-1/2" data-aos="fade-right">
+          <h2 class="text-3xl font-bold mb-6 neon-title">
+            The Mind Behind the Code
+          </h2>
+          <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+            RC Digital Creations is led by
+            <span class="text-brand-blue font-semibold">Ruan Coetzee</span>.
+            With a background in Geography & Environmental Sciences turned AI
+            Engineer & Developer, Ruan brings a unique systems-thinking approach
+            to digital problems.
+          </p>
+          <p class="text-gray-400 mb-8">
+            "I don't just write code; I build solutions that are sustainable,
+            data-driven, and designed for the future."
+          </p>
+          <a
+            href="https://ruancoetzee.co.za"
+            target="_blank"
+            class="btn-neon-outline"
+          >
+            <i data-feather="user" class="mr-2 h-5 w-5"></i>
+            View Ruan's Personal Portfolio
+          </a>
         </div>
+        <div class="md:w-1/2 relative" data-aos="fade-left">
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-brand-blue to-brand-purple blur-2xl opacity-20 rounded-full"
+          ></div>
+          <div class="glass p-8 rounded-2xl relative border border-gray-700">
+            <div class="grid grid-cols-2 gap-6">
+              <div class="text-center">
+                <h4 class="text-4xl font-bold text-white mb-1">4+</h4>
+                <p class="text-sm text-gray-400">Years Tech Exp</p>
+              </div>
+              <div class="text-center">
+                <h4 class="text-4xl font-bold text-white mb-1">100%</h4>
+                <p class="text-sm text-gray-400">Client Satisfaction</p>
+              </div>
+              <div class="text-center">
+                <h4 class="text-4xl font-bold text-white mb-1">24h</h4>
+                <p class="text-sm text-gray-400">Support Response</p>
+              </div>
+              <div class="text-center">
+                <h4 class="text-4xl font-bold text-white mb-1">AI</h4>
+                <p class="text-sm text-gray-400">Powered Solutions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="contact" class="py-24 relative overflow-hidden scroll-mt-24">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Let's Build Something Great</h2>
-                <p class="text-gray-400">Ready to start? Fill out the form below or reach out directly.</p>
-            </div>
-
-                <div class="glass p-8 md:p-10 rounded-2xl shadow-2xl border border-gray-700" data-aos="zoom-in">
-                
-                <div class="flex flex-col md:flex-row justify-center gap-8 mb-10 border-b border-gray-700 pb-8">
-                    <div class="flex items-center gap-3 text-gray-300">
-                        <a href="https://wa.me/27888998305?text=Hi%20Ruan%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="group relative p-3 rounded-full bg-[#25D366] inline-flex items-center justify-center hover:brightness-110" aria-label="WhatsApp Ruan">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" aria-hidden="true">
-                                <path fill="white" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                            </svg>
-                            <span class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg">WhatsApp us</span>
-                        </a>
-                        <a href="tel:+27788998305" class="group relative p-3 rounded-full bg-gray-800 text-brand-blue inline-flex items-center justify-center" aria-label="Call Ruan">
-                            <i data-feather="phone" class="w-5 h-5"></i>
-                            <span class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg">Call us</span>
-                        </a>
-                        <a href="tel:+27788998305" class="hover:text-white">078 899 8305</a>
-                    </div>
-                    <div class="flex items-center gap-3 text-gray-300">
-                        <a href="mailto:ruan.coetzee2@gmail.com" class="group relative p-3 rounded-full bg-gray-800 text-brand-purple inline-flex items-center justify-center" aria-label="Email Ruan">
-                            <i data-feather="mail" class="w-5 h-5"></i>
-                            <span class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg">Email us</span>
-                        </a>
-                        <a href="mailto:ruan.coetzee2@gmail.com" class="hover:text-white">ruan.coetzee2@gmail.com</a>
-                    </div>
-                </div>
-
-                <form action="https://api.web3forms.com/submit" method="POST" id="agency-form" class="space-y-6">
-                    <input type="hidden" name="access_key" value="13e3d3b7-e0ac-482d-9ecb-19395a35beae">
-                    <input type="hidden" name="subject" value="New Inquiry - RC Digital Creations">
-                    <input type="hidden" name="from_name" value="RC Digital Creations Site">
-                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-400 mb-2">Your Name</label>
-                            <input type="text" name="name" required class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-colors" placeholder="John Doe">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
-                            <input type="email" name="email" required class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-colors" placeholder="john@example.com">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2">Service Interested In</label>
-                        <select name="service" class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-blue transition-colors">
-                            <option value="Web Design">Website Design & Development</option>
-                            <option value="AI Chatbot">AI Chatbot Integration</option>
-                            <option value="Branding">Logo / Branding Design</option>
-                            <option value="Other">Other / Consultation</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                        <textarea name="message" rows="4" required class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-colors" placeholder="Tell us about your project..."></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full bg-gradient-to-r from-brand-blue to-brand-purple text-white font-bold py-4 rounded-lg hover:opacity-90 transition-opacity shadow-lg transform active:scale-95">Send Message</button>
-                    <p class="text-center text-sm mt-4 hidden" id="form-result"></p>
-                </form>
-            </div>
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-12" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 neon-title">
+            Let's Build Something Great
+          </h2>
+          <p class="text-gray-400">
+            Ready to start? Fill out the form below or reach out directly.
+          </p>
         </div>
+
+        <div
+          class="glass p-8 md:p-10 rounded-2xl shadow-2xl border border-gray-700"
+          data-aos="zoom-in"
+        >
+          <div
+            class="flex flex-col md:flex-row justify-center gap-8 mb-10 border-b border-gray-700 pb-8"
+          >
+            <div class="flex items-center gap-3 text-gray-300">
+              <a
+                href="https://wa.me/27888998305?text=Hi%20Ruan%2C%20I%27d%20like%20to%20discuss%20a%20project."
+                target="_blank"
+                rel="noopener"
+                class="group relative p-3 rounded-full bg-[#25D366] inline-flex items-center justify-center hover:brightness-110 icon-neon icon-neon-green"
+                aria-label="WhatsApp Ruan"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="w-5 h-5"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill="white"
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                  />
+                </svg>
+                <span
+                  class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg"
+                  >WhatsApp us</span
+                >
+              </a>
+              <a
+                href="tel:+27788998305"
+                class="group relative p-3 rounded-full bg-gray-800 text-brand-blue inline-flex items-center justify-center icon-neon icon-neon-blue"
+                aria-label="Call Ruan"
+              >
+                <i data-feather="phone" class="w-5 h-5"></i>
+                <span
+                  class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg"
+                  >Call us</span
+                >
+              </a>
+              <a href="tel:+27788998305" class="hover:text-white"
+                >078 899 8305</a
+              >
+            </div>
+            <div class="flex items-center gap-3 text-gray-300">
+              <a
+                href="mailto:ruan.coetzee2@gmail.com"
+                class="group relative p-3 rounded-full bg-gray-800 text-brand-purple inline-flex items-center justify-center icon-neon icon-neon-purple"
+                aria-label="Email Ruan"
+              >
+                <i data-feather="mail" class="w-5 h-5"></i>
+                <span
+                  class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg"
+                  >Email us</span
+                >
+              </a>
+              <a href="mailto:ruan.coetzee2@gmail.com" class="hover:text-white"
+                >ruan.coetzee2@gmail.com</a
+              >
+            </div>
+          </div>
+
+          <form
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            id="agency-form"
+            class="space-y-6"
+          >
+            <input
+              type="hidden"
+              name="access_key"
+              value="13e3d3b7-e0ac-482d-9ecb-19395a35beae"
+            />
+            <input
+              type="hidden"
+              name="subject"
+              value="New Inquiry - RC Digital Creations"
+            />
+            <input
+              type="hidden"
+              name="from_name"
+              value="RC Digital Creations Site"
+            />
+            <input
+              type="checkbox"
+              name="botcheck"
+              class="hidden"
+              style="display: none"
+            />
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2"
+                  >Your Name</label
+                >
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-colors"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-colors"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2"
+                  >Phone Number (optional)</label
+                >
+                <input
+                  type="tel"
+                  name="phone"
+                  pattern="[0-9+\-()\s]{7,}"
+                  class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-colors"
+                  placeholder="078 899 8305"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-2"
+                >Service Interested In</label
+              >
+              <select
+                name="service"
+                class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-blue transition-colors"
+              >
+                <option value="Web Design">Website Design & Development</option>
+                <option value="AI Chatbot">AI Chatbot Integration</option>
+                <option value="Branding">Logo / Branding Design</option>
+                <option value="Other">Other / Consultation</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-400 mb-2"
+                >Message</label
+              >
+              <textarea
+                name="message"
+                rows="4"
+                required
+                class="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-colors"
+                placeholder="Tell us about your project..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full py-4 rounded-lg font-bold btn-hero btn-hero-gradient"
+            >
+              Send Message
+            </button>
+            <p class="text-center text-sm mt-4 hidden" id="form-result"></p>
+          </form>
+        </div>
+      </div>
     </section>
 
     <footer class="bg-black py-12 border-t border-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-6 text-center">
-            <div class="flex flex-col items-center gap-2">
-                <a href="index.html" aria-label="RC Digital Creations Home">
-                    <img src="images/RC Digital Creations.png" alt="Logo" class="h-20 w-20 object-contain drop-shadow-[0_0_14px_rgba(59,130,246,0.6)]">
-                </a>
-                <span class="text-gray-300 font-semibold text-lg">&copy; <span id="year"></span> RC Digital Creations</span>
-                <span class="text-gray-500 text-sm">Designed by RC Digital Creations</span>
-            </div>
-            <div class="flex gap-6 text-gray-500">
-                <a href="https://wa.me/27888998305?text=Hi%20Ruan%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="group relative p-3 rounded-full bg-[#25D366] inline-flex items-center justify-center hover:brightness-110" aria-label="WhatsApp Ruan">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" aria-hidden="true">
-                        <path fill="white" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                    </svg>
-                    <span class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg">WhatsApp us</span>
-                </a>
-                <a href="tel:+27788998305" class="group relative p-3 rounded-full bg-gray-800 text-brand-blue inline-flex items-center justify-center" aria-label="Call Ruan">
-                    <i data-feather="phone" class="w-5 h-5"></i>
-                    <span class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg">Call us</span>
-                </a>
-                <a href="mailto:ruan.coetzee2@gmail.com" class="group relative p-3 rounded-full bg-brand-purple inline-flex items-center justify-center hover:brightness-110" aria-label="Email Ruan">
-                    <i data-feather="mail" class="w-5 h-5 text-white"></i>
-                    <span class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg">Email us</span>
-                </a>
-            </div>
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-6 text-center"
+      >
+        <div class="flex flex-col items-center gap-2">
+          <a href="index.html" aria-label="RC Digital Creations Home">
+            <img
+              src="images/RC Digital Creations.png"
+              alt="Logo"
+              class="h-20 w-20 object-contain drop-shadow-[0_0_14px_rgba(59,130,246,0.6)]"
+            />
+          </a>
+          <span class="text-gray-300 font-semibold text-lg"
+            >&copy; <span id="year"></span> RC Digital Creations</span
+          >
+          <span class="text-gray-500 text-sm"
+            >Designed by RC Digital Creations</span
+          >
         </div>
+        <div class="flex gap-6 text-gray-500">
+          <a
+            href="https://wa.me/27888998305?text=Hi%20Ruan%2C%20I%27d%20like%20to%20discuss%20a%20project."
+            target="_blank"
+            rel="noopener"
+            class="group relative p-3 rounded-full bg-[#25D366] inline-flex items-center justify-center hover:brightness-110 icon-neon icon-neon-green"
+            aria-label="WhatsApp Ruan"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="w-5 h-5"
+              aria-hidden="true"
+            >
+              <path
+                fill="white"
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+              />
+            </svg>
+            <span
+              class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg"
+              >WhatsApp us</span
+            >
+          </a>
+          <a
+            href="tel:+27788998305"
+            class="group relative p-3 rounded-full bg-gray-800 text-brand-blue inline-flex items-center justify-center btn-outline-purple btn-pop icon-neon icon-neon-blue"
+            aria-label="Call Ruan"
+          >
+            <i data-feather="phone" class="w-5 h-5"></i>
+            <span
+              class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg"
+              >Call us</span
+            >
+          </a>
+          <a
+            href="mailto:ruan.coetzee2@gmail.com"
+            class="group relative p-3 rounded-full bg-brand-purple inline-flex items-center justify-center hover:brightness-110 icon-neon icon-neon-purple"
+            aria-label="Email Ruan"
+          >
+            <i data-feather="mail" class="w-5 h-5 text-white"></i>
+            <span
+              class="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 rounded bg-gray-900 text-white text-xs opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 border border-gray-700 shadow-lg"
+              >Email us</span
+            >
+          </a>
+        </div>
+      </div>
     </footer>
 
-    <button id="back-to-top" class="fixed bottom-6 right-6 z-50 bg-brand-blue/30 hover:bg-brand-blue/50 text-white rounded-full p-3 backdrop-blur border border-brand-blue/40 shadow-lg transition-all opacity-0 pointer-events-none">
-        <i data-feather="arrow-up" class="w-5 h-5"></i>
+    <button
+      id="back-to-top"
+      class="fixed bottom-6 right-6 z-50 bg-brand-blue/20 hover:bg-brand-blue/40 text-white rounded-full p-3 backdrop-blur border border-brand-blue/30 shadow-lg transition-all opacity-0 pointer-events-none btn-pop icon-neon"
+    >
+      <i data-feather="arrow-up" class="w-5 h-5"></i>
     </button>
 
-    <div id="lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
-        <button id="lightbox-close" class="absolute top-5 right-5 bg-gray-800 text-white px-3 py-2 rounded">Close</button>
-        <button id="lightbox-prev" class="absolute left-5 top-1/2 -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded">Prev</button>
-        <img id="lightbox-image" src="" alt="Preview" class="max-w-[90%] max-h-[80%] shadow-2xl rounded">
-        <div id="lightbox-caption" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-200 text-sm bg-black/50 px-4 py-2 rounded"></div>
-        <button id="lightbox-next" class="absolute right-5 top-1/2 -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded">Next</button>
+    <div
+      id="lightbox"
+      class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50"
+    >
+      <button
+        id="lightbox-close"
+        class="lb-btn absolute top-5 right-5"
+        aria-label="Close"
+      >
+        <i data-feather="x" class="w-5 h-5"></i>
+      </button>
+      <button
+        id="lightbox-prev"
+        class="lb-btn absolute left-5 top-1/2 -translate-y-1/2"
+        aria-label="Previous"
+      >
+        <i data-feather="chevron-left" class="w-6 h-6"></i>
+      </button>
+      <img
+        id="lightbox-image"
+        src=""
+        alt="Preview"
+        class="max-w-[90%] max-h-[80%] shadow-2xl rounded"
+      />
+      <div
+        id="lightbox-caption"
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-200 text-sm bg-black/50 px-4 py-2 rounded"
+      ></div>
+      <button
+        id="lightbox-next"
+        class="lb-btn absolute right-5 top-1/2 -translate-y-1/2"
+        aria-label="Next"
+      >
+        <i data-feather="chevron-right" class="w-6 h-6"></i>
+      </button>
     </div>
 
+    <script src="https://code.createjs.com/easeljs-0.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+    <script src="ambient.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

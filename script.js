@@ -27,12 +27,11 @@ const currentStart = { web: 0, branding: 0, qr: 0, posters: 0 };
 let pagerAuto = null;
 function startPagerAuto() {
     if (pagerAuto) clearInterval(pagerAuto);
-    pagerAuto = setInterval(() => nextPage(), 8000);
+    pagerAuto = setInterval(() => nextPage(), 6000);
 }
 
 function getVisibleCount() {
-    // 3 images on Desktop, 1 on Mobile
-    return window.innerWidth >= 1024 ? 3 : 1;
+    return window.innerWidth >= 1024 ? 6 : 1;
 }
 
 function getCategoryItems(cat) {
@@ -97,12 +96,13 @@ function filterProjects(category, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => {
         b.classList.remove('bg-brand-blue/10', 'text-brand-blue', 'border-brand-blue');
         b.classList.add('text-gray-400', 'border-gray-700');
+        b.classList.remove('tab-active');
     });
     
     // 2. Activate Current Tab
     if (btn) {
         btn.classList.remove('text-gray-400', 'border-gray-700');
-        btn.classList.add('bg-brand-blue/10', 'text-brand-blue', 'border-brand-blue');
+        btn.classList.add('bg-brand-blue/10', 'text-brand-blue', 'border-brand-blue', 'tab-active');
     }
 
     // 3. Hide all items initially to clear the view
@@ -124,6 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // -- Initialize Feather Icons & AOS --
     feather.replace();
     AOS.init({ once: true, offset: 100, duration: 800 });
+
+    
 
     // -- Refresh Animations on Load/Resize --
     const refreshAOS = () => { if (typeof AOS !== 'undefined') AOS.refreshHard(); };
@@ -198,6 +200,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // -- Mobile Swipe for Selected Works --
+    const pagerEl = document.getElementById('projects-pager');
+    if (pagerEl) {
+        let startX = 0;
+        let startY = 0;
+        let movedX = 0;
+        let movedY = 0;
+        let tracking = false;
+        const threshold = 40;
+
+        pagerEl.addEventListener('touchstart', (e) => {
+            const t = e.changedTouches[0];
+            startX = t.clientX;
+            startY = t.clientY;
+            movedX = 0;
+            movedY = 0;
+            tracking = true;
+        }, { passive: true });
+
+        pagerEl.addEventListener('touchmove', (e) => {
+            if (!tracking) return;
+            const t = e.changedTouches[0];
+            movedX = t.clientX - startX;
+            movedY = t.clientY - startY;
+        }, { passive: true });
+
+        pagerEl.addEventListener('touchend', () => {
+            if (!tracking) return;
+            tracking = false;
+            const absX = Math.abs(movedX);
+            const absY = Math.abs(movedY);
+            if (absX > absY && absX > threshold) {
+                if (movedX < 0) {
+                    nextPage();
+                } else {
+                    prevPage();
+                }
+                startPagerAuto();
+            }
+        });
+    }
 
     const backToTop = document.getElementById('back-to-top');
     if (backToTop) backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -283,6 +327,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLbCategory = null;
     let currentLbIndex = 0;
 
+    function openLightbox(cat, idx) {
+        currentLbCategory = cat;
+        currentLbIndex = idx;
+        updateLightbox();
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
     function buildGalleries() {
         document.querySelectorAll('.project-item').forEach(item => {
             const img = item.querySelector('img');
@@ -298,14 +351,28 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!cat) return;
 
             const entry = { src: img.src, title: (item.querySelector('h3')?.textContent || '') };
+            const idx = galleryMap[cat].length;
             galleryMap[cat].push(entry);
 
-            // Open image in a new window when clicking the card or the image
-            img.style.cursor = 'zoom-in';
-            item.style.cursor = 'zoom-in';
-            const openImage = (e) => { e.preventDefault(); window.open(img.src, '_blank', 'noopener'); };
-            img.addEventListener('click', openImage);
-            item.addEventListener('click', openImage);
+            // Click behavior
+            if (cat === 'web') {
+                const linkEl = item.querySelector('a[href^="http"]');
+                if (linkEl) {
+                    img.style.cursor = 'pointer';
+                    item.style.cursor = 'pointer';
+                    const openLink = (e) => { e.preventDefault(); window.open(linkEl.href, '_blank', 'noopener'); };
+                    img.addEventListener('click', openLink);
+                    item.addEventListener('click', openLink);
+                }
+            } else {
+                img.style.cursor = 'zoom-in';
+                item.style.cursor = 'zoom-in';
+                const openImage = (e) => { e.preventDefault(); openLightbox(cat, idx); };
+                img.addEventListener('click', openImage);
+                item.addEventListener('click', openImage);
+            }
+
+            // Allow anchor clicks without triggering card click
             item.querySelectorAll('a').forEach(a => a.addEventListener('click', (e) => e.stopPropagation()));
         });
     }
@@ -336,6 +403,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (lightbox) {
         buildGalleries();
+        // Inject mobile descriptions for non-web items
+        (function injectMobileDescriptions(){
+            const items = document.querySelectorAll('.project-item');
+            items.forEach(item => {
+                if (item.classList.contains('web')) return;
+                if (item.querySelector('.mob-desc')) return;
+                const overlay = item.querySelector('.absolute');
+                const descText = overlay && overlay.querySelector('p') ? overlay.querySelector('p').textContent : '';
+                let fallback = '';
+                if (item.classList.contains('branding')) fallback = 'Logo and brand identity design.';
+                else if (item.classList.contains('posters')) fallback = 'Product sticker / poster design.';
+                else if (item.classList.contains('qr')) fallback = 'Custom QR solution linking to maps or websites.';
+                const finalDesc = descText || fallback;
+                if (!finalDesc) return;
+                const wrapper = document.createElement('div');
+                wrapper.className = 'md:hidden p-4 text-center space-y-2 mob-desc';
+                const p = document.createElement('p');
+                p.className = 'text-gray-300 text-sm';
+                p.textContent = finalDesc;
+                wrapper.appendChild(p);
+                item.appendChild(wrapper);
+            });
+        })();
         lightboxClose.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
         
