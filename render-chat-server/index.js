@@ -5,6 +5,10 @@ const app = express();
 app.use(cors({ origin: 'https://rcdigitalcreations.co.za' }));
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.status(200).send('Vector Proxy is LIVE');
+});
+
 app.post('/api/chat', async (req, res) => {
   try {
     const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
