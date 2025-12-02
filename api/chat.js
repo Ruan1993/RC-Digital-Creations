@@ -1,5 +1,17 @@
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://rcdigitalcreations.co.za');
+  const ALLOWED_ORIGINS = process.env.CORS_ORIGINS
+    ? process.env.CORS_ORIGINS.split(',').map(s => s.trim())
+    : ['https://rcdigitalcreations.co.za'];
+
+  const DEFAULT_MODEL = process.env.GOOGLE_MODEL || 'gemini-2.5-flash';
+  const DEFAULT_TEMPERATURE = parseFloat(process.env.LLM_TEMPERATURE) || 0.2;
+
+  const origin = req.headers.origin;
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGINS[0]);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -30,7 +42,9 @@ export default async function handler(req, res) {
       try { body = JSON.parse(body || '{}'); } catch { body = {}; }
     }
 
-    const { query, context, model = 'gemini-1.5-flash-latest' } = body || {};
+    const { query, context } = body || {};
+    const model = body?.model || DEFAULT_MODEL;
+
     if (!query || !context) {
       res.status(400).json({ error: 'Missing required fields: query and context' });
       return;
@@ -41,7 +55,7 @@ export default async function handler(req, res) {
       "Your primary goal is to answer user questions using ONLY the content provided in the 'CONTEXT' section below.",
       'Do not use any external knowledge.',
       'If the CONTEXT does not contain the necessary information to answer the question, you MUST respond only with:',
-      "\"I'm sorry, I couldn't find information about that specific topic in the provided website content. Please try rephrasing your question or check the website directly.\"",
+      "I'm sorry, I couldn't find information about that specific topic in the provided website content. Please try rephrasing your question or check the website directly.",
       'You may engage in brief, friendly small talk only before or after a factual answer. Your tone is polite, community-focused, and slightly technical. Never invent business facts.',
       "Keep your answers brief, friendly, and directly related to the user's query.",
       '',
@@ -55,7 +69,7 @@ export default async function handler(req, res) {
       contents: [
         { role: 'user', parts: [{ text: systemPrompt }, { text: 'Question: ' + query }] }
       ],
-      generationConfig: { temperature: 0.2, maxOutputTokens: 250 }
+      generationConfig: { temperature: DEFAULT_TEMPERATURE, maxOutputTokens: 250 }
     };
 
     const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
@@ -83,4 +97,3 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Server error', details: String(err) });
   }
 }
-

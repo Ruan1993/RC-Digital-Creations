@@ -1,4 +1,4 @@
-const MODEL_NAME = "gemini-1.5-flash-latest";
+const MODEL_NAME = "gemini-2.5-flash";
 const CHAT_ENDPOINT = '/api/chat';
 
 let websiteContent = "";
@@ -75,7 +75,7 @@ async function sendMessage() {
       const response = await fetch(CHAT_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query, context: websiteContent, model: MODEL_NAME })
+        body: JSON.stringify({ query, context: websiteContent })
       });
       if (!response.ok) {
         const errorText = await response.text();
