@@ -2,3 +2,8 @@
 .chat-container::-webkit-scrollbar { width: 8px; }
 .chat-container::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
 .chat-container::-webkit-scrollbar-track { background-color: #f1f5f9; }
+
+#chatbot-widget-container input,
+#chatbot-widget-container textarea { color: #111827; }
+#chatbot-widget-container input::placeholder,
+#chatbot-widget-container textarea::placeholder { color: #6b7280; }

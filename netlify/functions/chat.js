@@ -10,8 +10,6 @@ exports.handler = async (event) => {
   }
 
   try {
-    console.log("Checking for key existence...");
-    console.log("Key length (if present):", process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.length : "UNDEFINED");
     if (!process.env.GEMINI_API_KEY) {
       return {
         statusCode: 500,
