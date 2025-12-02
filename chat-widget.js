@@ -1,4 +1,5 @@
 const MODEL_NAME = "gemini-1.5-flash-latest";
+const CHAT_ENDPOINT = 'YOUR_RENDER_URL/api/chat';
 
 let websiteContent = "";
 let chatContainer;
@@ -71,7 +72,7 @@ async function sendMessage() {
   let retryCount = 0;
   while (retryCount < MAX_RETRIES) {
     try {
-      const response = await fetch('/.netlify/functions/chat', {
+      const response = await fetch(CHAT_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query, context: websiteContent, model: MODEL_NAME })
