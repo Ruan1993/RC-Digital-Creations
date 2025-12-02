@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @source "./index.html";
 @source "./script.js";
+@source "./chat-widget.html";
+@source "./chat-widget.js";
 @theme {
     --color-brand-blue: #3B82F6;
     --color-brand-purple: #8B5CF6;

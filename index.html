@@ -52,8 +52,9 @@
     />
 
     <link rel="stylesheet" href="dist/style.css" />
+    <link rel="stylesheet" href="chat-widget.css" />
   </head>
-  <body class="antialiased">
+  <body class="antialiased pb-24 md:pb-28">
     <canvas id="projector"
       >Your browser does not support the Canvas element.</canvas
     >
@@ -1389,7 +1390,7 @@
       </div>
     </section>
 
-    <footer class="bg-black py-12 border-t border-gray-900">
+    <footer class="bg-black py-20 border-t border-gray-900 mt-24">
       <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-6 text-center"
       >
@@ -1456,7 +1457,9 @@
           </a>
         </div>
         <div class="mt-6 flex items-center gap-3 text-gray-500 text-sm">
-          <a href="terms.html" class="hover:text-white">Terms &amp; Conditions</a>
+          <a href="terms.html" class="hover:text-white"
+            >Terms &amp; Conditions</a
+          >
           <span class="text-gray-700">•</span>
           <a href="privacy.html" class="hover:text-white">Privacy Policy</a>
         </div>
@@ -1465,7 +1468,7 @@
 
     <button
       id="back-to-top"
-      class="fixed bottom-6 right-6 z-50 bg-brand-blue/20 hover:bg-brand-blue/40 text-white rounded-full p-3 backdrop-blur border border-brand-blue/30 shadow-lg transition-all opacity-0 pointer-events-none btn-pop icon-neon"
+      class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-brand-blue/20 hover:bg-brand-blue/40 text-white rounded-full p-3 backdrop-blur border border-brand-blue/30 shadow-lg transition-all opacity-0 pointer-events-none btn-pop icon-neon"
     >
       <i data-feather="arrow-up" class="w-5 h-5"></i>
     </button>
@@ -1511,5 +1514,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="ambient.js"></script>
     <script src="script.js"></script>
+    <script src="chat-widget.js" defer></script>
   </body>
 </html>

@@ -177,21 +177,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // -- Navbar Scroll --
-    window.addEventListener('scroll', () => {
+    // -- Navbar Scroll & Back-to-top visibility --
+    const updateNavAndBtt = () => {
         const nav = document.getElementById('navbar');
         const btt = document.getElementById('back-to-top');
-        
-        if (window.scrollY > 50) {
-            nav.classList.add('bg-slate-900/90', 'shadow-lg');
-            nav.classList.remove('glass');
-        } else {
-            nav.classList.add('glass');
-            nav.classList.remove('bg-slate-900/90', 'shadow-lg');
+
+        if (nav) {
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-slate-900/90', 'shadow-lg');
+                nav.classList.remove('glass');
+            } else {
+                nav.classList.add('glass');
+                nav.classList.remove('bg-slate-900/90', 'shadow-lg');
+            }
         }
 
         if (btt) {
-            if (window.scrollY > 400) {
+            const threshold = 120;
+            if (window.scrollY > threshold) {
                 btt.classList.remove('opacity-0','pointer-events-none');
                 btt.classList.add('opacity-100');
             } else {
@@ -199,7 +202,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 btt.classList.remove('opacity-100');
             }
         }
-    });
+    };
+
+    window.addEventListener('scroll', updateNavAndBtt);
+    // Initialize state on load
+    updateNavAndBtt();
 
     // -- Mobile Swipe for Selected Works --
     const pagerEl = document.getElementById('projects-pager');
