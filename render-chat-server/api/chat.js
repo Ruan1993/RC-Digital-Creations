@@ -1,24 +1,39 @@
-const express = require('express');
-const cors = require('cors');
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', 'https://rcdigitalcreations.co.za');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-const app = express();
-app.use(cors({ origin: 'https://rcdigitalcreations.co.za' }));
-app.use(express.json());
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
 
-app.get('/', (req, res) => {
-  res.status(200).send('Vector Proxy is LIVE');
-});
+  if (req.method === 'GET') {
+    res.status(200).json({ message: 'OK' });
+    return;
+  }
 
-app.post('/api/chat', async (req, res) => {
+  if (req.method !== 'POST') {
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+
   try {
     const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
     if (!GEMINI_API_KEY) {
-      return res.status(500).json({ error: 'Missing GEMINI_API_KEY environment variable' });
+      res.status(500).json({ error: 'Missing GEMINI_API_KEY environment variable' });
+      return;
     }
 
-    const { query, context, model = 'gemini-1.5-flash-latest' } = req.body || {};
+    let body = req.body;
+    if (typeof body === 'string') {
+      try { body = JSON.parse(body || '{}'); } catch { body = {}; }
+    }
+
+    const { query, context, model = 'gemini-1.5-flash-latest' } = body || {};
     if (!query || !context) {
-      return res.status(400).json({ error: 'Missing required fields: query and context' });
+      res.status(400).json({ error: 'Missing required fields: query and context' });
+      return;
     }
 
     const systemPrompt = [
@@ -53,7 +68,8 @@ app.post('/api/chat', async (req, res) => {
 
     if (!resp.ok) {
       const text = await resp.text();
-      return res.status(resp.status).json({ error: `Upstream error: ${resp.status} ${resp.statusText}`, details: text });
+      res.status(resp.status).json({ error: `Upstream error: ${resp.status} ${resp.statusText}`, details: text });
+      return;
     }
 
     const result = await resp.json();
@@ -62,13 +78,9 @@ app.post('/api/chat', async (req, res) => {
       aiText = result.candidates[0].content.parts[0].text;
     }
 
-    return res.status(200).json({ text: aiText });
+    res.status(200).json({ text: aiText });
   } catch (err) {
-    return res.status(500).json({ error: 'Server error', details: String(err) });
+    res.status(500).json({ error: 'Server error', details: String(err) });
   }
-});
+}
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Vector chat proxy listening on port ${PORT}`);
-});
