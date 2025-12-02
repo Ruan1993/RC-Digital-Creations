@@ -10,6 +10,8 @@ exports.handler = async (event) => {
   }
 
   try {
+    console.log("Checking for key existence...");
+    console.log("Key length (if present):", process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.length : "UNDEFINED");
     if (!process.env.GEMINI_API_KEY) {
       return {
         statusCode: 500,
@@ -46,9 +48,10 @@ exports.handler = async (event) => {
       generationConfig: { temperature: 0.2, maxOutputTokens: 250 },
     };
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`;
+    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
 
-    const resp = await fetch(url, {
+    const resp = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
