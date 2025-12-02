@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env
+.env
+.env.*
+
+# Vercel local config
+.vercel/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Build artifacts (keep generated CSS we ship)
+dist/*
+!dist/style.css
+
