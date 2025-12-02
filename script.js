@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxNext = document.getElementById('lightbox-next');
     const lightboxCaption = document.getElementById('lightbox-caption');
 
-    let galleryMap = { web: [], branding: [], qr: [], posters: [] };
+    let galleryMap = { web: [], branding: [], qr: [], posters: [], ads: [] };
     let currentLbCategory = null;
     let currentLbIndex = 0;
 
@@ -354,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (item.classList.contains('branding')) cat = 'branding';
             else if (item.classList.contains('qr')) cat = 'qr';
             else if (item.classList.contains('posters')) cat = 'posters';
+            else if (item.classList.contains('ads')) cat = 'ads';
 
             if (!cat) return;
 
@@ -447,6 +448,13 @@ document.addEventListener('DOMContentLoaded', () => {
             currentLbIndex = (currentLbIndex - 1 + galleryMap[currentLbCategory].length) % galleryMap[currentLbCategory].length;
             updateLightbox();
         });
+        if (lightboxImg) lightboxImg.addEventListener('click', () => {
+            if (!currentLbCategory) return;
+            if (currentLbCategory === 'ads') {
+                const entry = galleryMap[currentLbCategory][currentLbIndex];
+                if (entry) openAdFullscreen(entry.src, entry.title || 'Advertisement');
+            }
+        });
     }
 
     const adsFiles = [
@@ -458,38 +466,11 @@ document.addEventListener('DOMContentLoaded', () => {
         'Advertisements/business Starter Pack 1.jpg'
     ];
     const adsGrid = document.getElementById('ads-grid');
-    const adsModal = document.getElementById('ads-modal');
-    const adsImg = document.getElementById('ads-image');
-    const adsCaption = document.getElementById('ads-caption');
-    const adsClose = document.getElementById('ads-close');
-    const adsPrev = document.getElementById('ads-prev');
-    const adsNext = document.getElementById('ads-next');
-    let adsIndex = 0;
-    let adsTimer = null;
     function fmtName(p) {
         const n = p.split('/').pop().replace(/\.[^.]+$/, '');
         return n.replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
     }
-    function openAds(i) {
-        adsIndex = i;
-        updateAds();
-        adsModal.classList.remove('hidden');
-        adsModal.classList.add('flex');
-        document.body.style.overflow = 'hidden';
-        if (adsTimer) clearInterval(adsTimer);
-        adsTimer = setInterval(() => { adsIndex = (adsIndex + 1) % adsFiles.length; updateAds(); }, 6000);
-    }
-    function closeAds() {
-        adsModal.classList.add('hidden');
-        adsModal.classList.remove('flex');
-        document.body.style.overflow = '';
-        if (adsTimer) { clearInterval(adsTimer); adsTimer = null; }
-    }
-    function updateAds() {
-        const src = adsFiles[adsIndex];
-        adsImg.src = src;
-        adsCaption.textContent = fmtName(src);
-    }
+    
     function openAdFullscreen(src, title) {
         const w = window.open('', '_blank', 'noopener');
         if (!w) return;
@@ -500,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (adsGrid) {
         adsFiles.forEach((p, i) => {
             const card = document.createElement('div');
-            card.className = 'group relative rounded-xl overflow-hidden glass border-0';
+            card.className = 'project-item ads group relative rounded-xl overflow-hidden glass border-0';
             const wrap = document.createElement('div');
             wrap.className = 'aspect-video overflow-hidden bg-gray-900 flex items-center justify-center';
             const img = document.createElement('img');
@@ -520,13 +501,9 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.appendChild(pdesc);
             card.appendChild(wrap);
             card.appendChild(overlay);
-            card.addEventListener('click', () => openAds(i));
             adsGrid.appendChild(card);
         });
+        if (lightbox) buildGalleries();
     }
-    if (adsClose) adsClose.addEventListener('click', closeAds);
-    if (adsModal) adsModal.addEventListener('click', (e) => { if (e.target === adsModal) closeAds(); });
-    if (adsNext) adsNext.addEventListener('click', () => { adsIndex = (adsIndex + 1) % adsFiles.length; updateAds(); });
-    if (adsPrev) adsPrev.addEventListener('click', () => { adsIndex = (adsIndex - 1 + adsFiles.length) % adsFiles.length; updateAds(); });
-    if (adsImg) adsImg.addEventListener('click', () => openAdFullscreen(adsFiles[adsIndex], fmtName(adsFiles[adsIndex])));
+    
 });
