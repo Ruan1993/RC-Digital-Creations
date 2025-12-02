@@ -1,5 +1,5 @@
 const MODEL_NAME = "gemini-1.5-flash-latest";
-const CHAT_ENDPOINT = 'YOUR_RENDER_URL/api/chat';
+const CHAT_ENDPOINT = 'https://rc-digital-creations-chatbot.onrender.com/api/chat';
 
 let websiteContent = "";
 let chatContainer;
