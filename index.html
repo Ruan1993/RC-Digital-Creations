@@ -221,6 +221,32 @@
       </div>
     </section>
 
+    <section id="advertisements" class="py-20 md:py-24 bg-black/20 relative border-y border-gray-800/50 scroll-mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 neon-title">Latest Offers</h2>
+          <div class="w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-purple mx-auto rounded-full"></div>
+          <p class="text-gray-400 mt-4">Browse current advertisements featuring services, bundles, and hosting options.</p>
+        </div>
+
+        <div id="ads-grid" class="grid md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100"></div>
+
+        <div id="ads-modal" class="hidden fixed inset-0 z-50 bg-black/80 items-center justify-center">
+          <button id="ads-close" class="lb-btn absolute top-5 right-5" aria-label="Close">
+            <i data-feather="x" class="w-5 h-5"></i>
+          </button>
+          <button id="ads-prev" class="lb-btn absolute left-5 top-1/2 -translate-y-1/2" aria-label="Previous">
+            <i data-feather="chevron-left" class="w-6 h-6"></i>
+          </button>
+          <img id="ads-image" src="" alt="Advertisement" class="max-w-[90%] max-h-[80%] shadow-2xl rounded cursor-zoom-in" />
+          <div id="ads-caption" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-200 text-sm bg-black/50 px-4 py-2 rounded"></div>
+          <button id="ads-next" class="lb-btn absolute right-5 top-1/2 -translate-y-1/2" aria-label="Next">
+            <i data-feather="chevron-right" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
     <section
       id="services"
       class="py-20 md:py-24 bg-black/20 relative border-y border-gray-800/50 scroll-mt-24"
