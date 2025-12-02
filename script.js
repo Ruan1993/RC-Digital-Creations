@@ -132,6 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', refreshAOS);
     window.addEventListener('resize', () => {
         renderPage(currentCategoryPager); // Re-calculate visible items on resize
+        // Re-render ads pager on resize
+        if (typeof adsRenderPage === 'function') adsRenderPage();
         setTimeout(() => { if (typeof AOS !== 'undefined') AOS.refresh(); }, 100);
     });
 
@@ -246,6 +248,48 @@ document.addEventListener('DOMContentLoaded', () => {
                     prevPage();
                 }
                 startPagerAuto();
+            }
+        });
+    }
+
+    // -- Mobile Swipe for Our Prices --
+    const adsPager = document.getElementById('ads-pager');
+    if (adsPager) {
+        let startX = 0;
+        let startY = 0;
+        let movedX = 0;
+        let movedY = 0;
+        let tracking = false;
+        const threshold = 40;
+
+        adsPager.addEventListener('touchstart', (e) => {
+            const t = e.changedTouches[0];
+            startX = t.clientX;
+            startY = t.clientY;
+            movedX = 0;
+            movedY = 0;
+            tracking = true;
+        }, { passive: true });
+
+        adsPager.addEventListener('touchmove', (e) => {
+            if (!tracking) return;
+            const t = e.changedTouches[0];
+            movedX = t.clientX - startX;
+            movedY = t.clientY - startY;
+        }, { passive: true });
+
+        adsPager.addEventListener('touchend', () => {
+            if (!tracking) return;
+            tracking = false;
+            const absX = Math.abs(movedX);
+            const absY = Math.abs(movedY);
+            if (absX > absY && absX > threshold) {
+                if (movedX < 0) {
+                    adsNextPage();
+                } else {
+                    adsPrevPage();
+                }
+                adsStartAuto();
             }
         });
     }
@@ -451,8 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lightboxImg) lightboxImg.addEventListener('click', () => {
             if (!currentLbCategory) return;
             if (currentLbCategory === 'ads') {
-                const entry = galleryMap[currentLbCategory][currentLbIndex];
-                if (entry) openAdFullscreen(entry.src, entry.title || 'Advertisement');
+                openAdFullscreen(currentLbIndex);
             }
         });
     }
@@ -460,7 +503,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const adsFiles = [
         'Advertisements/Domain Registration & Hosting.jpg',
         'Advertisements/Digital Portfolio.jpg',
-        'Advertisements/Business Starter Pack 2.jpg',
         'Advertisements/Chatbot Integration.jpg',
         'Advertisements/Standard Business Website.jpg',
         'Advertisements/business Starter Pack 1.jpg'
@@ -471,15 +513,101 @@ document.addEventListener('DOMContentLoaded', () => {
         return n.replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
     }
     
-    function openAdFullscreen(src, title) {
+    function openAdFullscreen(startIndex) {
+        const sources = (galleryMap && galleryMap.ads && galleryMap.ads.length)
+            ? galleryMap.ads.map(e => e.src)
+            : adsFiles.slice();
+        const titles = (galleryMap && galleryMap.ads && galleryMap.ads.length)
+            ? galleryMap.ads.map(e => e.title || '')
+            : adsFiles.map(fmtName);
         const w = window.open('', '_blank', 'noopener');
         if (!w) return;
-        const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${title}</title><style>body{margin:0;background:#000;display:flex;align-items:center;justify-content:center;height:100vh}img{max-width:96vw;max-height:92vh;border-radius:12px;box-shadow:0 0 24px rgba(0,0,0,0.6)}button{position:fixed;top:16px;right:16px;width:44px;height:44px;border-radius:9999px;border:1px solid rgba(255,255,255,0.5);background:rgba(0,0,0,0.4);color:#fff;cursor:pointer}</style></head><body><button onclick="window.close()" aria-label="Close">✕</button><img src="${src}" alt="${title}"></body></html>`;
+        const style = `
+            body{margin:0;background:#000;color:#ddd;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;height:100vh;display:flex;flex-direction:column}
+            header{position:fixed;top:12px;right:12px;z-index:30}
+            .close{width:44px;height:44px;border-radius:9999px;border:1px solid rgba(255,255,255,0.5);background:rgba(0,0,0,0.4);color:#fff;cursor:pointer}
+            .wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:16px}
+            .stage{display:flex;align-items:center;justify-content:center}
+            img{max-width:85vw;max-height:80vh;border-radius:12px;box-shadow:0 0 24px rgba(0,0,0,0.6)}
+            .controls{display:flex;align-items:center;justify-content:space-between;width:min(85vw,900px)}
+            .nav{width:52px;height:52px;border-radius:9999px;border:1px solid rgba(255,255,255,0.5);background:rgba(0,0,0,0.4);color:#fff;cursor:pointer}
+            .nav:hover{background:rgba(255,255,255,0.08)}
+            footer{padding:10px 16px;text-align:center;color:#bbb}
+            @media (max-width:640px){ .nav{width:44px;height:44px} }
+        `;
+        const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Our Prices</title><style>${style}</style></head>
+        <body>
+          <header><button class="close" id="fsClose" aria-label="Close">✕</button></header>
+          <div class="wrap">
+            <div class="stage"><img id="fsImg" alt="Advertisement"></div>
+            <div class="controls">
+              <button class="nav" id="fsPrev" aria-label="Previous">‹</button>
+              <button class="nav" id="fsNext" aria-label="Next">›</button>
+            </div>
+          </div>
+          <footer id="fsCaption"></footer>
+          <script>
+            const files = ${JSON.stringify(sources)};
+            const titles = ${JSON.stringify(titles)};
+            let idx = ${Math.max(0, startIndex || 0)} % files.length;
+            const img = document.getElementById('fsImg');
+            const cap = document.getElementById('fsCaption');
+            function render(){ img.src = files[idx]; cap.textContent = titles[idx] || ''; }
+            function prev(){ idx = (idx - 1 + files.length) % files.length; render(); }
+            function next(){ idx = (idx + 1) % files.length; render(); }
+            document.getElementById('fsPrev').addEventListener('click', prev);
+            document.getElementById('fsNext').addEventListener('click', next);
+            document.getElementById('fsClose').addEventListener('click', () => window.close());
+            window.addEventListener('keydown', (e) => { if(e.key==='ArrowLeft') prev(); else if(e.key==='ArrowRight') next(); else if(e.key==='Escape') window.close(); });
+            render();
+          </script>
+        </body></html>`;
         w.document.write(html);
         w.document.close();
     }
+    // -- Ads Pager Logic (mirrors Selected Works) --
+    let adsStart = 0;
+    let adsAuto = null;
+    const adsPrevBtn = document.getElementById('ads-prev');
+    const adsNextBtn = document.getElementById('ads-next');
+    function adsGetItems(){ return Array.from(document.querySelectorAll('#ads-grid .project-item.ads')); }
+    function adsVisible(){ return getVisibleCount(); }
+    function adsRenderPage(){
+        const items = adsGetItems();
+        const visible = adsVisible();
+        const maxStart = Math.max(0, items.length - visible);
+        if (adsStart > maxStart) adsStart = maxStart;
+        if (adsStart < 0) adsStart = 0;
+        items.forEach((item, idx) => {
+            if (idx >= adsStart && idx < adsStart + visible) {
+                item.style.display = 'block';
+                setTimeout(() => item.style.opacity = '1', 50);
+            } else {
+                item.style.display = 'none';
+                item.style.opacity = '0';
+            }
+        });
+    }
+    function adsNextPage(){
+        const items = adsGetItems();
+        const visible = adsVisible();
+        if (!items.length) return;
+        const maxStart = Math.max(0, items.length - visible);
+        adsStart = (adsStart < maxStart) ? adsStart + 1 : 0;
+        adsRenderPage();
+    }
+    function adsPrevPage(){
+        const items = adsGetItems();
+        const visible = adsVisible();
+        if (!items.length) return;
+        const maxStart = Math.max(0, items.length - visible);
+        adsStart = (adsStart > 0) ? adsStart - 1 : maxStart;
+        adsRenderPage();
+    }
+    function adsStartAuto(){ if (adsAuto) clearInterval(adsAuto); adsAuto = setInterval(adsNextPage, 6000); }
+
     if (adsGrid) {
-        adsFiles.forEach((p, i) => {
+        adsFiles.forEach((p) => {
             const card = document.createElement('div');
             card.className = 'project-item ads group relative rounded-xl overflow-hidden glass border-0';
             const wrap = document.createElement('div');
@@ -488,6 +616,10 @@ document.addEventListener('DOMContentLoaded', () => {
             img.src = p;
             img.alt = fmtName(p);
             img.className = 'w-full h-full object-contain transition-transform duration-700 group-hover:scale-110';
+            // Remove broken images similar to posters handling
+            const removeItem = () => card.remove();
+            if (img.complete && img.naturalWidth === 0) removeItem();
+            img.addEventListener('error', removeItem, { once: true });
             wrap.appendChild(img);
             const overlay = document.createElement('div');
             overlay.className = 'absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6';
@@ -504,6 +636,11 @@ document.addEventListener('DOMContentLoaded', () => {
             adsGrid.appendChild(card);
         });
         if (lightbox) buildGalleries();
+        // Initialize ads pager
+        adsRenderPage();
+        adsStartAuto();
+        if (adsPrevBtn) adsPrevBtn.addEventListener('click', () => { adsPrevPage(); adsStartAuto(); });
+        if (adsNextBtn) adsNextBtn.addEventListener('click', () => { adsNextPage(); adsStartAuto(); });
     }
     
 });

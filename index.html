@@ -240,11 +240,36 @@
         </div>
 
         <div
-          id="ads-grid"
-          class="grid md:grid-cols-3 gap-8"
+          id="ads-pager"
+          class="relative px-0 md:px-0"
           data-aos="fade-up"
           data-aos-delay="100"
-        ></div>
+        >
+          <button
+            id="ads-prev"
+            class="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-gray-900/40 border border-gray-700/40 text-white opacity-10 hover:opacity-60 transition-all shadow-lg backdrop-blur-sm group btn-pop"
+            aria-label="Previous"
+          >
+            <i
+              data-feather="chevron-left"
+              class="w-6 h-6 group-hover:scale-110 transition-transform"
+            ></i>
+          </button>
+          <button
+            id="ads-next"
+            class="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-gray-900/40 border border-gray-700/40 text-white opacity-10 hover:opacity-60 transition-all shadow-lg backdrop-blur-sm group btn-pop"
+            aria-label="Next"
+          >
+            <i
+              data-feather="chevron-right"
+              class="w-6 h-6 group-hover:scale-110 transition-transform"
+            ></i>
+          </button>
+          <div
+            id="ads-grid"
+            class="grid grid-cols-1 lg:grid-cols-3 gap-1"
+          ></div>
+        </div>
       </div>
     </section>
 
