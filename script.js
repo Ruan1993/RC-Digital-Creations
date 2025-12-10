@@ -62,6 +62,73 @@ function renderPage(cat) {
             item.style.opacity = '0';
         }
     });
+
+// Bulletproof Lightbox Auto-Hide & Centering (Runs on DOM load) 
+document.addEventListener('DOMContentLoaded', () => { 
+  const lightbox = document.getElementById('lightbox'); 
+  if (!lightbox) return; // Safety check 
+
+  let inactivityTimer; 
+  const controls = [ 
+    document.getElementById('lightbox-prev'), 
+    document.getElementById('lightbox-next'), 
+    document.getElementById('lightbox-close') 
+  ].filter(Boolean); // Filter out nulls 
+
+  function resetTimer() { 
+    clearTimeout(inactivityTimer); 
+    controls.forEach(btn => { 
+      btn.style.opacity = '0.8'; 
+      btn.style.pointerEvents = 'auto'; 
+    }); 
+    inactivityTimer = setTimeout(() => { 
+      controls.forEach(btn => { 
+        btn.style.opacity = '0'; 
+        btn.style.pointerEvents = 'none'; 
+      }); 
+    }, 3000); 
+  } 
+
+  function onLightboxOpen() { 
+    if (lightbox.style.display !== 'flex' && !lightbox.classList.contains('hidden')) return; 
+    resetTimer(); // Start on open 
+  } 
+
+  // Watch for lightbox changes (auto-detect open) 
+  const observer = new MutationObserver(onLightboxOpen); 
+  observer.observe(lightbox, { attributes: true, attributeFilter: ['class', 'style'] }); 
+
+  // Inactivity events (on whole lightbox) 
+  lightbox.addEventListener('mousemove', resetTimer); 
+  lightbox.addEventListener('touchstart', resetTimer, { passive: true }); 
+  lightbox.addEventListener('click', resetTimer); // For touch/click reactivation 
+
+  // Fullscreen listener (global, cross-browser) 
+  document.addEventListener('fullscreenchange', handleFullscreen); 
+  document.addEventListener('webkitfullscreenchange', handleFullscreen); 
+  document.addEventListener('mozfullscreenchange', handleFullscreen); 
+
+  function handleFullscreen() { 
+    const isFullscreen = !!document.fullscreenElement || !!document.webkitFullscreenElement || !!document.mozFullScreenElement; 
+    controls.forEach(btn => { 
+      btn.style.display = isFullscreen ? 'none' : 'block'; 
+    }); 
+    if (!isFullscreen) resetTimer(); 
+  } 
+
+  // On close, clean up 
+  const closeBtn = document.getElementById('lightbox-close'); 
+  if (closeBtn) { 
+    closeBtn.addEventListener('click', () => clearTimeout(inactivityTimer)); 
+  } 
+
+  console.log('Lightbox fixes loaded'); // Debug log 
+}); 
+
+// Polyfill for older browsers if needed (optional) 
+if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement) { 
+  console.warn('Fullscreen not fully supported—arrows may not hide perfectly'); 
+}
 }
 
 function nextPage() {
@@ -377,15 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let galleryMap = { web: [], branding: [], qr: [], posters: [], ads: [] };
     let currentLbCategory = null;
     let currentLbIndex = 0;
-
-    function openLightbox(cat, idx) {
-        currentLbCategory = cat;
-        currentLbIndex = idx;
-        updateLightbox();
-        lightbox.classList.remove('hidden');
-        lightbox.classList.add('flex');
-        document.body.style.overflow = 'hidden';
-    }
+    let resetInactivityTimer; // Global reference for the timer reset function
 
     function buildGalleries() {
         document.querySelectorAll('.project-item').forEach(item => {
@@ -436,6 +495,14 @@ document.addEventListener('DOMContentLoaded', () => {
         lightbox.classList.remove('hidden');
         lightbox.classList.add('flex'); // Ensure flex display
         document.body.style.overflow = 'hidden';
+        
+        // Hide Chatbot
+        const chatToggle = document.getElementById('chat-toggle-button');
+        const chatBubble = document.getElementById('chat-welcome-bubble');
+        if (chatToggle) chatToggle.style.setProperty('display', 'none', 'important');
+        if (chatBubble) chatBubble.style.setProperty('display', 'none', 'important');
+
+        if (typeof resetInactivityTimer === 'function') resetInactivityTimer();
     }
 
     function updateLightbox() {
@@ -451,9 +518,58 @@ document.addEventListener('DOMContentLoaded', () => {
         lightbox.classList.add('hidden');
         lightbox.classList.remove('flex');
         document.body.style.overflow = '';
+
+        // Show Chatbot
+        const chatToggle = document.getElementById('chat-toggle-button');
+        const chatBubble = document.getElementById('chat-welcome-bubble');
+        if (chatToggle) chatToggle.style.removeProperty('display');
+        if (chatBubble) chatBubble.style.removeProperty('display');
     }
 
     if (lightbox) {
+        // Lightbox Auto-Hide & Full-Screen Fix 
+        let inactivityTimer; 
+        const prevBtn = document.getElementById('lightbox-prev'); 
+        const nextBtn = document.getElementById('lightbox-next'); 
+        const closeBtn = document.getElementById('lightbox-close'); 
+        // const overlay = lightbox; // lightbox is already defined
+
+        resetInactivityTimer = function() { 
+          clearTimeout(inactivityTimer); 
+          [prevBtn, nextBtn, closeBtn].forEach(btn => { 
+            if (!btn) return;
+            btn.style.opacity = '1'; 
+            btn.style.pointerEvents = 'auto'; 
+            btn.style.transition = 'opacity 0.3s ease'; // Smooth fade 
+            // Ensure display is block just in case it was hidden by fullscreen
+            if (btn.style.display === 'none') btn.style.display = 'block';
+          }); 
+          inactivityTimer = setTimeout(() => { 
+            [prevBtn, nextBtn, closeBtn].forEach(btn => { 
+              if (!btn) return;
+              btn.style.opacity = '0'; 
+              btn.style.pointerEvents = 'none'; 
+            }); 
+          }, 3000); // 3s delay 
+        };
+ 
+        // Attach events to the entire lightbox modal 
+        lightbox.addEventListener('mousemove', resetInactivityTimer); 
+        lightbox.addEventListener('touchstart', resetInactivityTimer, { passive: true }); 
+ 
+        // Full-screen handler (global, add outside if needed) 
+        document.addEventListener('fullscreenchange', () => { 
+          if (document.fullscreenElement) { 
+            [prevBtn, nextBtn, closeBtn].forEach(btn => { if (btn) btn.style.display = 'none'; }); 
+          } else { 
+            [prevBtn, nextBtn, closeBtn].forEach(btn => { if (btn) btn.style.display = 'block'; }); 
+            resetInactivityTimer(); 
+          } 
+        }); 
+ 
+        // Start timer when lightbox opens
+        resetInactivityTimer();
+
         buildGalleries();
         // Inject mobile descriptions for non-web items
         (function injectMobileDescriptions(){
@@ -498,6 +614,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 openAdFullscreen(currentLbIndex);
             }
         });
+
+        // -- Mobile Swipe for Lightbox --
+        let lbStartX = 0;
+        let lbStartY = 0;
+        let lbTracking = false;
+        
+        lightbox.addEventListener('touchstart', (e) => {
+            const t = e.changedTouches[0];
+            lbStartX = t.clientX;
+            lbStartY = t.clientY;
+            lbTracking = true;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', (e) => {
+            if (!lbTracking) return;
+            lbTracking = false;
+            const t = e.changedTouches[0];
+            const movedX = t.clientX - lbStartX;
+            const movedY = t.clientY - lbStartY;
+            const absX = Math.abs(movedX);
+            const absY = Math.abs(movedY);
+            
+            if (absX > absY && absX > 40) { // Threshold 40
+                if (movedX < 0) {
+                    // Swipe Left -> Next
+                    if (lightboxNext) lightboxNext.click();
+                } else {
+                    // Swipe Right -> Prev
+                    if (lightboxPrev) lightboxPrev.click();
+                }
+            }
+        });
     }
 
     const adsFiles = [
@@ -520,50 +668,112 @@ document.addEventListener('DOMContentLoaded', () => {
         const titles = (galleryMap && galleryMap.ads && galleryMap.ads.length)
             ? galleryMap.ads.map(e => e.title || '')
             : adsFiles.map(fmtName);
-        const w = window.open('', '_blank', 'noopener');
-        if (!w) return;
-        const style = `
-            body{margin:0;background:#000;color:#ddd;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;height:100vh;display:flex;flex-direction:column}
-            header{position:fixed;top:12px;right:12px;z-index:30}
-            .close{width:44px;height:44px;border-radius:9999px;border:1px solid rgba(255,255,255,0.5);background:rgba(0,0,0,0.4);color:#fff;cursor:pointer}
-            .wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:16px}
-            .stage{display:flex;align-items:center;justify-content:center}
-            img{max-width:85vw;max-height:80vh;border-radius:12px;box-shadow:0 0 24px rgba(0,0,0,0.6)}
-            .controls{display:flex;align-items:center;justify-content:space-between;width:min(85vw,900px)}
-            .nav{width:52px;height:52px;border-radius:9999px;border:1px solid rgba(255,255,255,0.5);background:rgba(0,0,0,0.4);color:#fff;cursor:pointer}
-            .nav:hover{background:rgba(255,255,255,0.08)}
-            footer{padding:10px 16px;text-align:center;color:#bbb}
-            @media (max-width:640px){ .nav{width:44px;height:44px} }
-        `;
-        const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Our Prices</title><style>${style}</style></head>
-        <body>
-          <header><button class="close" id="fsClose" aria-label="Close">✕</button></header>
-          <div class="wrap">
-            <div class="stage"><img id="fsImg" alt="Advertisement"></div>
-            <div class="controls">
-              <button class="nav" id="fsPrev" aria-label="Previous">‹</button>
-              <button class="nav" id="fsNext" aria-label="Next">›</button>
-            </div>
-          </div>
-          <footer id="fsCaption"></footer>
-          <script>
-            const files = ${JSON.stringify(sources)};
-            const titles = ${JSON.stringify(titles)};
-            let idx = ${Math.max(0, startIndex || 0)} % files.length;
-            const img = document.getElementById('fsImg');
-            const cap = document.getElementById('fsCaption');
-            function render(){ img.src = files[idx]; cap.textContent = titles[idx] || ''; }
-            function prev(){ idx = (idx - 1 + files.length) % files.length; render(); }
-            function next(){ idx = (idx + 1) % files.length; render(); }
-            document.getElementById('fsPrev').addEventListener('click', prev);
-            document.getElementById('fsNext').addEventListener('click', next);
-            document.getElementById('fsClose').addEventListener('click', () => window.close());
-            window.addEventListener('keydown', (e) => { if(e.key==='ArrowLeft') prev(); else if(e.key==='ArrowRight') next(); else if(e.key==='Escape') window.close(); });
-            render();
-          </script>
-        </body></html>`;
-        w.document.write(html);
-        w.document.close();
+        
+        let idx = Math.max(0, startIndex || 0) % sources.length;
+
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black z-[100] flex items-center justify-center';
+        
+        // Image
+        const img = document.createElement('img');
+        img.className = 'max-w-[95%] max-h-[95%] object-contain shadow-2xl rounded';
+        img.src = sources[idx];
+        img.alt = titles[idx];
+        
+        // Caption
+        const caption = document.createElement('div');
+        caption.className = 'absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-200 text-sm bg-black/50 px-4 py-2 rounded pointer-events-none';
+        caption.textContent = titles[idx];
+
+        // 1. Close Button (Top Right - Clean Cross)
+        const closeBtn = document.createElement('button');
+        closeBtn.className = "absolute top-6 right-6 text-white/80 hover:text-white bg-black/40 hover:bg-black/60 rounded-full p-2 transition-all z-[120]";
+        closeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+
+        // 2. Previous Arrow (Left - Chevron Style)
+        const prevBtn = document.createElement('button');
+        prevBtn.className = "absolute left-2 md:left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 transition-transform hover:scale-110 z-[120]";
+        prevBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>`;
+
+        // 3. Next Arrow (Right - Chevron Style)
+        const nextBtn = document.createElement('button');
+        nextBtn.className = "absolute right-2 md:right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 transition-transform hover:scale-110 z-[120]";
+        nextBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+
+        // Append elements
+        overlay.appendChild(img);
+        overlay.appendChild(caption);
+        overlay.appendChild(closeBtn);
+        overlay.appendChild(prevBtn);
+        overlay.appendChild(nextBtn);
+        document.body.appendChild(overlay);
+        document.body.style.overflow = 'hidden';
+
+        // Logic
+        function update() {
+            img.src = sources[idx];
+            caption.textContent = titles[idx];
+        }
+
+        function close() {
+            overlay.remove();
+            document.body.style.overflow = '';
+            document.removeEventListener('keydown', handleKey);
+        }
+
+        function prev() {
+            idx = (idx - 1 + sources.length) % sources.length;
+            update();
+        }
+
+        function next() {
+            idx = (idx + 1) % sources.length;
+            update();
+        }
+
+        function handleKey(e) {
+            if (e.key === 'ArrowLeft') prev();
+            else if (e.key === 'ArrowRight') next();
+            else if (e.key === 'Escape') close();
+        }
+
+        // Events
+        closeBtn.addEventListener('click', close);
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+        document.addEventListener('keydown', handleKey);
+
+        // -- Mobile Swipe for Ads Overlay --
+        let adStartX = 0;
+        let adStartY = 0;
+        let adTracking = false;
+
+        overlay.addEventListener('touchstart', (e) => {
+            const t = e.changedTouches[0];
+            adStartX = t.clientX;
+            adStartY = t.clientY;
+            adTracking = true;
+        }, { passive: true });
+
+        overlay.addEventListener('touchend', (e) => {
+            if (!adTracking) return;
+            adTracking = false;
+            const t = e.changedTouches[0];
+            const movedX = t.clientX - adStartX;
+            const movedY = t.clientY - adStartY;
+            const absX = Math.abs(movedX);
+            const absY = Math.abs(movedY);
+
+            if (absX > absY && absX > 40) {
+                if (movedX < 0) {
+                    next();
+                } else {
+                    prev();
+                }
+            }
+        });
     }
     // -- Ads Pager Logic (mirrors Selected Works) --
     let adsStart = 0;

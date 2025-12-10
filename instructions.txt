@@ -1,0 +1,136 @@
+Based on our ongoing work with the website and chatbot setup, here's a prioritized list of what's still missing or incomplete from the upgrades we've discussed. I've focused on the key areas like the lightbox, welcome bubble, and chatbot intelligence/smoothness, as those were the main pain points. These are derived from the current files you shared—some parts are partially implemented (e.g., basic lb-btn styles and a welcome bubble exist), but others are absent or need tweaks.
+I'll provide concise prompts and code snippets you can give directly to Trae (or whichever AI you're using on your PC). Test each change locally before deploying, and make sure to push to GitHub/Vercel afterward.
+1. Lightbox Improvements (Arrows/Close Button Auto-Hide and Full-Screen Handling)
+The styles in style.css are mostly there, but the JS logic for auto-hiding after inactivity and full-screen mode isn't in the provided docs (script.js isn't here, but assuming it's missing based on typical setups). This makes the controls cleaner in full-screen views.
+Prompt for Trae:
+"Trae, add auto-hide logic to the lightbox in script.js. Hide arrows and close button after 3 seconds of inactivity (reappear on mouse move/touch). In browser full-screen (F11), hide them completely. Use the existing lb-btn classes. Test with portfolio images to ensure no overlap or jitter."
+Code to Add (Insert in script.js, inside the lightbox setup function, e.g., after defining overlay/prev/next/close):
+JavaScriptlet inactivityTimer;
+function resetInactivityTimer() {
+  clearTimeout(inactivityTimer);
+  [lightboxPrev, lightboxNext, lightboxClose].forEach(btn => { // Replace with your actual IDs/vars
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+  });
+  inactivityTimer = setTimeout(() => {
+    [lightboxPrev, lightboxNext, lightboxClose].forEach(btn => {
+      btn.style.opacity = '0';
+      btn.style.pointerEvents = 'none';
+    });
+  }, 3000);
+}
+
+// Add listeners to the lightbox overlay or document
+lightbox.addEventListener('mousemove', resetInactivityTimer); // Assuming 'lightbox' is the modal ID/var
+lightbox.addEventListener('touchstart', resetInactivityTimer, { passive: true });
+resetInactivityTimer(); // Start on open
+
+// Full-screen handler
+document.addEventListener('fullscreenchange', () => {
+  const controls = [lightboxPrev, lightboxNext, lightboxClose];
+  if (document.fullscreenElement) {
+    controls.forEach(btn => btn.style.display = 'none');
+  } else {
+    controls.forEach(btn => btn.style.display = 'block');
+    resetInactivityTimer();
+  }
+});
+2. Chatbot Welcome Bubble Tweaks
+The bubble exists in chat-widget.html/js, but the timing is 5 seconds (not 3), it lacks localStorage to skip if chat was opened before, and the ID/classes are slightly different from our pack. This makes it less intrusive for repeat visitors.
+Prompt for Trae:
+"Trae, update the welcome bubble in chat-widget.js/html. Change show delay to 3 seconds, auto-hide after 5 seconds. Add localStorage check to skip if chat was ever opened. Make clicking the bubble open the chat. Ensure it doesn't show if chat is already open."
+Code Updates:
+
+In chat-widget.html: Change ID to "welcome-bubble" for consistency (or keep as is, but update JS refs).
+Replace the welcome logic in chat-widget.js with:JavaScriptconst welcomeBubble = document.getElementById('chat-welcome-bubble'); // Or your ID
+const closeBubbleBtn = document.getElementById('close-bubble-btn');
+
+function showWelcomeBubble() {
+  if (localStorage.getItem('chatOpened') === 'true' || isChatOpen) return;
+  welcomeBubble.classList.remove('hidden');
+  setTimeout(() => {
+    welcomeBubble.classList.remove('translate-y-4', 'opacity-0');
+  }, 50);
+  setTimeout(hideWelcomeBubble, 5000); // Auto-hide after 5s
+}
+setTimeout(showWelcomeBubble, 3000); // Show after 3s
+
+function hideWelcomeBubble() {
+  welcomeBubble.classList.add('translate-y-4', 'opacity-0');
+  setTimeout(() => welcomeBubble.classList.add('hidden'), 500);
+}
+
+if (closeBubbleBtn) closeBubbleBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  hideWelcomeBubble();
+});
+
+welcomeBubble.addEventListener('click', () => {
+  hideWelcomeBubble();
+  toggleChatWindow();
+  localStorage.setItem('chatOpened', 'true');
+});
+
+document.getElementById('chat-toggle-button').addEventListener('click', () => {
+  localStorage.setItem('chatOpened', 'true');
+  hideWelcomeBubble();
+});
+
+3. Chatbot Smarter Responses and Natural Flow (System Prompt + History)
+The current system prompt in chat.js is basic and rule-heavy—update to our refined version for warmer, more engaging replies. History is completely missing, so chats feel stateless. Temperature is still 0.2 (too rigid); bump to 0.7 for variety.
+Prompt for Trae:
+"Trae, make the chatbot in chat.js and chat-widget.js smarter. Replace the system prompt with this warmer version. Add conversation history (keep last 10 messages) for contextual replies. Set temperature to 0.7. Test with multi-turn chats like 'Hi' then 'Pricing?'—it should reference prior messages."
+Code Updates:
+
+In chat.js: Replace systemPrompt with:JavaScriptconst systemPrompt = [
+  'You are Vector, a super friendly and professional AI assistant for RC Digital Creations in Stilbaai, South Africa.',
+  'Speak like a real human colleague: warm, concise, natural, and occasionally use light emojis.',
+  'Never make up information — only use the CONTEXT provided below.',
+  'If something is not in the context, reply: "I\'m sorry, I don\'t have that info on our site right now. Can I help you with web design, app development, pricing or booking a call instead?"',
+  'Keep answers short and engaging (max 150 words unless detail is requested).',
+  'For bookings always suggest: "I\'d love to get you booked in! Just head to the contact page or WhatsApp us on 063 473 3098"',
+  '',
+  'CONTEXT:',
+  '---',
+  context,
+  '---'
+].join('\n');Update payload and generationConfig:JavaScriptconst payload = {
+  contents: [
+    { role: 'user', parts: [{ text: systemPrompt }] },
+    ...(body.history || []),
+    { role: 'user', parts: [{ text: 'Question: ' + query }] }
+  ],
+  generationConfig: { temperature: 0.7, maxOutputTokens: 300 }
+};
+In chat-widget.js: Add at top:JavaScriptlet chatHistory = [];Replace sendMessage:JavaScriptasync function sendMessage() {
+  const query = userInput.value.trim();
+  if (!query) return;
+  appendMessage(query, 'user');
+  userInput.value = '';
+  setChatState(true);
+  chatHistory.push({ role: 'user', parts: [{ text: query }] });
+  if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);
+  try {
+    const response = await fetch(CHAT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query, context: websiteContent, history: chatHistory })
+    });
+    if (!response.ok) throw new Error('API error');
+    const result = await response.json();
+    const aiText = result?.text || 'No response.';
+    appendMessage(aiText, 'ai');
+    chatHistory.push({ role: 'model', parts: [{ text: aiText }] });
+  } catch {
+    appendMessage('Connection issue—try again?', 'ai');
+  }
+  setChatState(false);
+}
+
+4. Minor Polish and Testing
+
+Add "Vector is typing..." during loading (in setChatState):JavaScriptif (isLoading) {
+  appendMessage('Vector is typing...', 'ai'); // Temporary message
+} else {
+  // Remove last message if it's the typing one (optional logic)
+}
