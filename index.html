@@ -1525,94 +1525,10 @@
       <i data-feather="arrow-up" class="w-5 h-5"></i>
     </button>
 
-    <div
-      id="lightbox"
-      class="fixed inset-0 bg-black hidden items-center justify-center z-[100]"
-    >
-      <button
-        id="lightbox-close"
-        class="lb-btn absolute top-5 right-5 transition-opacity duration-300"
-        aria-label="Close"
-      >
-        <i data-feather="x" class="w-5 h-5"></i>
-      </button>
-      <button
-        id="lightbox-prev"
-        class="lb-btn absolute left-5 top-1/2 -translate-y-1/2 transition-opacity duration-300"
-        aria-label="Previous"
-      >
-        <i data-feather="chevron-left" class="w-6 h-6"></i>
-      </button>
-      <img
-        id="lightbox-image"
-        src=""
-        alt="Preview"
-        class="max-w-[95%] max-h-[95%] shadow-2xl rounded"
-      />
-      <div
-        id="lightbox-caption"
-        class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-200 text-sm bg-black/50 px-4 py-2 rounded transition-opacity duration-300"
-      ></div>
-      <button
-        id="lightbox-next"
-        class="lb-btn absolute right-5 top-1/2 -translate-y-1/2 transition-opacity duration-300"
-        aria-label="Next"
-      >
-        <i data-feather="chevron-right" class="w-6 h-6"></i>
-      </button>
-    </div>
-
     <script src="https://code.createjs.com/easeljs-0.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="ambient.js"></script>
     <script src="script.js"></script>
     <script src="chat-widget.js" defer></script>
-    <script>
-      // NUCLEAR LIGHTBOX FIX – Works even if script.js is broken
-      document.addEventListener("DOMContentLoaded", () => {
-        const lb = document.getElementById("lightbox");
-        if (!lb) return;
-
-        const controls = [
-          document.getElementById("lightbox-prev"),
-          document.getElementById("lightbox-next"),
-          document.getElementById("lightbox-close"),
-        ];
-
-        let timer;
-        const reset = () => {
-          clearTimeout(timer);
-          controls.forEach((c) => {
-            c.style.opacity = "0.9";
-            c.style.pointerEvents = "auto";
-          });
-          timer = setTimeout(() => {
-            controls.forEach((c) => {
-              c.style.opacity = "0";
-              c.style.pointerEvents = "none";
-            });
-          }, 2800);
-        };
-
-        // Trigger on open (when lightbox becomes visible)
-        new MutationObserver(() => {
-          if (lb.offsetParent !== null) reset(); // visible
-        }).observe(lb, {
-          attributes: true,
-          attributeFilter: ["style", "class"],
-        });
-
-        lb.addEventListener("mousemove", reset);
-        lb.addEventListener("touchstart", reset);
-        lb.addEventListener("click", reset);
-
-        // Fullscreen hide
-        document.addEventListener("fullscreenchange", () => {
-          const hide = !!document.fullscreenElement;
-          controls.forEach((c) => (c.style.display = hide ? "none" : "block"));
-          if (!hide) reset();
-        });
-      });
-    </script>
   </body>
 </html>

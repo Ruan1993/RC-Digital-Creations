@@ -63,72 +63,6 @@ function renderPage(cat) {
         }
     });
 
-// Bulletproof Lightbox Auto-Hide & Centering (Runs on DOM load) 
-document.addEventListener('DOMContentLoaded', () => { 
-  const lightbox = document.getElementById('lightbox'); 
-  if (!lightbox) return; // Safety check 
-
-  let inactivityTimer; 
-  const controls = [ 
-    document.getElementById('lightbox-prev'), 
-    document.getElementById('lightbox-next'), 
-    document.getElementById('lightbox-close') 
-  ].filter(Boolean); // Filter out nulls 
-
-  function resetTimer() { 
-    clearTimeout(inactivityTimer); 
-    controls.forEach(btn => { 
-      btn.style.opacity = '0.8'; 
-      btn.style.pointerEvents = 'auto'; 
-    }); 
-    inactivityTimer = setTimeout(() => { 
-      controls.forEach(btn => { 
-        btn.style.opacity = '0'; 
-        btn.style.pointerEvents = 'none'; 
-      }); 
-    }, 3000); 
-  } 
-
-  function onLightboxOpen() { 
-    if (lightbox.style.display !== 'flex' && !lightbox.classList.contains('hidden')) return; 
-    resetTimer(); // Start on open 
-  } 
-
-  // Watch for lightbox changes (auto-detect open) 
-  const observer = new MutationObserver(onLightboxOpen); 
-  observer.observe(lightbox, { attributes: true, attributeFilter: ['class', 'style'] }); 
-
-  // Inactivity events (on whole lightbox) 
-  lightbox.addEventListener('mousemove', resetTimer); 
-  lightbox.addEventListener('touchstart', resetTimer, { passive: true }); 
-  lightbox.addEventListener('click', resetTimer); // For touch/click reactivation 
-
-  // Fullscreen listener (global, cross-browser) 
-  document.addEventListener('fullscreenchange', handleFullscreen); 
-  document.addEventListener('webkitfullscreenchange', handleFullscreen); 
-  document.addEventListener('mozfullscreenchange', handleFullscreen); 
-
-  function handleFullscreen() { 
-    const isFullscreen = !!document.fullscreenElement || !!document.webkitFullscreenElement || !!document.mozFullScreenElement; 
-    controls.forEach(btn => { 
-      btn.style.display = isFullscreen ? 'none' : 'block'; 
-    }); 
-    if (!isFullscreen) resetTimer(); 
-  } 
-
-  // On close, clean up 
-  const closeBtn = document.getElementById('lightbox-close'); 
-  if (closeBtn) { 
-    closeBtn.addEventListener('click', () => clearTimeout(inactivityTimer)); 
-  } 
-
-  console.log('Lightbox fixes loaded'); // Debug log 
-}); 
-
-// Polyfill for older browsers if needed (optional) 
-if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement) { 
-  console.warn('Fullscreen not fully supported—arrows may not hide perfectly'); 
-}
 }
 
 function nextPage() {
@@ -433,20 +367,27 @@ document.addEventListener('DOMContentLoaded', () => {
         img.addEventListener('error', removeItem, { once: true });
     });
 
-    // -- Lightbox Logic --
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-image');
-    const lightboxClose = document.getElementById('lightbox-close');
-    const lightboxPrev = document.getElementById('lightbox-prev');
-    const lightboxNext = document.getElementById('lightbox-next');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-
+    // -- Lightbox Logic (Unified) --
     let galleryMap = { web: [], branding: [], qr: [], posters: [], ads: [] };
-    let currentLbCategory = null;
-    let currentLbIndex = 0;
-    let resetInactivityTimer; // Global reference for the timer reset function
+    
+    const adsFiles = [
+        'Advertisements/Domain Registration & Hosting.jpg',
+        'Advertisements/Digital Portfolio.jpg',
+        'Advertisements/Chatbot Integration.jpg',
+        'Advertisements/Standard Business Website.jpg',
+        'Advertisements/business Starter Pack 1.jpg'
+    ];
+    const adsGrid = document.getElementById('ads-grid');
+
+    function fmtName(p) {
+        const n = p.split('/').pop().replace(/\.[^.]+$/, '');
+        return n.replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
+    }
 
     function buildGalleries() {
+        // Clear map to avoid duplicates
+        galleryMap = { web: [], branding: [], qr: [], posters: [], ads: [] };
+
         document.querySelectorAll('.project-item').forEach(item => {
             const img = item.querySelector('img');
             if (!img) return;
@@ -462,8 +403,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!cat) return;
 
             const entry = { src: img.src, title: (item.querySelector('h3')?.textContent || '') };
-            const idx = galleryMap[cat].length;
             galleryMap[cat].push(entry);
+            const idx = galleryMap[cat].length - 1;
 
             // Click behavior
             if (cat === 'web') {
@@ -472,15 +413,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     img.style.cursor = 'pointer';
                     item.style.cursor = 'pointer';
                     const openLink = (e) => { e.preventDefault(); window.open(linkEl.href, '_blank', 'noopener'); };
-                    img.addEventListener('click', openLink);
-                    item.addEventListener('click', openLink);
+                    img.onclick = openLink;
+                    item.onclick = openLink;
                 }
             } else {
                 img.style.cursor = 'zoom-in';
                 item.style.cursor = 'zoom-in';
-                const openImage = (e) => { e.preventDefault(); openLightbox(cat, idx); };
-                img.addEventListener('click', openImage);
-                item.addEventListener('click', openImage);
+                const openImage = (e) => { 
+                    e.preventDefault(); 
+                    e.stopPropagation();
+                    openFullscreenGallery(cat, idx); 
+                };
+                img.onclick = openImage;
+                item.onclick = openImage;
             }
 
             // Allow anchor clicks without triggering card click
@@ -488,186 +433,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function openLightbox(category, index) {
-        currentLbCategory = category;
-        currentLbIndex = index;
-        updateLightbox();
-        lightbox.classList.remove('hidden');
-        lightbox.classList.add('flex'); // Ensure flex display
-        document.body.style.overflow = 'hidden';
+    function openFullscreenGallery(category, startIndex) {
+        let sources = [];
+        let titles = [];
         
-        // Hide Chatbot
-        const chatToggle = document.getElementById('chat-toggle-button');
-        const chatBubble = document.getElementById('chat-welcome-bubble');
-        if (chatToggle) chatToggle.style.setProperty('display', 'none', 'important');
-        if (chatBubble) chatBubble.style.setProperty('display', 'none', 'important');
-
-        if (typeof resetInactivityTimer === 'function') resetInactivityTimer();
-    }
-
-    function updateLightbox() {
-        if (!currentLbCategory) return;
-        const entry = galleryMap[currentLbCategory][currentLbIndex];
-        if (entry) {
-            lightboxImg.src = entry.src;
-            lightboxCaption.textContent = entry.title;
+        if (category === 'ads' && (!galleryMap.ads || galleryMap.ads.length === 0)) {
+             sources = adsFiles.slice();
+             titles = adsFiles.map(fmtName);
+        } else if (galleryMap[category]) {
+            sources = galleryMap[category].map(e => e.src);
+            titles = galleryMap[category].map(e => e.title);
         }
-    }
 
-    function closeLightbox() {
-        lightbox.classList.add('hidden');
-        lightbox.classList.remove('flex');
-        document.body.style.overflow = '';
-
-        // Show Chatbot
-        const chatToggle = document.getElementById('chat-toggle-button');
-        const chatBubble = document.getElementById('chat-welcome-bubble');
-        if (chatToggle) chatToggle.style.removeProperty('display');
-        if (chatBubble) chatBubble.style.removeProperty('display');
-    }
-
-    if (lightbox) {
-        // Lightbox Auto-Hide & Full-Screen Fix 
-        let inactivityTimer; 
-        const prevBtn = document.getElementById('lightbox-prev'); 
-        const nextBtn = document.getElementById('lightbox-next'); 
-        const closeBtn = document.getElementById('lightbox-close'); 
-        // const overlay = lightbox; // lightbox is already defined
-
-        resetInactivityTimer = function() { 
-          clearTimeout(inactivityTimer); 
-          [prevBtn, nextBtn, closeBtn].forEach(btn => { 
-            if (!btn) return;
-            btn.style.opacity = '1'; 
-            btn.style.pointerEvents = 'auto'; 
-            btn.style.transition = 'opacity 0.3s ease'; // Smooth fade 
-            // Ensure display is block just in case it was hidden by fullscreen
-            if (btn.style.display === 'none') btn.style.display = 'block';
-          }); 
-          inactivityTimer = setTimeout(() => { 
-            [prevBtn, nextBtn, closeBtn].forEach(btn => { 
-              if (!btn) return;
-              btn.style.opacity = '0'; 
-              btn.style.pointerEvents = 'none'; 
-            }); 
-          }, 3000); // 3s delay 
-        };
- 
-        // Attach events to the entire lightbox modal 
-        lightbox.addEventListener('mousemove', resetInactivityTimer); 
-        lightbox.addEventListener('touchstart', resetInactivityTimer, { passive: true }); 
- 
-        // Full-screen handler (global, add outside if needed) 
-        document.addEventListener('fullscreenchange', () => { 
-          if (document.fullscreenElement) { 
-            [prevBtn, nextBtn, closeBtn].forEach(btn => { if (btn) btn.style.display = 'none'; }); 
-          } else { 
-            [prevBtn, nextBtn, closeBtn].forEach(btn => { if (btn) btn.style.display = 'block'; }); 
-            resetInactivityTimer(); 
-          } 
-        }); 
- 
-        // Start timer when lightbox opens
-        resetInactivityTimer();
-
-        buildGalleries();
-        // Inject mobile descriptions for non-web items
-        (function injectMobileDescriptions(){
-            const items = document.querySelectorAll('.project-item');
-            items.forEach(item => {
-                if (item.classList.contains('web')) return;
-                if (item.querySelector('.mob-desc')) return;
-                const overlay = item.querySelector('.absolute');
-                const descText = overlay && overlay.querySelector('p') ? overlay.querySelector('p').textContent : '';
-                let fallback = '';
-                if (item.classList.contains('branding')) fallback = 'Logo and brand identity design.';
-                else if (item.classList.contains('posters')) fallback = 'Product sticker / poster design.';
-                else if (item.classList.contains('qr')) fallback = 'Custom QR solution linking to maps or websites.';
-                const finalDesc = descText || fallback;
-                if (!finalDesc) return;
-                const wrapper = document.createElement('div');
-                wrapper.className = 'md:hidden p-4 text-center space-y-2 mob-desc';
-                const p = document.createElement('p');
-                p.className = 'text-gray-300 text-sm';
-                p.textContent = finalDesc;
-                wrapper.appendChild(p);
-                item.appendChild(wrapper);
-            });
-        })();
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-        
-        // Lightbox Navigation
-        if (lightboxNext) lightboxNext.addEventListener('click', () => {
-            if (!currentLbCategory) return;
-            currentLbIndex = (currentLbIndex + 1) % galleryMap[currentLbCategory].length;
-            updateLightbox();
-        });
-        if (lightboxPrev) lightboxPrev.addEventListener('click', () => {
-            if (!currentLbCategory) return;
-            currentLbIndex = (currentLbIndex - 1 + galleryMap[currentLbCategory].length) % galleryMap[currentLbCategory].length;
-            updateLightbox();
-        });
-        if (lightboxImg) lightboxImg.addEventListener('click', () => {
-            if (!currentLbCategory) return;
-            if (currentLbCategory === 'ads') {
-                openAdFullscreen(currentLbIndex);
-            }
-        });
-
-        // -- Mobile Swipe for Lightbox --
-        let lbStartX = 0;
-        let lbStartY = 0;
-        let lbTracking = false;
-        
-        lightbox.addEventListener('touchstart', (e) => {
-            const t = e.changedTouches[0];
-            lbStartX = t.clientX;
-            lbStartY = t.clientY;
-            lbTracking = true;
-        }, { passive: true });
-
-        lightbox.addEventListener('touchend', (e) => {
-            if (!lbTracking) return;
-            lbTracking = false;
-            const t = e.changedTouches[0];
-            const movedX = t.clientX - lbStartX;
-            const movedY = t.clientY - lbStartY;
-            const absX = Math.abs(movedX);
-            const absY = Math.abs(movedY);
-            
-            if (absX > absY && absX > 40) { // Threshold 40
-                if (movedX < 0) {
-                    // Swipe Left -> Next
-                    if (lightboxNext) lightboxNext.click();
-                } else {
-                    // Swipe Right -> Prev
-                    if (lightboxPrev) lightboxPrev.click();
-                }
-            }
-        });
-    }
-
-    const adsFiles = [
-        'Advertisements/Domain Registration & Hosting.jpg',
-        'Advertisements/Digital Portfolio.jpg',
-        'Advertisements/Chatbot Integration.jpg',
-        'Advertisements/Standard Business Website.jpg',
-        'Advertisements/business Starter Pack 1.jpg'
-    ];
-    const adsGrid = document.getElementById('ads-grid');
-    function fmtName(p) {
-        const n = p.split('/').pop().replace(/\.[^.]+$/, '');
-        return n.replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
-    }
-    
-    function openAdFullscreen(startIndex) {
-        const sources = (galleryMap && galleryMap.ads && galleryMap.ads.length)
-            ? galleryMap.ads.map(e => e.src)
-            : adsFiles.slice();
-        const titles = (galleryMap && galleryMap.ads && galleryMap.ads.length)
-            ? galleryMap.ads.map(e => e.title || '')
-            : adsFiles.map(fmtName);
+        if (!sources.length) return;
         
         let idx = Math.max(0, startIndex || 0) % sources.length;
 
@@ -679,29 +457,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
         img.className = 'max-w-[95%] max-h-[95%] object-contain shadow-2xl rounded';
         img.src = sources[idx];
-        img.alt = titles[idx];
+        img.alt = titles[idx] || '';
         
         // Caption
         const caption = document.createElement('div');
         caption.className = 'absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-200 text-sm bg-black/50 px-4 py-2 rounded pointer-events-none';
-        caption.textContent = titles[idx];
+        caption.textContent = titles[idx] || '';
 
-        // 1. Close Button (Top Right - Clean Cross)
+        // Close Button
         const closeBtn = document.createElement('button');
         closeBtn.className = "absolute top-6 right-6 text-white/80 hover:text-white bg-black/40 hover:bg-black/60 rounded-full p-2 transition-all z-[120]";
         closeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
 
-        // 2. Previous Arrow (Left - Chevron Style)
+        // Prev Arrow
         const prevBtn = document.createElement('button');
         prevBtn.className = "absolute left-2 md:left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 transition-transform hover:scale-110 z-[120]";
         prevBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>`;
 
-        // 3. Next Arrow (Right - Chevron Style)
+        // Next Arrow
         const nextBtn = document.createElement('button');
         nextBtn.className = "absolute right-2 md:right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 transition-transform hover:scale-110 z-[120]";
         nextBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
 
-        // Append elements
+        // Append
         overlay.appendChild(img);
         overlay.appendChild(caption);
         overlay.appendChild(closeBtn);
@@ -710,16 +488,24 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(overlay);
         document.body.style.overflow = 'hidden';
 
-        // Logic
+        // Hide Chatbot
+        const chatToggle = document.getElementById('chat-toggle-button');
+        const chatBubble = document.getElementById('chat-welcome-bubble');
+        if (chatToggle) chatToggle.style.setProperty('display', 'none', 'important');
+        if (chatBubble) chatBubble.style.setProperty('display', 'none', 'important');
+
         function update() {
             img.src = sources[idx];
-            caption.textContent = titles[idx];
+            caption.textContent = titles[idx] || '';
         }
 
         function close() {
             overlay.remove();
             document.body.style.overflow = '';
             document.removeEventListener('keydown', handleKey);
+            // Restore Chatbot
+            if (chatToggle) chatToggle.style.removeProperty('display');
+            if (chatBubble) chatBubble.style.removeProperty('display');
         }
 
         function prev() {
@@ -738,43 +524,66 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (e.key === 'Escape') close();
         }
 
-        // Events
         closeBtn.addEventListener('click', close);
         prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
         nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
         overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
         document.addEventListener('keydown', handleKey);
 
-        // -- Mobile Swipe for Ads Overlay --
-        let adStartX = 0;
-        let adStartY = 0;
-        let adTracking = false;
+        // Mobile Swipe
+        let startX = 0;
+        let startY = 0;
+        let tracking = false;
 
         overlay.addEventListener('touchstart', (e) => {
             const t = e.changedTouches[0];
-            adStartX = t.clientX;
-            adStartY = t.clientY;
-            adTracking = true;
+            startX = t.clientX;
+            startY = t.clientY;
+            tracking = true;
         }, { passive: true });
 
         overlay.addEventListener('touchend', (e) => {
-            if (!adTracking) return;
-            adTracking = false;
+            if (!tracking) return;
+            tracking = false;
             const t = e.changedTouches[0];
-            const movedX = t.clientX - adStartX;
-            const movedY = t.clientY - adStartY;
+            const movedX = t.clientX - startX;
+            const movedY = t.clientY - startY;
             const absX = Math.abs(movedX);
             const absY = Math.abs(movedY);
 
             if (absX > absY && absX > 40) {
-                if (movedX < 0) {
-                    next();
-                } else {
-                    prev();
-                }
+                if (movedX < 0) next();
+                else prev();
             }
         });
     }
+
+    // Initialize Galleries
+    buildGalleries();
+
+    // Inject mobile descriptions for non-web items
+    (function injectMobileDescriptions(){
+        const items = document.querySelectorAll('.project-item');
+        items.forEach(item => {
+            if (item.classList.contains('web')) return;
+            if (item.querySelector('.mob-desc')) return;
+            const overlay = item.querySelector('.absolute');
+            const descText = overlay && overlay.querySelector('p') ? overlay.querySelector('p').textContent : '';
+            let fallback = '';
+            if (item.classList.contains('branding')) fallback = 'Logo and brand identity design.';
+            else if (item.classList.contains('posters')) fallback = 'Product sticker / poster design.';
+            else if (item.classList.contains('qr')) fallback = 'Custom QR solution linking to maps or websites.';
+            const finalDesc = descText || fallback;
+            if (!finalDesc) return;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'md:hidden p-4 text-center space-y-2 mob-desc';
+            const p = document.createElement('p');
+            p.className = 'text-gray-300 text-sm';
+            p.textContent = finalDesc;
+            wrapper.appendChild(p);
+            item.appendChild(wrapper);
+        });
+    })();
     // -- Ads Pager Logic (mirrors Selected Works) --
     let adsStart = 0;
     let adsAuto = null;
@@ -821,7 +630,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'project-item ads group relative rounded-xl overflow-hidden glass border-0';
             const wrap = document.createElement('div');
-            wrap.className = 'aspect-video lg:aspect-auto lg:h-96 overflow-hidden bg-gray-900 flex items-center justify-center';
+            wrap.className = 'h-96 lg:h-[750px] overflow-hidden bg-gray-900 flex items-center justify-center';
             const img = document.createElement('img');
             img.src = p;
             img.alt = fmtName(p);
@@ -845,7 +654,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.appendChild(overlay);
             adsGrid.appendChild(card);
         });
-        if (lightbox) buildGalleries();
+        buildGalleries();
         // Initialize ads pager
         adsRenderPage();
         adsStartAuto();

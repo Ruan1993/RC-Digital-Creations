@@ -48,7 +48,7 @@ POLICIES & QUOTES:
 - Privacy Policy: https://www.rcdigitalcreations.co.za/privacy.html
 
 EXAMPLE WEBSITES (PORTFOLIO):
-- https://albertiniapavers.co.za/
+- Albertinia Pavers (Manufacturing): https://albertiniapavers.co.za/ - A manufacturing company specializing in paving solutions.
 - https://ccautorepairs.netlify.app/
 - https://nailsbywilma.co.za/
 - https://ruancoetzee.co.za/
