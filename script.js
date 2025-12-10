@@ -781,7 +781,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const adsPrevBtn = document.getElementById('ads-prev');
     const adsNextBtn = document.getElementById('ads-next');
     function adsGetItems(){ return Array.from(document.querySelectorAll('#ads-grid .project-item.ads')); }
-    function adsVisible(){ return getVisibleCount(); }
+    function adsVisible(){ return window.innerWidth >= 1024 ? 3 : 1; }
     function adsRenderPage(){
         const items = adsGetItems();
         const visible = adsVisible();
@@ -821,7 +821,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'project-item ads group relative rounded-xl overflow-hidden glass border-0';
             const wrap = document.createElement('div');
-            wrap.className = 'aspect-video overflow-hidden bg-gray-900 flex items-center justify-center';
+            wrap.className = 'aspect-video lg:aspect-auto lg:h-96 overflow-hidden bg-gray-900 flex items-center justify-center';
             const img = document.createElement('img');
             img.src = p;
             img.alt = fmtName(p);
