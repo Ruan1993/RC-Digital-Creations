@@ -60,6 +60,11 @@ Rules:
 - Always steer toward booking a call or WhatsApp.
 - If asked about price, say: "Our popular Business Starter Pack is just R5,200 (includes design, domain & hosting!). Custom sites typically range from R5,000 to R15,000 depending on complexity. Want a specific quote? Let's chat!"
 - End most replies with a short question to keep the chat going.
+- STRICT FORMATTING:
+  - Do NOT use asterisks (*) or Markdown (no bolding, no bullet points).
+  - Use clear paragraph breaks for readability.
+  - Use colons (:) to introduce lists or explanations.
+  - Ensure grammar and punctuation are impeccable.
 
 Examples:
 User: Hi → "Hey there! Ready to make your business look ridiculously good online?"
@@ -80,7 +85,7 @@ ${context}
       ],
       generationConfig: {
         temperature: 0.8,        // more playful
-        maxOutputTokens: 280,
+        maxOutputTokens: 1000,
         topP: 0.95
       }
     };

@@ -117,7 +117,10 @@ function appendMessage(text, sender) {
     const btns = document.createElement('div');
     btns.className = 'flex gap-2 mt-3 flex-wrap';
     btns.innerHTML = `
-      <a href="https://wa.me/27634733098" target="_blank" class="px-4 py-2 bg-green-600 text-white rounded-full text-sm hover:bg-green-700 transition-colors no-underline">WhatsApp Me</a>
+      <a href="https://wa.me/27634733098" target="_blank" style="background-color: #25D366;" class="px-4 py-2 text-white rounded-full text-sm hover:opacity-90 transition-opacity no-underline flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592z"/></svg>
+        WhatsApp Me
+      </a>
       <a href="https://www.rcdigitalcreations.co.za/#contact" target="_self" class="px-4 py-2 bg-brand-purple text-white rounded-full text-sm hover:opacity-90 transition-opacity no-underline">Book Appointment</a>
     `;
     const bubble = messageElement.querySelector('.rounded-lg');
@@ -233,14 +236,23 @@ const CHAT_WIDGET_HTML = `<div id="chatbot-widget-container">
       </svg>
     </button>
   </div>
-  <!-- Pulse Ring Effect -->
-  <span class="fixed bottom-6 right-6 z-40 flex h-14 w-14">
-      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75"></span>
-  </span>
   <button
     id="chat-toggle-button"
-    class="fixed bottom-6 right-6 z-50 bg-brand-blue text-white p-3 rounded-full shadow-2xl hover:bg-brand-blue/80 transition duration-300 flex items-center justify-center"
+    class="fixed bottom-6 right-6 z-50 bg-brand-blue text-white p-3 rounded-full shadow-2xl hover:bg-brand-blue/80 transition duration-300 flex items-center justify-center group"
   >
+    <!-- Red Notification Dot -->
+    <span class="absolute top-0 right-0 flex h-4 w-4 -mt-1 -mr-1">
+      <span class="absolute inline-flex h-full w-full rounded-full opacity-75" style="background-color: #ef4444; animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+      <span class="relative inline-flex rounded-full h-4 w-4 border-2 border-white" style="background-color: #ef4444;"></span>
+    </span>
+    <style>
+      @keyframes ping {
+        75%, 100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+    </style>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="28"
