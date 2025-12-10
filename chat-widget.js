@@ -118,7 +118,7 @@ function appendMessage(text, sender) {
     btns.className = 'flex gap-2 mt-3 flex-wrap';
     btns.innerHTML = `
       <a href="https://wa.me/27634733098" target="_blank" class="px-4 py-2 bg-green-600 text-white rounded-full text-sm hover:bg-green-700 transition-colors no-underline">WhatsApp Me</a>
-      <a href="https://calendly.com/ruan-rcdigital/30min" target="_blank" class="px-4 py-2 bg-brand-purple text-white rounded-full text-sm hover:opacity-90 transition-opacity no-underline">Book Free Call</a>
+      <a href="https://www.rcdigitalcreations.co.za/#contact" target="_self" class="px-4 py-2 bg-brand-purple text-white rounded-full text-sm hover:opacity-90 transition-opacity no-underline">Book Appointment</a>
     `;
     const bubble = messageElement.querySelector('.rounded-lg');
     if (bubble) bubble.appendChild(btns);
@@ -233,9 +233,13 @@ const CHAT_WIDGET_HTML = `<div id="chatbot-widget-container">
       </svg>
     </button>
   </div>
+  <!-- Pulse Ring Effect -->
+  <span class="fixed bottom-6 right-6 z-40 flex h-14 w-14">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75"></span>
+  </span>
   <button
     id="chat-toggle-button"
-    class="fixed bottom-6 right-6 z-50 bg-brand-blue text-white p-3 rounded-full shadow-2xl hover:bg-brand-blue/80 transition duration-300"
+    class="fixed bottom-6 right-6 z-50 bg-brand-blue text-white p-3 rounded-full shadow-2xl hover:bg-brand-blue/80 transition duration-300 flex items-center justify-center"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -359,20 +363,33 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   if (bubble && closeBubbleBtn) {
-      // Show after 3 seconds
+      const bubbleText = bubble.querySelector('p');
+
+      // Helper to show bubble
+      const showBubble = (text) => {
+          if (isChatOpen) return;
+          if (bubbleText) bubbleText.textContent = text;
+          
+          bubble.classList.remove("hidden");
+          // Small delay for transition
+          setTimeout(() => {
+              bubble.classList.remove("translate-y-4", "opacity-0");
+              bubble.classList.add("translate-y-0", "opacity-100");
+          }, 50);
+          
+          // Auto-hide after 6 seconds
+          setTimeout(hideBubble, 6000);
+      };
+
+      // 1. First Popup (3 seconds)
       setTimeout(() => {
-          // const alreadyOpened = localStorage.getItem('chatOpened') === 'true'; // Commented out for testing
-          if (!isChatOpen) { // Removed !alreadyOpened check so it always shows for testing
-              bubble.classList.remove("hidden");
-              // Small delay to allow display:block to apply before opacity transition
-              setTimeout(() => {
-                  bubble.classList.remove("translate-y-4", "opacity-0");
-                  bubble.classList.add("translate-y-0", "opacity-100");
-              }, 50);
-              // Auto-hide after 5 seconds
-              setTimeout(hideBubble, 5000);
-          }
+          showBubble("👋 Need help? Chat with us!");
       }, 3000);
+
+      // 2. Second Popup (30 seconds)
+      setTimeout(() => {
+          showBubble("Feel free to ask if I can assist with anything!");
+      }, 30000);
 
       // Close button action
       closeBubbleBtn.addEventListener("click", (e) => {
