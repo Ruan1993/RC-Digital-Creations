@@ -178,6 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeMenu();
             }
         });
+
+        // -- Close Menu When Clicking a Link Inside It --
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMenu();
+            });
+        });
     }
 
     // -- Navbar Scroll & Back-to-top visibility --
