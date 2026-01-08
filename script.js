@@ -374,15 +374,90 @@ document.addEventListener('DOMContentLoaded', () => {
         img.addEventListener('error', removeItem, { once: true });
     });
 
-    // -- Lightbox Logic (Unified) --
+    // -- Paystack Logic --
+    const PAYSTACK_PUBLIC_KEY = 'pk_live_4e6d0a9feab451dd29683e4b87b1303e47619931';
+
+    window.payWithPaystack = function(planCode, planName) {
+        if (typeof PaystackPop === 'undefined') {
+            alert('Payment system failed to load. Please refresh and try again.');
+            return;
+        }
+
+        const emailInput = prompt(`Enter your email address to subscribe to ${planName}:`);
+        const email = (emailInput || '').trim();
+        if (!email) return;
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        const handler = PaystackPop.setup({
+            key: PAYSTACK_PUBLIC_KEY,
+            email: email,
+            plan: planCode,
+            onClose: function() {
+                alert('Transaction was not completed, window closed.');
+            },
+            callback: function(response) {
+                const ref = response && response.reference ? `?reference=${encodeURIComponent(response.reference)}` : '';
+                window.location.href = `success.html${ref}`;
+            }
+        });
+        handler.openIframe();
+    };
+
     let galleryMap = { web: [], branding: [], qr: [], posters: [], ads: [] };
     
-    const adsFiles = [
-        'Advertisements/Domain Registration & Hosting.jpg',
-        'Advertisements/Digital Portfolio.jpg',
-        'Advertisements/Chatbot Integration.jpg',
-        'Advertisements/Standard Business Website.jpg',
-        'Advertisements/business Starter Pack 1.jpg'
+    const adsData = [
+        {
+            name: "On-Demand Website Maintenance - Emergency Fixes",
+            price: "R699/hr",
+            img: "Advertisements/Digital Portfolio.jpg",
+            plan: "PLN_5us6feeuwqst6r9",
+            term: null
+        },
+        {
+            name: "On-Demand Website Maintenance - Major changes",
+            price: "R499/hr",
+            img: "Advertisements/Digital Portfolio.jpg",
+            plan: "PLN_58wd3rgqd3ftpgn",
+            term: null
+        },
+        {
+            name: "On-Demand Website Maintenance - Minor updates",
+            price: "R249/hr",
+            img: "Advertisements/Digital Portfolio.jpg",
+            plan: "PLN_pp4e4mhhzrqdym3",
+            term: null
+        },
+        {
+            name: "AI Chatbot",
+            price: "R329/mo",
+            img: "Advertisements/Chatbot Integration.jpg",
+            plan: "PLN_s3mo9yes9xyl3l4",
+            term: "Fully paid after 12 months"
+        },
+        {
+            name: "Domain & Hosting Fees",
+            price: "R59/mo",
+            img: "Advertisements/Domain Registration & Hosting.jpg",
+            plan: "PLN_04b9gisf0skml43",
+            term: "Renews after 12 months"
+        },
+        {
+            name: "Standard Business Website",
+            price: "R699/mo",
+            img: "Advertisements/Standard Business Website.jpg",
+            plan: "PLN_wcs8n0slspomxp3",
+            term: "Fully paid after 12 months"
+        },
+        {
+            name: "New Business Starter Pack",
+            price: "R499/mo",
+            img: "Advertisements/business Starter Pack 1.jpg",
+            plan: "PLN_3rks5optsysodit",
+            term: "Fully paid after 12 months"
+        }
     ];
     const adsGrid = document.getElementById('ads-grid');
 
@@ -445,8 +520,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let titles = [];
         
         if (category === 'ads' && (!galleryMap.ads || galleryMap.ads.length === 0)) {
-             sources = adsFiles.slice();
-             titles = adsFiles.map(fmtName);
+             sources = adsData.map(d => d.img);
+             titles = adsData.map(d => d.name);
         } else if (galleryMap[category]) {
             sources = galleryMap[category].map(e => e.src);
             titles = galleryMap[category].map(e => e.title);
@@ -630,35 +705,84 @@ document.addEventListener('DOMContentLoaded', () => {
         adsStart = (adsStart > 0) ? adsStart - 1 : maxStart;
         adsRenderPage();
     }
-    function adsStartAuto(){ if (adsAuto) clearInterval(adsAuto); adsAuto = setInterval(adsNextPage, 6000); }
+    function adsStartAuto(){ if (adsAuto) clearInterval(adsAuto); adsAuto = setInterval(adsNextPage, 8000); }
 
     if (adsGrid) {
-        adsFiles.forEach((p) => {
+        adsData.forEach((data) => {
             const card = document.createElement('div');
             card.className = 'project-item ads group relative rounded-xl overflow-hidden glass border-0';
             const wrap = document.createElement('div');
             wrap.className = 'h-96 lg:h-[750px] overflow-hidden bg-gray-900 flex items-center justify-center';
             const img = document.createElement('img');
-            img.src = p;
-            img.alt = fmtName(p);
+            img.src = data.img;
+            img.alt = data.name;
             img.className = 'w-full h-full object-contain transition-transform duration-700 group-hover:scale-110';
-            // Remove broken images similar to posters handling
+            
             const removeItem = () => card.remove();
             if (img.complete && img.naturalWidth === 0) removeItem();
             img.addEventListener('error', removeItem, { once: true });
             wrap.appendChild(img);
+            
             const overlay = document.createElement('div');
-            overlay.className = 'absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6';
+            overlay.className = 'absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6';
+            
             const h3 = document.createElement('h3');
-            h3.className = 'text-xl font-bold text-white';
-            h3.textContent = fmtName(p);
-            const pdesc = document.createElement('p');
-            pdesc.className = 'text-sm text-gray-300';
-            pdesc.textContent = 'See image for details and pricing.';
-            overlay.appendChild(h3);
-            overlay.appendChild(pdesc);
-            card.appendChild(wrap);
-            card.appendChild(overlay);
+            h3.className = 'text-xl font-bold text-white mb-1';
+            h3.textContent = data.name;
+            
+            const price = document.createElement('p');
+      price.className = 'text-lg text-brand-blue font-semibold mb-1';
+      price.textContent = data.price;
+
+      const term = document.createElement('p');
+      term.className = 'text-xs text-gray-400 mb-4';
+      term.textContent = data.term || '';
+      
+      const btn = document.createElement('button');
+      btn.className = 'px-6 py-2 bg-brand-blue text-white rounded-full font-semibold hover:bg-blue-600 transition-colors w-full';
+      btn.textContent = 'Subscribe';
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        window.payWithPaystack(data.plan, data.name);
+      };
+
+      overlay.appendChild(h3);
+      overlay.appendChild(price);
+      if(data.term) overlay.appendChild(term);
+      overlay.appendChild(btn);
+      
+      // Add mobile-specific content that's always visible
+      const mobileContent = document.createElement('div');
+      mobileContent.className = 'md:hidden absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/90 to-transparent';
+      
+      const mobileTitle = document.createElement('h3');
+      mobileTitle.className = 'text-lg font-bold text-white mb-1';
+      mobileTitle.textContent = data.name;
+      
+      const mobilePrice = document.createElement('p');
+      mobilePrice.className = 'text-base text-brand-blue font-semibold mb-1';
+      mobilePrice.textContent = data.price;
+      
+      const mobileTerm = document.createElement('p');
+      mobileTerm.className = 'text-xs text-gray-400 mb-2';
+      mobileTerm.textContent = data.term || '';
+      
+      const mobileBtn = document.createElement('button');
+      mobileBtn.className = 'px-4 py-2 bg-brand-blue text-white rounded-full font-semibold hover:bg-blue-600 transition-colors w-full text-sm';
+      mobileBtn.textContent = 'Subscribe';
+      mobileBtn.onclick = (e) => {
+        e.stopPropagation();
+        window.payWithPaystack(data.plan, data.name);
+      };
+      
+      mobileContent.appendChild(mobileTitle);
+      mobileContent.appendChild(mobilePrice);
+      if(data.term) mobileContent.appendChild(mobileTerm);
+      mobileContent.appendChild(mobileBtn);
+      
+      card.appendChild(wrap);
+      card.appendChild(overlay);
+      card.appendChild(mobileContent);
             adsGrid.appendChild(card);
         });
         buildGalleries();
