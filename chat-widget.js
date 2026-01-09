@@ -55,10 +55,10 @@ EXAMPLE WEBSITES (PORTFOLIO):
 - https://www.debrakke.co.za/
 
 Prices are in South African Rand (ZAR) and exclude VAT and are as follows:
-- New Business Starter Pack is R5200,00 once-off (2-3 pages) and R499 per month for 12 months (after 12 months only Domain and hosting will need to be paid at R59 per month).
-- Standard Business Website starts at R6500,00 (4-8 pages) and R699 per month for 12 months (after 12 months only Domain and hosting will need to be paid at R59 per month).
+- New Business Starter Pack is R5200,00 once-off (2-3 pages) or R499 per month for 12 months (after 12 months only Domain and hosting will need to be paid at R59 per month).
+- Standard Business Website starts at R6500,00 (4-8 pages) or R699 per month for 12 months (after 12 months only Domain and hosting will need to be paid at R59 per month).
 - Custom Websites can be quoted based on requirements. 
-- AI Chatbots are R3500,00 and R329 per month for 12 months.
+- AI Chatbots are R3500,00 or R329 per month for 12 months.
 - On-Demand Website Maintenance - Minor updates (R249/hr).
 - On-Demand Website Maintenance - Major changes (R499/hr).
 - On-Demand Website Maintenance - Emergency Fixes (699/hr).
