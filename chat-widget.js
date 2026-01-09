@@ -54,6 +54,17 @@ EXAMPLE WEBSITES (PORTFOLIO):
 - https://ruancoetzee.co.za/
 - https://www.debrakke.co.za/
 
+Prices are in South African Rand (ZAR) and exclude VAT and are as follows:
+- New Business Starter Pack is R5200,00 once-off (2-3 pages) and R499 per month for 12 months (after 12 months only Domain and hosting will need to be paid at R59 per month).
+- Standard Business Website starts at R6500,00 (4-8 pages) and R699 per month for 12 months (after 12 months only Domain and hosting will need to be paid at R59 per month).
+- Custom Websites can be quoted based on requirements. 
+- AI Chatbots are R3500,00 and R329 per month for 12 months.
+- On-Demand Website Maintenance - Minor updates (R249/hr).
+- On-Demand Website Maintenance - Major changes (R499/hr).
+- On-Demand Website Maintenance - Emergency Fixes (699/hr).
+All payments can be securely made via Paystack through our website or a custom Quote can be requested and sent via email.
+Upon request a detailed document can be sent to the client with all needed details and instructions to start the project/website.
+
 FAQ:
 Q: How long does it take to build a website?
 A: Basic sites are typically completed within three to seven days. Timelines can change based on complexity.
