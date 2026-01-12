@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // -- Dynamic Year --
     const yearSpan = document.getElementById('year');
-    if(yearSpan) yearSpan.textContent = new Date().getFullYear();
+    if(yearSpan) yearSpan.textContent = `2025-${new Date().getFullYear()}`;
 
     // -- Mobile Menu --
     const mobileBtn = document.getElementById('mobile-menu-btn');
