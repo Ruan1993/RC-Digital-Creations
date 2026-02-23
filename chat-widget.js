@@ -63,7 +63,11 @@ Prices are in South African Rand (ZAR) and exclude VAT and are as follows:
 - On-Demand Website Maintenance - Major changes (R499/hr).
 - On-Demand Website Maintenance - Emergency Fixes (699/hr).
 All payments can be securely made via Paystack through our website or a custom Quote can be requested and sent via email.
-Upon request a detailed document can be sent to the client with all needed details and instructions to start the project/website.
+
+STARTING A WEBSITE PROJECT:
+- If a client asks what is needed or how to start, tell them they can fill in the "Website Design Client Intake Questionnaire" here: https://docs.google.com/forms/d/e/1FAIpQLSdgReyOlg7z7Xt7D_UisBDMn2acF34X8OO4wCpNXGUbpXPmjA/viewform?usp=publish-editor
+- This questionnaire collects all the important details needed to begin a new website project.
+- They can also use the contact form or WhatsApp button on the site if they prefer.
 
 FAQ:
 Q: How long does it take to build a website?
