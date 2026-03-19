@@ -2,8 +2,10 @@
 .chat-container::-webkit-scrollbar { width: 8px; }
 .chat-container::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
 .chat-container::-webkit-scrollbar-track { background-color: #f1f5f9; }
-
-#chatbot-widget-container input,
-#chatbot-widget-container textarea { color: #111827; }
-#chatbot-widget-container input::placeholder,
-#chatbot-widget-container textarea::placeholder { color: #6b7280; }
+#chatbot-widget-container input, #chatbot-widget-container textarea { color: #111827; }
+#chatbot-widget-container input::placeholder, #chatbot-widget-container textarea::placeholder { color: #6b7280; }
+.vector-quick-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.vector-action-chip { display: inline-flex; align-items: center; justify-content: center; padding: 10px 14px; border-radius: 9999px; background: #ffffff; border: 1px solid #d1d5db; color: #111827; text-decoration: none; font-size: 13px; font-weight: 600; line-height: 1.2; transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease; cursor: pointer; }
+.vector-action-chip:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12); background: #f8fafc; }
+.vector-action-chip-primary { background: linear-gradient(135deg, #2563eb, #7c3aed); border-color: transparent; color: #ffffff; }
+.vector-action-chip-primary:hover { background: linear-gradient(135deg, #1d4ed8, #6d28d9); }

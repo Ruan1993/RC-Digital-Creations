@@ -373,93 +373,113 @@ document.addEventListener('DOMContentLoaded', () => {
         if (img.complete && img.naturalWidth === 0) removeItem();
         img.addEventListener('error', removeItem, { once: true });
     });
+// -- Pricing Actions --
+const WHATSAPP_NUMBER = '27634733098';
 
-    // -- Paystack Logic --
-    const PAYSTACK_PUBLIC_KEY = 'pk_live_4e6d0a9feab451dd29683e4b87b1303e47619931';
+function openWhatsApp(message) {
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank', 'noopener');
+}
 
-    window.payWithPaystack = function(planCode, planName) {
-        if (typeof PaystackPop === 'undefined') {
-            alert('Payment system failed to load. Please refresh and try again.');
-            return;
-        }
+function createPricingMessage(data) {
+    const lines = [
+        `Hi Ruan, I am interested in the ${data.name}.`,
+        `Price shown: ${data.price}${data.secondaryPrice ? `, ${data.secondaryPrice}` : ''}.`,
+        data.note ? `Package note: ${data.note}.` : '',
+        data.action === 'invoice'
+            ? 'Please send me an invoice and let me know what you need from me to get started.'
+            : 'Please send me a custom quote and let me know the next steps.'
+    ].filter(Boolean);
 
-        const emailInput = prompt(`Enter your email address to subscribe to ${planName}:`);
-        const email = (emailInput || '').trim();
-        if (!email) return;
-        if (!/^\S+@\S+\.\S+$/.test(email)) {
-            alert('Please enter a valid email address.');
-            return;
-        }
+    return lines.join(' ');
+}
 
-        const handler = PaystackPop.setup({
-            key: PAYSTACK_PUBLIC_KEY,
-            email: email,
-            plan: planCode,
-            onClose: function() {
-                alert('Transaction was not completed, window closed.');
-            },
-            callback: function(response) {
-                const ref = response && response.reference ? `?reference=${encodeURIComponent(response.reference)}` : '';
-                window.location.href = `success.html${ref}`;
-            }
-        });
-        handler.openIframe();
-    };
+function handlePricingAction(data) {
+    openWhatsApp(createPricingMessage(data));
+}
 
-    let galleryMap = { web: [], branding: [], qr: [], posters: [], ads: [] };
-    
-    const adsData = [
-        {
-            name: "On-Demand Website Maintenance - Emergency Fixes",
-            price: "R699/hr",
-            img: "Advertisements/Digital Portfolio.jpg",
-            plan: "PLN_5us6feeuwqst6r9",
-            term: null
-        },
-        {
-            name: "On-Demand Website Maintenance - Major changes",
-            price: "R499/hr",
-            img: "Advertisements/Digital Portfolio.jpg",
-            plan: "PLN_58wd3rgqd3ftpgn",
-            term: null
-        },
-        {
-            name: "On-Demand Website Maintenance - Minor updates",
-            price: "R249/hr",
-            img: "Advertisements/Digital Portfolio.jpg",
-            plan: "PLN_pp4e4mhhzrqdym3",
-            term: null
-        },
-        {
-            name: "AI Chatbot",
-            price: "R329/mo",
-            img: "Advertisements/Chatbot Integration.jpg",
-            plan: "PLN_s3mo9yes9xyl3l4",
-            term: "Fully paid after 12 months"
-        },
-        {
-            name: "Domain & Hosting Fees",
-            price: "R59/mo",
-            img: "Advertisements/Domain Registration & Hosting.jpg",
-            plan: "PLN_04b9gisf0skml43",
-            term: "Renews after 12 months"
-        },
-        {
-            name: "Standard Business Website",
-            price: "R699/mo",
-            img: "Advertisements/Standard Business Website.jpg",
-            plan: "PLN_wcs8n0slspomxp3",
-            term: "Fully paid after 12 months"
-        },
-        {
-            name: "New Business Starter Pack",
-            price: "R499/mo",
-            img: "Advertisements/business Starter Pack 1.jpg",
-            plan: "PLN_3rks5optsysodit",
-            term: "Fully paid after 12 months"
-        }
-    ];
-    const adsGrid = document.getElementById('ads-grid');
+let galleryMap = { web: [], branding: [], qr: [], posters: [], ads: [] };
+
+const adsData = [
+    {
+        name: "New Business Starter Pack",
+        price: "R5,200 once-off",
+        secondaryPrice: "or R499/month for 12 months",
+        img: "Advertisements/business Starter Pack 1.jpg",
+        badge: "Best for new businesses",
+        note: "Includes a basic brochure website, logo concepts, a branded QR code, and first-year domain and hosting",
+        features: ["1 to 3 custom pages", "Logo design included", "QR code included", "Launch in 5 to 7 days"],
+        action: "invoice",
+        cta: "Request Invoice"
+    },
+    {
+        name: "Standard Business Website",
+        price: "From R6,500 once-off",
+        secondaryPrice: "or R699/month for 12 months",
+        img: "Advertisements/Standard Business Website.jpg",
+        badge: "For growing businesses",
+        note: "Ideal for businesses that need a stronger online presence with more pages and stronger calls to action",
+        features: ["4 to 8 custom pages", "SEO-friendly structure", "Conversion-focused layout", "Custom quote for added scope"],
+        action: "invoice",
+        cta: "Request Invoice"
+    },
+    {
+        name: "AI Chatbot",
+        price: "R3,500 once-off",
+        secondaryPrice: "or R329/month for 12 months",
+        img: "Advertisements/Chatbot Integration.jpg",
+        badge: "Automation",
+        note: "Integrated into your website to answer common questions and help with leads",
+        features: ["Website integration", "Lead capture support", "24/7 responses", "Tailored to your business"],
+        action: "quote",
+        cta: "Request Quote"
+    },
+    {
+        name: "Domain and Hosting Fees",
+        price: "R59/month",
+        secondaryPrice: "",
+        img: "Advertisements/Domain Registration & Hosting.jpg",
+        badge: "Recurring essential",
+        note: "Applies after the initial package term where relevant",
+        features: ["Domain renewal", "Hosting support", "Keeps your website live", "Billed manually"],
+        action: "invoice",
+        cta: "Request Invoice"
+    },
+    {
+        name: "On-Demand Website Maintenance, Minor Updates",
+        price: "R249/hour",
+        secondaryPrice: "",
+        img: "Advertisements/Digital Portfolio.jpg",
+        badge: "Support",
+        note: "Small text, image, or content updates",
+        features: ["Quick changes", "Content edits", "Design touch-ups", "Flexible support"],
+        action: "quote",
+        cta: "Request Quote"
+    },
+    {
+        name: "On-Demand Website Maintenance, Major Changes",
+        price: "R499/hour",
+        secondaryPrice: "",
+        img: "Advertisements/Digital Portfolio.jpg",
+        badge: "Support",
+        note: "For larger updates, feature adjustments, or layout changes",
+        features: ["Page restructuring", "New sections", "Feature adjustments", "Scoping before work starts"],
+        action: "quote",
+        cta: "Request Quote"
+    },
+    {
+        name: "On-Demand Website Maintenance, Emergency Fixes",
+        price: "R699/hour",
+        secondaryPrice: "",
+        img: "Advertisements/Digital Portfolio.jpg",
+        badge: "Priority support",
+        note: "Fast assistance for urgent issues that need immediate attention",
+        features: ["Urgent troubleshooting", "Priority response", "Technical fixes", "Recovery support"],
+        action: "quote",
+        cta: "Request Quote"
+    }
+];
+const adsGrid = document.getElementById('ads-grid');
 
     function fmtName(p) {
         const n = p.split('/').pop().replace(/\.[^.]+$/, '');
@@ -727,62 +747,92 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.className = 'absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6';
             
             const h3 = document.createElement('h3');
-            h3.className = 'text-xl font-bold text-white mb-1';
-            h3.textContent = data.name;
-            
-            const price = document.createElement('p');
-      price.className = 'text-lg text-brand-blue font-semibold mb-1';
-      price.textContent = data.price;
+h3.className = 'text-xl font-bold text-white mb-1';
+h3.textContent = data.name;
 
-      const term = document.createElement('p');
-      term.className = 'text-xs text-gray-400 mb-4';
-      term.textContent = data.term || '';
-      
-      const btn = document.createElement('button');
-      btn.className = 'px-6 py-2 bg-brand-blue text-white rounded-full font-semibold hover:bg-blue-600 transition-colors w-full';
-      btn.textContent = 'Subscribe';
-      btn.onclick = (e) => {
-        e.stopPropagation();
-        window.payWithPaystack(data.plan, data.name);
-      };
+const badge = document.createElement('p');
+badge.className = 'text-xs uppercase tracking-[0.18em] text-gray-400 mb-2';
+badge.textContent = data.badge || 'Service';
 
-      overlay.appendChild(h3);
-      overlay.appendChild(price);
-      if(data.term) overlay.appendChild(term);
-      overlay.appendChild(btn);
-      
-      // Add mobile-specific content that's always visible
-      const mobileContent = document.createElement('div');
-      mobileContent.className = 'md:hidden absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/90 to-transparent';
-      
-      const mobileTitle = document.createElement('h3');
-      mobileTitle.className = 'text-lg font-bold text-white mb-1';
-      mobileTitle.textContent = data.name;
-      
-      const mobilePrice = document.createElement('p');
-      mobilePrice.className = 'text-base text-brand-blue font-semibold mb-1';
-      mobilePrice.textContent = data.price;
-      
-      const mobileTerm = document.createElement('p');
-      mobileTerm.className = 'text-xs text-gray-400 mb-2';
-      mobileTerm.textContent = data.term || '';
-      
-      const mobileBtn = document.createElement('button');
-      mobileBtn.className = 'px-4 py-2 bg-brand-blue text-white rounded-full font-semibold hover:bg-blue-600 transition-colors w-full text-sm';
-      mobileBtn.textContent = 'Subscribe';
-      mobileBtn.onclick = (e) => {
-        e.stopPropagation();
-        window.payWithPaystack(data.plan, data.name);
-      };
-      
-      mobileContent.appendChild(mobileTitle);
-      mobileContent.appendChild(mobilePrice);
-      if(data.term) mobileContent.appendChild(mobileTerm);
-      mobileContent.appendChild(mobileBtn);
-      
-      card.appendChild(wrap);
-      card.appendChild(overlay);
-      card.appendChild(mobileContent);
+const price = document.createElement('p');
+price.className = 'text-lg text-brand-blue font-semibold mb-1';
+price.textContent = data.price;
+
+const secondaryPrice = document.createElement('p');
+secondaryPrice.className = 'text-sm text-gray-300 mb-3';
+secondaryPrice.textContent = data.secondaryPrice || '';
+
+const note = document.createElement('p');
+note.className = 'text-xs text-gray-400 mb-4';
+note.textContent = data.note || '';
+
+const featureList = document.createElement('ul');
+featureList.className = 'space-y-2 mb-4';
+(data.features || []).forEach((feature) => {
+    const li = document.createElement('li');
+    li.className = 'text-sm text-gray-200 flex items-start gap-2';
+    li.innerHTML = `<span class="text-brand-blue mt-0.5">•</span><span>${feature}</span>`;
+    featureList.appendChild(li);
+});
+
+const btn = document.createElement('button');
+btn.className = 'px-6 py-2 bg-brand-blue text-white rounded-full font-semibold hover:bg-blue-600 transition-colors w-full';
+btn.textContent = data.cta || 'Request Quote';
+btn.onclick = (e) => {
+    e.stopPropagation();
+    handlePricingAction(data);
+};
+
+overlay.appendChild(h3);
+overlay.appendChild(badge);
+overlay.appendChild(price);
+if (data.secondaryPrice) overlay.appendChild(secondaryPrice);
+if (data.note) overlay.appendChild(note);
+if (data.features?.length) overlay.appendChild(featureList);
+overlay.appendChild(btn);
+
+// Add mobile-specific content that's always visible
+const mobileContent = document.createElement('div');
+mobileContent.className = 'md:hidden absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/90 to-transparent';
+
+const mobileTitle = document.createElement('h3');
+mobileTitle.className = 'text-lg font-bold text-white mb-1';
+mobileTitle.textContent = data.name;
+
+const mobileBadge = document.createElement('p');
+mobileBadge.className = 'text-[10px] uppercase tracking-[0.16em] text-gray-400 mb-1';
+mobileBadge.textContent = data.badge || 'Service';
+
+const mobilePrice = document.createElement('p');
+mobilePrice.className = 'text-base text-brand-blue font-semibold mb-1';
+mobilePrice.textContent = data.price;
+
+const mobileSecondaryPrice = document.createElement('p');
+mobileSecondaryPrice.className = 'text-xs text-gray-300 mb-1';
+mobileSecondaryPrice.textContent = data.secondaryPrice || '';
+
+const mobileTerm = document.createElement('p');
+mobileTerm.className = 'text-xs text-gray-400 mb-2';
+mobileTerm.textContent = data.note || '';
+
+const mobileBtn = document.createElement('button');
+mobileBtn.className = 'px-4 py-2 bg-brand-blue text-white rounded-full font-semibold hover:bg-blue-600 transition-colors w-full text-sm';
+mobileBtn.textContent = data.cta || 'Request Quote';
+mobileBtn.onclick = (e) => {
+    e.stopPropagation();
+    handlePricingAction(data);
+};
+
+mobileContent.appendChild(mobileTitle);
+mobileContent.appendChild(mobileBadge);
+mobileContent.appendChild(mobilePrice);
+if (data.secondaryPrice) mobileContent.appendChild(mobileSecondaryPrice);
+if (data.note) mobileContent.appendChild(mobileTerm);
+mobileContent.appendChild(mobileBtn);
+
+card.appendChild(wrap);
+card.appendChild(overlay);
+card.appendChild(mobileContent);
             adsGrid.appendChild(card);
         });
         buildGalleries();
