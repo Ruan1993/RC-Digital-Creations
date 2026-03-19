@@ -373,113 +373,127 @@ document.addEventListener('DOMContentLoaded', () => {
         if (img.complete && img.naturalWidth === 0) removeItem();
         img.addEventListener('error', removeItem, { once: true });
     });
-// -- Pricing Actions --
-const WHATSAPP_NUMBER = '27634733098';
 
-function openWhatsApp(message) {
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank', 'noopener');
-}
+    // -- Paystack Logic --
+    const PAYSTACK_PUBLIC_KEY = 'pk_live_4e6d0a9feab451dd29683e4b87b1303e47619931';
 
-function createPricingMessage(data) {
-    const lines = [
-        `Hi Ruan, I am interested in the ${data.name}.`,
-        `Price shown: ${data.price}${data.secondaryPrice ? `, ${data.secondaryPrice}` : ''}.`,
-        data.note ? `Package note: ${data.note}.` : '',
-        data.action === 'invoice'
-            ? 'Please send me an invoice and let me know what you need from me to get started.'
-            : 'Please send me a custom quote and let me know the next steps.'
-    ].filter(Boolean);
+    window.payWithPaystack = function(planCode, planName) {
+        if (typeof PaystackPop === 'undefined') {
+            alert('Payment system failed to load. Please refresh and try again.');
+            return;
+        }
 
-    return lines.join(' ');
-}
+        const emailInput = prompt(`Enter your email address to subscribe to ${planName}:`);
+        const email = (emailInput || '').trim();
+        if (!email) return;
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
 
-function handlePricingAction(data) {
-    openWhatsApp(createPricingMessage(data));
-}
+        const handler = PaystackPop.setup({
+            key: PAYSTACK_PUBLIC_KEY,
+            email: email,
+            plan: planCode,
+            onClose: function() {
+                alert('Transaction was not completed, window closed.');
+            },
+            callback: function(response) {
+                const ref = response && response.reference ? `?reference=${encodeURIComponent(response.reference)}` : '';
+                window.location.href = `success.html${ref}`;
+            }
+        });
+        handler.openIframe();
+    };
 
-let galleryMap = { web: [], branding: [], qr: [], posters: [], ads: [] };
-
+    let galleryMap = { web: [], branding: [], qr: [], posters: [], ads: [] };
+    
+    
 const adsData = [
     {
-        name: "New Business Starter Pack",
-        price: "R5,200 once-off",
-        secondaryPrice: "or R499/month for 12 months",
-        img: "Advertisements/business Starter Pack 1.jpg",
-        badge: "Best for new businesses",
-        note: "Includes a basic brochure website, logo concepts, a branded QR code, and first-year domain and hosting",
-        features: ["1 to 3 custom pages", "Logo design included", "QR code included", "Launch in 5 to 7 days"],
-        action: "invoice",
-        cta: "Request Invoice"
+        name: "Emergency Website Fixes",
+        tagline: "Priority support",
+        price: "R699/hr",
+        note: "For urgent issues that need immediate attention.",
+        img: "Advertisements/Digital Portfolio.jpg",
+        cta: "Request Support",
+        viewLabel: "View design",
+        waText: "Hi Ruan, I need emergency website support and would like a quote for urgent fixes.",
+        features: ["Priority support", "Critical fixes", "Fast turnaround"]
     },
     {
-        name: "Standard Business Website",
-        price: "From R6,500 once-off",
-        secondaryPrice: "or R699/month for 12 months",
-        img: "Advertisements/Standard Business Website.jpg",
-        badge: "For growing businesses",
-        note: "Ideal for businesses that need a stronger online presence with more pages and stronger calls to action",
-        features: ["4 to 8 custom pages", "SEO-friendly structure", "Conversion-focused layout", "Custom quote for added scope"],
-        action: "invoice",
-        cta: "Request Invoice"
+        name: "Ongoing Improvements",
+        tagline: "Major changes",
+        price: "R499/hr",
+        note: "Best for larger design, layout, and feature updates on an existing website.",
+        img: "Advertisements/Digital Portfolio.jpg",
+        cta: "Request Changes",
+        viewLabel: "View design",
+        waText: "Hi Ruan, I would like help with larger website improvements and a quote for major changes.",
+        features: ["Larger updates", "Design changes", "Feature improvements"]
+    },
+    {
+        name: "Affordable Upkeep",
+        tagline: "Minor updates",
+        price: "R249/hr",
+        note: "Ideal for small content edits, quick fixes, and regular website upkeep.",
+        img: "Advertisements/Digital Portfolio.jpg",
+        cta: "Request Update",
+        viewLabel: "View design",
+        waText: "Hi Ruan, I need help with minor website updates and regular upkeep.",
+        features: ["Small edits", "Content updates", "Affordable upkeep"]
     },
     {
         name: "AI Chatbot",
+        tagline: "Smart automation",
         price: "R3,500 once-off",
-        secondaryPrice: "or R329/month for 12 months",
+        subprice: "or R329/month for 12 months",
+        note: "A guided chatbot that helps answer questions, qualify leads, and drive enquiries.",
         img: "Advertisements/Chatbot Integration.jpg",
-        badge: "Automation",
-        note: "Integrated into your website to answer common questions and help with leads",
-        features: ["Website integration", "Lead capture support", "24/7 responses", "Tailored to your business"],
-        action: "quote",
-        cta: "Request Quote"
+        cta: "Request Quote",
+        viewLabel: "View design",
+        waText: "Hi Ruan, I would like a quote for AI chatbot integration for my website.",
+        features: ["Lead capture", "24/7 responses", "Website integration"]
     },
     {
-        name: "Domain and Hosting Fees",
-        price: "R59/month",
-        secondaryPrice: "",
+        name: "Domain & Hosting",
+        tagline: "Essential setup",
+        price: "R600/year",
+        subprice: "or R59/month for 12 months",
+        note: "Secure hosting and domain management to keep your business online and reliable.",
         img: "Advertisements/Domain Registration & Hosting.jpg",
-        badge: "Recurring essential",
-        note: "Applies after the initial package term where relevant",
-        features: ["Domain renewal", "Hosting support", "Keeps your website live", "Billed manually"],
-        action: "invoice",
-        cta: "Request Invoice"
+        cta: "Request Invoice",
+        viewLabel: "View design",
+        waText: "Hi Ruan, I would like an invoice for domain registration and hosting.",
+        features: ["SSL included", "Domain registration", "Annual renewals managed"]
     },
     {
-        name: "On-Demand Website Maintenance, Minor Updates",
-        price: "R249/hour",
-        secondaryPrice: "",
-        img: "Advertisements/Digital Portfolio.jpg",
-        badge: "Support",
-        note: "Small text, image, or content updates",
-        features: ["Quick changes", "Content edits", "Design touch-ups", "Flexible support"],
-        action: "quote",
-        cta: "Request Quote"
+        name: "Standard Business Website",
+        tagline: "For growing businesses",
+        price: "From R6,500 once-off",
+        subprice: "or R699/month for 12 months",
+        note: "Ideal for businesses that need a stronger online presence with more pages and stronger calls to action.",
+        img: "Advertisements/Standard Business Website.jpg",
+        cta: "Request Invoice",
+        viewLabel: "View design",
+        waText: "Hi Ruan, I would like an invoice for the Standard Business Website package.",
+        features: ["4 to 8 custom pages", "SEO-friendly structure", "Conversion-focused layout"],
+        featured: true
     },
     {
-        name: "On-Demand Website Maintenance, Major Changes",
-        price: "R499/hour",
-        secondaryPrice: "",
-        img: "Advertisements/Digital Portfolio.jpg",
-        badge: "Support",
-        note: "For larger updates, feature adjustments, or layout changes",
-        features: ["Page restructuring", "New sections", "Feature adjustments", "Scoping before work starts"],
-        action: "quote",
-        cta: "Request Quote"
-    },
-    {
-        name: "On-Demand Website Maintenance, Emergency Fixes",
-        price: "R699/hour",
-        secondaryPrice: "",
-        img: "Advertisements/Digital Portfolio.jpg",
-        badge: "Priority support",
-        note: "Fast assistance for urgent issues that need immediate attention",
-        features: ["Urgent troubleshooting", "Priority response", "Technical fixes", "Recovery support"],
-        action: "quote",
-        cta: "Request Quote"
+        name: "New Business Starter Pack",
+        tagline: "Best for new businesses",
+        price: "R5,200 once-off",
+        subprice: "or R499/month for 12 months",
+        note: "A strong launch package for startups that need a professional online presence from day one.",
+        img: "Advertisements/business Starter Pack 1.jpg",
+        cta: "Request Invoice",
+        viewLabel: "View design",
+        waText: "Hi Ruan, I would like an invoice for the New Business Starter Pack.",
+        features: ["1 to 3 custom pages", "Logo design included", "QR code included"]
     }
 ];
-const adsGrid = document.getElementById('ads-grid');
+    const adsGrid = document.getElementById('ads-grid');
 
     function fmtName(p) {
         const n = p.split('/').pop().replace(/\.[^.]+$/, '');
@@ -727,120 +741,105 @@ const adsGrid = document.getElementById('ads-grid');
     }
     function adsStartAuto(){ if (adsAuto) clearInterval(adsAuto); adsAuto = setInterval(adsNextPage, 8000); }
 
-    if (adsGrid) {
-        adsData.forEach((data) => {
-            const card = document.createElement('div');
-            card.className = 'project-item ads group relative rounded-xl overflow-hidden glass border-0';
-            const wrap = document.createElement('div');
-            wrap.className = 'h-96 lg:h-[750px] overflow-hidden bg-gray-900 flex items-center justify-center';
-            const img = document.createElement('img');
-            img.src = data.img;
-            img.alt = data.name;
-            img.className = 'w-full h-full object-contain transition-transform duration-700 group-hover:scale-110';
-            
-            const removeItem = () => card.remove();
-            if (img.complete && img.naturalWidth === 0) removeItem();
-            img.addEventListener('error', removeItem, { once: true });
-            wrap.appendChild(img);
-            
-            const overlay = document.createElement('div');
-            overlay.className = 'absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6';
-            
-            const h3 = document.createElement('h3');
-h3.className = 'text-xl font-bold text-white mb-1';
-h3.textContent = data.name;
-
-const badge = document.createElement('p');
-badge.className = 'text-xs uppercase tracking-[0.18em] text-gray-400 mb-2';
-badge.textContent = data.badge || 'Service';
-
-const price = document.createElement('p');
-price.className = 'text-lg text-brand-blue font-semibold mb-1';
-price.textContent = data.price;
-
-const secondaryPrice = document.createElement('p');
-secondaryPrice.className = 'text-sm text-gray-300 mb-3';
-secondaryPrice.textContent = data.secondaryPrice || '';
-
-const note = document.createElement('p');
-note.className = 'text-xs text-gray-400 mb-4';
-note.textContent = data.note || '';
-
-const featureList = document.createElement('ul');
-featureList.className = 'space-y-2 mb-4';
-(data.features || []).forEach((feature) => {
-    const li = document.createElement('li');
-    li.className = 'text-sm text-gray-200 flex items-start gap-2';
-    li.innerHTML = `<span class="text-brand-blue mt-0.5">•</span><span>${feature}</span>`;
-    featureList.appendChild(li);
-});
-
-const btn = document.createElement('button');
-btn.className = 'px-6 py-2 bg-brand-blue text-white rounded-full font-semibold hover:bg-blue-600 transition-colors w-full';
-btn.textContent = data.cta || 'Request Quote';
-btn.onclick = (e) => {
-    e.stopPropagation();
-    handlePricingAction(data);
-};
-
-overlay.appendChild(h3);
-overlay.appendChild(badge);
-overlay.appendChild(price);
-if (data.secondaryPrice) overlay.appendChild(secondaryPrice);
-if (data.note) overlay.appendChild(note);
-if (data.features?.length) overlay.appendChild(featureList);
-overlay.appendChild(btn);
-
-// Add mobile-specific content that's always visible
-const mobileContent = document.createElement('div');
-mobileContent.className = 'md:hidden absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/90 to-transparent';
-
-const mobileTitle = document.createElement('h3');
-mobileTitle.className = 'text-lg font-bold text-white mb-1';
-mobileTitle.textContent = data.name;
-
-const mobileBadge = document.createElement('p');
-mobileBadge.className = 'text-[10px] uppercase tracking-[0.16em] text-gray-400 mb-1';
-mobileBadge.textContent = data.badge || 'Service';
-
-const mobilePrice = document.createElement('p');
-mobilePrice.className = 'text-base text-brand-blue font-semibold mb-1';
-mobilePrice.textContent = data.price;
-
-const mobileSecondaryPrice = document.createElement('p');
-mobileSecondaryPrice.className = 'text-xs text-gray-300 mb-1';
-mobileSecondaryPrice.textContent = data.secondaryPrice || '';
-
-const mobileTerm = document.createElement('p');
-mobileTerm.className = 'text-xs text-gray-400 mb-2';
-mobileTerm.textContent = data.note || '';
-
-const mobileBtn = document.createElement('button');
-mobileBtn.className = 'px-4 py-2 bg-brand-blue text-white rounded-full font-semibold hover:bg-blue-600 transition-colors w-full text-sm';
-mobileBtn.textContent = data.cta || 'Request Quote';
-mobileBtn.onclick = (e) => {
-    e.stopPropagation();
-    handlePricingAction(data);
-};
-
-mobileContent.appendChild(mobileTitle);
-mobileContent.appendChild(mobileBadge);
-mobileContent.appendChild(mobilePrice);
-if (data.secondaryPrice) mobileContent.appendChild(mobileSecondaryPrice);
-if (data.note) mobileContent.appendChild(mobileTerm);
-mobileContent.appendChild(mobileBtn);
-
-card.appendChild(wrap);
-card.appendChild(overlay);
-card.appendChild(mobileContent);
-            adsGrid.appendChild(card);
-        });
-        buildGalleries();
-        // Initialize ads pager
-        adsRenderPage();
-        adsStartAuto();
-        if (adsPrevBtn) adsPrevBtn.addEventListener('click', () => { adsPrevPage(); adsStartAuto(); });
-        if (adsNextBtn) adsNextBtn.addEventListener('click', () => { adsNextPage(); adsStartAuto(); });
-    }
     
+if (adsGrid) {
+    const WHATSAPP_BASE = 'https://wa.me/27634733098?text=';
+
+    // Clear any existing pricing markup so the redesigned cards replace,
+    // rather than sit behind, the older text-only blocks.
+    adsGrid.innerHTML = '';
+
+    adsData.forEach((data) => {
+        const card = document.createElement('div');
+        card.className = `project-item ads pricing-info-card ${data.featured ? 'pricing-featured' : ''}`;
+
+        const body = document.createElement('div');
+        body.className = 'pricing-info-body';
+
+        const topRow = document.createElement('div');
+        topRow.className = 'pricing-card-toprow';
+
+        const badge = document.createElement('span');
+        badge.className = 'pricing-badge';
+        badge.textContent = data.featured ? 'Most Popular' : (data.tagline || 'Service');
+
+        const title = document.createElement('h3');
+        title.className = 'pricing-title';
+        title.textContent = data.name;
+
+        const priceWrap = document.createElement('div');
+        priceWrap.className = 'pricing-price-wrap';
+
+        const price = document.createElement('div');
+        price.className = 'pricing-main-price';
+        price.textContent = data.price;
+        priceWrap.appendChild(price);
+
+        if (data.subprice) {
+            const subprice = document.createElement('div');
+            subprice.className = 'pricing-subprice';
+            subprice.textContent = data.subprice;
+            priceWrap.appendChild(subprice);
+        }
+
+        const note = document.createElement('p');
+        note.className = 'pricing-note';
+        note.textContent = data.note;
+
+        const featureList = document.createElement('ul');
+        featureList.className = 'pricing-feature-list';
+        (data.features || []).forEach((feature) => {
+            const li = document.createElement('li');
+            li.textContent = feature;
+            featureList.appendChild(li);
+        });
+
+        const actions = document.createElement('div');
+        actions.className = 'pricing-actions';
+
+        const primary = document.createElement('a');
+        primary.className = 'pricing-primary-btn';
+        primary.href = WHATSAPP_BASE + encodeURIComponent(data.waText || `Hi Ruan, I would like to enquire about ${data.name}.`);
+        primary.target = '_blank';
+        primary.rel = 'noopener';
+        primary.textContent = data.cta || 'Request Quote';
+
+        topRow.appendChild(badge);
+        body.appendChild(topRow);
+        body.appendChild(title);
+        body.appendChild(priceWrap);
+        body.appendChild(note);
+        body.appendChild(featureList);
+        actions.appendChild(primary);
+        body.appendChild(actions);
+        card.appendChild(body);
+        adsGrid.appendChild(card);
+    });
+
+    // Rebuild galleries now that the pricing cards exist in the DOM.
+    buildGalleries();
+
+    // Initialize ads pager
+    adsRenderPage();
+    adsStartAuto();
+    if (adsPrevBtn) adsPrevBtn.addEventListener('click', () => { adsPrevPage(); adsStartAuto(); });
+    if (adsNextBtn) adsNextBtn.addEventListener('click', () => { adsNextPage(); adsStartAuto(); });
+
+    // Premium pricing card spotlight interaction
+    requestAnimationFrame(() => {
+        document.querySelectorAll('.pricing-info-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--y', `${e.clientY - rect.top}px`);
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.setProperty('--x', '50%');
+                card.style.setProperty('--y', '50%');
+            });
+        });
+    });
+
+}
+
 });
