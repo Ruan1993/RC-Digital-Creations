@@ -1,0 +1,1 @@
+export default `<canvas id="projector">Your browser does not support the Canvas element.</canvas>`

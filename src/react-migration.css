@@ -1,0 +1,11 @@
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+.legacy-section-shell { display: contents; }
+
+
+/* React migration typography/spacing fixes */
+.brand-font { line-height: 1.05; }
+#navbar .brand-font { min-width: 0; }
+@media (max-width: 420px) {
+  #navbar .brand-font { gap: 0.12em; font-size: 0.95rem; }
+}
