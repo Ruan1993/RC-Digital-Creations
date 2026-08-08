@@ -1,40 +1,42 @@
+const proofPoints = [
+  {
+    icon: 'code',
+    label: 'Custom coded',
+    value: 'No cookie-cutter templates',
+  },
+  {
+    icon: 'credit-card',
+    label: 'Clear billing',
+    value: 'No automatic subscriptions',
+  },
+  {
+    icon: 'clock',
+    label: 'Fast turnaround',
+    value: 'Starter sites live in 5–7 days',
+  },
+  {
+    icon: 'user',
+    label: 'Direct support',
+    value: 'Work directly with Ruan',
+  },
+]
+
 export default function Section2() {
   return (
-    <section className={"py-10 bg-black/10 border-b border-gray-800/50"}>
-      <div className={"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"}>
-        <div className={"grid md:grid-cols-4 gap-4"}>
-          <div className={"glass rounded-2xl p-5 text-center"}>
-            <p className={"text-sm uppercase tracking-[0.18em] text-gray-500 mb-2"}>
-              Custom coded
-            </p>
-            <p className={"text-white font-semibold"}>
-              No cookie-cutter templates
-            </p>
-          </div>
-          <div className={"glass rounded-2xl p-5 text-center"}>
-            <p className={"text-sm uppercase tracking-[0.18em] text-gray-500 mb-2"}>
-              Manual invoicing
-            </p>
-            <p className={"text-white font-semibold"}>
-              No automatic subscriptions
-            </p>
-          </div>
-          <div className={"glass rounded-2xl p-5 text-center"}>
-            <p className={"text-sm uppercase tracking-[0.18em] text-gray-500 mb-2"}>
-              Fast turnaround
-            </p>
-            <p className={"text-white font-semibold"}>
-              Starter sites live in 5 to 7 days
-            </p>
-          </div>
-          <div className={"glass rounded-2xl p-5 text-center"}>
-            <p className={"text-sm uppercase tracking-[0.18em] text-gray-500 mb-2"}>
-              Direct support
-            </p>
-            <p className={"text-white font-semibold"}>
-              Work directly with Ruan
-            </p>
-          </div>
+    <section className="rc-proof-strip" aria-label="Why businesses choose RC Digital Creations">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="rc-proof-grid">
+          {proofPoints.map((item) => (
+            <article className="rc-proof-item" key={item.label}>
+              <span className="rc-proof-icon" aria-hidden="true">
+                <i data-feather={item.icon}></i>
+              </span>
+              <div>
+                <p>{item.label}</p>
+                <strong>{item.value}</strong>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

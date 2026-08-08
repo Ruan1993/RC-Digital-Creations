@@ -1,102 +1,108 @@
+const reviews = [
+  {
+    initials: 'DW',
+    name: 'Diane White',
+    business: 'Diane White Art',
+    accent: 'blue',
+    quote:
+      'RC Digital Creations transformed our online presence. The new website is fast, modern, and our clients love it!',
+  },
+  {
+    initials: 'NW',
+    name: 'Nails by Wilma',
+    business: 'Beauty & Wellness Client',
+    accent: 'purple',
+    quote:
+      'The AI chatbot has been a game changer for our customer service. It handles queries 24/7 perfectly.',
+  },
+  {
+    initials: 'CC',
+    name: 'CC Auto Repairs',
+    business: 'Automotive Client',
+    accent: 'cyan',
+    quote:
+      'Professional, reliable, and incredibly talented. Ruan really understands digital strategy.',
+  },
+]
+
+function Stars() {
+  return (
+    <div className="rc-review-stars" role="img" aria-label="5 out of 5 stars">
+      {Array.from({ length: 5 }, (_, index) => (
+        <i data-feather="star" key={index}></i>
+      ))}
+    </div>
+  )
+}
+
 export default function Reviews() {
   return (
-    <section id={"reviews"} className={"py-24 relative scroll-mt-24 overflow-hidden"}>
-      <div className={"absolute inset-0 bg-brand-blue/5 pointer-events-none"}></div>
-      <div className={"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative"}>
-        <div className={"text-center mb-16"} data-aos={"fade-up"}>
-          <h2 className={"text-3xl md:text-4xl font-bold mb-4 neon-title"}>
-            What Our Clients Say
-          </h2>
-          <p className={"text-gray-400 max-w-2xl mx-auto"}>
-            Real feedback from businesses we've helped elevate in the digital space.
-          </p>
-        </div>
-        <div className={"grid md:grid-cols-3 gap-8 mb-16"}>
-          <div className={"glass p-8 rounded-2xl relative group"} data-aos={"fade-up"} data-aos-delay={"100"}>
-            <div className={"flex text-[#FFD700] mb-4"}>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-            </div>
-            <p className={"text-gray-300 italic mb-6"}>
-              "RC Digital Creations transformed our online presence. The new website is fast, modern, and our clients love it!"
-            </p>
-            <div className={"flex items-center gap-4"}>
-              <div className={"w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center font-bold text-brand-blue"}>
-                DW
-              </div>
-              <div>
-                <h4 className={"text-white font-bold"}>
-                  Diane White
-                </h4>
-                <p className={"text-sm text-gray-500"}>
-                  Diane White Art
-                </p>
-              </div>
-            </div>
+    <section id="reviews" className="rc-reviews relative scroll-mt-24">
+      <div className="rc-reviews-orb rc-reviews-orb-one" aria-hidden="true"></div>
+      <div className="rc-reviews-orb rc-reviews-orb-two" aria-hidden="true"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="rc-reviews-heading" data-aos="fade-up">
+          <div>
+            <span className="rc-section-kicker">Client feedback</span>
+            <h2>Built with care. Remembered for the experience.</h2>
           </div>
-          <div className={"glass p-8 rounded-2xl relative group"} data-aos={"fade-up"} data-aos-delay={"200"}>
-            <div className={"flex text-[#FFD700] mb-4"}>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
+
+          <div className="rc-reviews-summary">
+            <div className="rc-reviews-score">
+              <strong>5.0</strong>
+              <Stars />
             </div>
-            <p className={"text-gray-300 italic mb-6"}>
-              "The AI chatbot has been a game changer for our customer service. It handles queries 24/7 perfectly."
+            <p>
+              Feedback from businesses we’ve helped with websites, digital design,
+              and AI-powered customer experiences.
             </p>
-            <div className={"flex items-center gap-4"}>
-              <div className={"w-12 h-12 rounded-full bg-brand-purple/20 flex items-center justify-center font-bold text-brand-purple"}>
-                NW
-              </div>
-              <div>
-                <h4 className={"text-white font-bold"}>
-                  Nails by Wilma
-                </h4>
-                <p className={"text-sm text-gray-500"}>
-                  Beauty & Wellness Client
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className={"glass p-8 rounded-2xl relative group"} data-aos={"fade-up"} data-aos-delay={"300"}>
-            <div className={"flex text-[#FFD700] mb-4"}>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-              <i data-feather={"star"} className={"fill-current w-4 h-4"}></i>
-            </div>
-            <p className={"text-gray-300 italic mb-6"}>
-              "Professional, reliable, and incredibly talented. Ruan really understands digital strategy."
-            </p>
-            <div className={"flex items-center gap-4"}>
-              <div className={"w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center font-bold text-pink-500"}>
-                CC
-              </div>
-              <div>
-                <h4 className={"text-white font-bold"}>
-                  CC Auto Repairs
-                </h4>
-                <p className={"text-sm text-gray-500"}>
-                  Automotive Client
-                </p>
-              </div>
-            </div>
           </div>
         </div>
-        <div className={"text-center"} data-aos={"fade-up"}>
-          <a href={"https://g.page/r/CaooJ9uv-_kdEAE/review"} target={"_blank"} rel={"noopener"} className={"inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-gray-900 font-bold hover:bg-gray-100 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] btn-pop"}>
-            <svg xmlns={"http://www.w3.org/2000/svg"} viewBox={"0 0 24 24"} className={"w-6 h-6"}>
-              <path fill={"#4285F4"} d={"M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"}></path>
-              <path fill={"#34A853"} d={"M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"}></path>
-              <path fill={"#FBBC05"} d={"M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"}></path>
-              <path fill={"#EA4335"} d={"M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"}></path>
-            </svg>
+
+        <div className="rc-reviews-grid">
+          {reviews.map((review, index) => (
+            <article
+              className={`rc-review-card rc-review-${review.accent}`}
+              data-aos="fade-up"
+              data-aos-delay={100 + index * 100}
+              key={review.name}
+            >
+              <div className="rc-review-top">
+                <Stars />
+                <span className="rc-review-quote-mark" aria-hidden="true">“</span>
+              </div>
+
+              <blockquote>{review.quote}</blockquote>
+
+              <div className="rc-review-person">
+                <span className="rc-review-avatar">{review.initials}</span>
+                <div>
+                  <strong>{review.name}</strong>
+                  <span>{review.business}</span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="rc-reviews-cta" data-aos="fade-up" data-aos-delay="160">
+          <div>
+            <span className="rc-reviews-google-mark" aria-hidden="true">G</span>
+            <div>
+              <strong>Worked with RC Digital Creations?</strong>
+              <span>Your feedback helps other businesses choose with confidence.</span>
+            </div>
+          </div>
+
+          <a
+            href="https://g.page/r/CaooJ9uv-_kdEAE/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rc-reviews-button"
+          >
             Leave a Google Review
+            <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>

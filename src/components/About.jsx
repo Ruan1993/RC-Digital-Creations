@@ -1,69 +1,77 @@
+const highlights = [
+  { icon: 'code', label: 'Web + AI', text: 'Custom digital builds with practical automation.' },
+  { icon: 'layers', label: 'Systems thinking', text: 'Solutions designed around the wider business workflow.' },
+  { icon: 'users', label: 'Direct collaboration', text: 'Work directly with the person building your project.' },
+  { icon: 'map-pin', label: 'Stilbaai · Remote', text: 'Based in the Western Cape and working with clients remotely.' },
+]
+
 export default function About() {
   return (
-    <section id={"about"} className={"py-20 bg-gradient-to-r from-gray-900 to-black border-y border-gray-800 scroll-mt-24"}>
-      <div className={"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12"}>
-        <div className={"md:w-1/2"} data-aos={"fade-right"}>
-          <h2 className={"text-3xl font-bold mb-6 neon-title"}>
-            The Mind Behind the Code
-          </h2>
-          <p className={"text-gray-300 mb-6 text-lg leading-relaxed"}>
-            RC Digital Creations is led by{' '}
-            <span className={"text-brand-blue font-semibold"}>Ruan Coetzee</span>.{' '}
-            With a background in Geography & Environmental Sciences turned AI
-            Engineer & Developer, Ruan brings a unique systems-thinking approach
-            to digital problems.
-          </p>
-          <p className={"text-gray-400 mb-8"}>
-            "I don't just write code; I build solutions that are sustainable,
-            data-driven, and designed for the future."
-          </p>
-          <div className={"flex flex-col sm:flex-row gap-4"}>
-            <a href={"about.html"} className={"btn-neon-outline"}>
-              <i data-feather={"info"} className={"mr-2 h-5 w-5"}></i>
-              More about us
-            </a>
-            <a href={"https://ruancoetzee.co.za"} target={"_blank"} className={"btn-neon-outline"}>
-              <i data-feather={"user"} className={"mr-2 h-5 w-5"}></i>
-              View Ruan's Personal Portfolio
-            </a>
+    <section id="about" className="rc-about scroll-mt-24">
+      <div className="rc-about-orb" aria-hidden="true"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="rc-about-grid">
+          <div className="rc-about-copy" data-aos="fade-right">
+            <span className="rc-section-kicker">Behind the build</span>
+            <h2>Technical thinking with a practical business focus.</h2>
+
+            <p className="rc-about-lead">
+              RC Digital Creations is led by <strong>Ruan Coetzee</strong>, combining
+              front-end development, AI, design, and a background in Geography &
+              Environmental Sciences to approach digital problems from more than one angle.
+            </p>
+
+            <p className="rc-about-body">
+              The goal is simple: build useful digital solutions that look professional,
+              perform well, and make sense for the way a business actually operates.
+            </p>
+
+            <blockquote>
+              “I don’t just write code; I build solutions that are sustainable,
+              data-driven, and designed for the future.”
+            </blockquote>
+
+            <div className="rc-about-actions">
+              <a href="/about.html" className="rc-button rc-button-primary">
+                More About RC
+                <span aria-hidden="true">→</span>
+              </a>
+              <a
+                href="https://ruancoetzee.co.za"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rc-button rc-button-secondary"
+              >
+                Personal Portfolio
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
           </div>
-        </div>
-        <div className={"md:w-1/2 relative"} data-aos={"fade-left"}>
-          <div className={"absolute inset-0 bg-gradient-to-r from-brand-blue to-brand-purple blur-2xl opacity-20 rounded-full"}></div>
-          <div className={"glass p-8 rounded-2xl relative border border-gray-700"}>
-            <div className={"grid grid-cols-2 gap-6"}>
-              <div className={"text-center"}>
-                <h4 className={"text-4xl font-bold text-white mb-1"}>
-                  4+
-                </h4>
-                <p className={"text-sm text-gray-400"}>
-                  Years Tech Exp
-                </p>
-              </div>
-              <div className={"text-center"}>
-                <h4 className={"text-4xl font-bold text-white mb-1"}>
-                  100%
-                </h4>
-                <p className={"text-sm text-gray-400"}>
-                  Client Satisfaction
-                </p>
-              </div>
-              <div className={"text-center"}>
-                <h4 className={"text-4xl font-bold text-white mb-1"}>
-                  24h
-                </h4>
-                <p className={"text-sm text-gray-400"}>
-                  Support Response
-                </p>
-              </div>
-              <div className={"text-center"}>
-                <h4 className={"text-4xl font-bold text-white mb-1"}>
-                  AI
-                </h4>
-                <p className={"text-sm text-gray-400"}>
-                  Powered Solutions
-                </p>
-              </div>
+
+          <div className="rc-about-panel" data-aos="fade-left">
+            <div className="rc-about-panel-head">
+              <span>RC Digital Creations</span>
+              <strong>Built around useful technology.</strong>
+            </div>
+
+            <div className="rc-about-highlight-grid">
+              {highlights.map((item) => (
+                <article className="rc-about-highlight" key={item.label}>
+                  <span className="rc-about-highlight-icon" aria-hidden="true">
+                    <i data-feather={item.icon}></i>
+                  </span>
+                  <div>
+                    <strong>{item.label}</strong>
+                    <p>{item.text}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="rc-about-panel-foot">
+              <span className="rc-about-status-dot" aria-hidden="true"></span>
+              <p>Available for websites, AI integrations, branding, and custom digital projects.</p>
             </div>
           </div>
         </div>

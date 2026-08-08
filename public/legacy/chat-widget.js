@@ -119,8 +119,18 @@ function resetLeadState() {
   leadState.timeline = null;
 }
 
-function toggleChatWindow() {
-  isChatOpen = !isChatOpen;
+function toggleChatWindow(forceOpen) {
+  isChatOpen = typeof forceOpen === "boolean" ? forceOpen : !isChatOpen;
+
+  const toggleButton = document.getElementById("chat-toggle-button");
+  if (toggleButton) {
+    toggleButton.setAttribute("aria-expanded", String(isChatOpen));
+    toggleButton.setAttribute(
+      "aria-label",
+      isChatOpen ? "Close Vector AI assistant" : "Open Vector AI assistant"
+    );
+  }
+
   if (isChatOpen) {
     mainChatWindow.classList.remove("translate-y-full", "opacity-0");
     mainChatWindow.classList.add("translate-y-0", "opacity-100");
@@ -128,6 +138,7 @@ function toggleChatWindow() {
   } else {
     mainChatWindow.classList.remove("translate-y-0", "opacity-100");
     mainChatWindow.classList.add("translate-y-full", "opacity-0");
+    if (toggleButton) toggleButton.focus({ preventScroll: true });
   }
 }
 
@@ -508,6 +519,9 @@ const CHAT_WIDGET_HTML = `<div id="chatbot-widget-container">
   </div>
   <button
     id="chat-toggle-button"
+    aria-label="Open Vector AI assistant"
+    aria-expanded="false"
+    aria-controls="main-chat-window"
     class="fixed bottom-6 right-6 z-50 bg-brand-blue text-white p-3 rounded-full shadow-2xl hover:bg-brand-blue/80 transition duration-300 flex items-center justify-center group"
   >
     <span class="absolute top-0 right-0 flex h-4 w-4 -mt-1 -mr-1">
@@ -543,6 +557,18 @@ const CHAT_WIDGET_HTML = `<div id="chatbot-widget-container">
         <h1 class="text-xl font-bold leading-tight">Vector</h1>
         <div class="text-xs opacity-90">Sales Assistant</div>
       </div>
+      <button
+        id="chat-close-button"
+        type="button"
+        class="vector-chat-close"
+        aria-label="Close Vector assistant"
+        title="Close chat (Esc)"
+      >
+        <span class="vector-chat-close-label">ESC</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
     </header>
     <div id="chat-container" class="chat-container flex-grow overflow-y-auto p-4 space-y-4 bg-gray-50">
       <div class="flex justify-start">
@@ -570,6 +596,7 @@ const CHAT_WIDGET_HTML = `<div id="chatbot-widget-container">
       />
       <button
         id="send-button"
+        aria-label="Send message"
         class="bg-brand-blue text-white p-3 rounded-full shadow-lg hover:bg-brand-blue/80 transition duration-150 disabled:bg-gray-400 disabled:cursor-not-allowed flex-shrink-0"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send">
@@ -594,6 +621,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("chat-toggle-button");
   const bubble = document.getElementById("chat-welcome-bubble");
   const closeBubbleBtn = document.getElementById("close-bubble-btn");
+  const chatCloseButton = document.getElementById("chat-close-button");
 
   initializeChatbot();
 
@@ -601,6 +629,19 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("chatOpened", "true");
     if (bubble) hideBubble(bubble);
     toggleChatWindow();
+  });
+
+  if (chatCloseButton) {
+    chatCloseButton.addEventListener("click", () => {
+      if (isChatOpen) toggleChatWindow(false);
+    });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isChatOpen) {
+      event.preventDefault();
+      toggleChatWindow(false);
+    }
   });
 
   function hideBubble(targetBubble) {

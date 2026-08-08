@@ -14,8 +14,6 @@ import LegacyExtras from './components/LegacyExtras.jsx'
 
 export default function App() {
   useEffect(() => {
-    // Legacy JS listens for DOMContentLoaded. React may mount after it, so notify
-    // a compatibility bridge if the document was already ready.
     window.dispatchEvent(new Event('rc-react-mounted'))
     return undefined
   }, [])
@@ -24,8 +22,8 @@ export default function App() {
     <>
       <Navbar />
       <Hero />
-      <Pricing />
       <Section2 />
+      <Pricing />
       <Services />
       <Portfolio />
       <About />

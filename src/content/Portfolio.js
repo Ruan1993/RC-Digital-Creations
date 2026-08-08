@@ -32,7 +32,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-1" id="projects-grid">
 <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden">
-<img alt="Albertinia Pavers Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/Albertinia_Pavers_Website.png"/>
+<img alt="Albertinia Pavers Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/Albertinia_Pavers_Website.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Albertinia Pavers</h3>
@@ -54,7 +54,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden">
-<img alt="Diane White Art Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/Diane_White_Art_Website.png"/>
+<img alt="Diane White Art Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/Diane_White_Art_Website.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Diane White Art</h3>
@@ -76,7 +76,23 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden">
-<img alt="CC Auto Repairs Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/CC_Auto_Repairs_Website.png"/>
+<img alt="@Natural Health Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/Natural_Health_Website.webp" width="1800" height="912"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<h3 class="text-xl font-bold text-white">@Natural Health</h3>
+<p class="text-sm text-gray-300 mb-4">Web Development • Natural Health</p>
+<a class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors" href="https://www.at-naturalhealth.co.za/" target="_blank" rel="noopener noreferrer">
+Visit Site <i class="ml-2 w-4 h-4" data-feather="arrow-right"></i>
+</a>
+</div>
+<div class="md:hidden p-4 text-center space-y-2">
+<p class="text-gray-300 text-sm">Natural health business website with product discovery, advertising, WhatsApp ordering, and a virtual health market.</p>
+<a class="inline-flex items-center text-brand-blue font-semibold hover:text-white transition-colors" href="https://www.at-naturalhealth.co.za/" target="_blank" rel="noopener noreferrer">Visit Website <i class="ml-2 w-4 h-4" data-feather="arrow-right"></i></a>
+</div>
+</div>
+<div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
+<div class="aspect-video overflow-hidden">
+<img alt="CC Auto Repairs Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/CC_Auto_Repairs_Website.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">CC Auto Repairs</h3>
@@ -98,7 +114,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden">
-<img alt="Nails by Wilma Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/Nails_by_Wilma_Website.png"/>
+<img alt="Nails by Wilma Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/Nails_by_Wilma_Website.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Nails by Wilma</h3>
@@ -119,7 +135,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden">
-<img alt="Ruan Coetzee Portfolio" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/Ruan_Coetzee_Portfolio.png"/>
+<img alt="Ruan Coetzee Portfolio" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/Ruan_Coetzee_Portfolio.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -144,7 +160,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden">
-<img alt="RC Digital Creations Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/RC_Digital_Creations.png"/>
+<img alt="RC Digital Creations Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/RC_Digital_Creations.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -168,7 +184,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="CC Auto Repairs Logo" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/CC Auto Repairs Logo.png"/>
+<img alt="CC Auto Repairs Logo" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/CC Auto Repairs Logo.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">CC Auto Repairs</h3>
@@ -179,7 +195,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Albertinia Pavers Logo" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Albertinia Pavers Logo.png"/>
+<img alt="Albertinia Pavers Logo" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Albertinia Pavers Logo.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Albertinia Pavers</h3>
@@ -190,7 +206,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Nails by Wilma Logo" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Nails_by_Wilma_Logo.png"/>
+<img alt="Nails by Wilma Logo" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Nails_by_Wilma_Logo.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Nails by Wilma</h3>
@@ -201,7 +217,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Still Green 6" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Still Green 6.png"/>
+<img alt="Still Green 6" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Still Green 6.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Still Green</h3>
@@ -212,7 +228,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Still Green 7" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Still Green 7.png"/>
+<img alt="Still Green 7" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Still Green 7.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Still Green</h3>
@@ -223,7 +239,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Still Green 8" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Still Green 8.png"/>
+<img alt="Still Green 8" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Still Green 8.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Still Green</h3>
@@ -234,7 +250,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Still Greens 5" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Still Greens 5.png"/>
+<img alt="Still Greens 5" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/Still Greens 5.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Still Green</h3>
@@ -245,7 +261,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="WhatsApp Image 2024-04-24 (1)" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.26 (1).jpeg"/>
+<img alt="WhatsApp Image 2024-04-24 (1)" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.26 (1).webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Client Logo</h3>
@@ -256,7 +272,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="WhatsApp Image 2024-04-24 10.05.26" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.26.jpeg"/>
+<img alt="WhatsApp Image 2024-04-24 10.05.26" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.26.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Client Logo</h3>
@@ -267,7 +283,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item branding group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="WhatsApp Image 2024-04-24 10.05.27" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.27.jpeg"/>
+<img alt="WhatsApp Image 2024-04-24 10.05.27" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Logo Designs/WhatsApp Image 2024-04-24 at 10.05.27.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Client Logo</h3>
@@ -278,7 +294,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item web group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden">
-<img alt="De Brakke Guest House" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/De_Brakke_Guest_House_Website.png"/>
+<img alt="De Brakke Guest House" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Websites/De_Brakke_Guest_House_Website.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -303,7 +319,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Still Green - Salad Mix" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster &amp; Sticker Designs/Still Green - Salad Mix.png"/>
+<img alt="Still Green - Salad Mix" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster & Sticker Designs/Still Green - Salad Mix.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -316,7 +332,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Nails By Wilma" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster &amp; Sticker Designs/Nails By Wilma.png"/>
+<img alt="Nails By Wilma" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster & Sticker Designs/Nails By Wilma.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -327,7 +343,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Nails by Wilma Poster" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster &amp; Sticker Designs/Nails_by_Wilma_Poster.png"/>
+<img alt="Nails by Wilma Poster" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster & Sticker Designs/Nails_by_Wilma_Poster.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -338,7 +354,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Still Green - Beetroot" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster &amp; Sticker Designs/Still Green - Beetroot.png"/>
+<img alt="Still Green - Beetroot" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster & Sticker Designs/Still Green - Beetroot.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -349,7 +365,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Still Green - Broccoli" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster &amp; Sticker Designs/Still Green - Broccoli.png"/>
+<img alt="Still Green - Broccoli" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster & Sticker Designs/Still Green - Broccoli.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -360,7 +376,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Still Green - Chai" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster &amp; Sticker Designs/Still Green - Chai.png"/>
+<img alt="Still Green - Chai" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster & Sticker Designs/Still Green - Chai.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -371,7 +387,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Still Green - Pea Shoots" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster &amp; Sticker Designs/Still Green - Pea Shoots.png"/>
+<img alt="Still Green - Pea Shoots" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster & Sticker Designs/Still Green - Pea Shoots.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -382,7 +398,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item posters group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Still Green - Sunflower" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster &amp; Sticker Designs/Still Green - Sunflower.png"/>
+<img alt="Still Green - Sunflower" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/Poster & Sticker Designs/Still Green - Sunflower.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -393,7 +409,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item qr group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="QR Design" class="h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/QR Designs/Nails_by_Wilma_Google_Maps_QR-1024.png"/>
+<img alt="QR Design" class="h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/QR Designs/Nails_by_Wilma_Google_Maps_QR-1024.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">
@@ -404,7 +420,7 @@ export default `<section class="py-24 relative scroll-mt-24" id="portfolio">
 </div>
 <div class="project-item qr group relative rounded-xl overflow-hidden glass border-0" data-aos="fade-up">
 <div class="aspect-video overflow-hidden bg-gray-900 flex items-center justify-center p-8">
-<img alt="Website QR" class="h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/QR Designs/Nails_by_Wilma_Website_QR-1024.png"/>
+<img alt="Website QR" class="h-full object-contain transition-transform duration-700 group-hover:scale-110" decoding="async" loading="lazy" src="images/QR Designs/Nails_by_Wilma_Website_QR-1024.webp"/>
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
 <h3 class="text-xl font-bold text-white">Website QR</h3>
